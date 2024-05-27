@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateTowarTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('towar', function (Blueprint $table) {
             $table->id();
-            $table->string('imie', 30);
-            $table->string('nazwisko', 50);
-            $table->string('username', 30);
-            $table->string('mail', 70);
-            $table->string('haslo', 255); // Laravel typically uses longer hash for passwords
+            $table->unsignedBigInteger('kategoria_id');
+            $table->string('nazwa', 255); // Zmienione z int na string
+            $table->decimal('cena', 10, 2);
+            $table->string('obraz', 255);
+            $table->text('opis');
             $table->timestamps();
+
+            $table->foreign('kategoria_id')->references('id')->on('kategoria');
         });
     }
 
@@ -31,6 +33,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('towar');
     }
 }
