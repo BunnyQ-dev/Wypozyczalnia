@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -35,5 +35,20 @@ class AuthController extends Controller
     public function showLoginForm()
     {
         return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Jeśli uwierzytelnienie się powiodło, przekieruj na odpowiednią stronę
+            return redirect()->intended('home');
+        }
+
+        // Jeśli uwierzytelnienie się nie powiodło, przekieruj z powrotem do formularza logowania z komunikatem błędu
+        return redirect()->back()->withInput($request->only('email'))->withErrors([
+            'email' => 'Nieprawidłowy adres email lub hasło.',
+        ]);
     }
 }
