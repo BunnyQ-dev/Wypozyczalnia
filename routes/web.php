@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TowarController;
 use App\Http\Controllers\WypozyczeniaController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MaszynaController;
+use App\Http\Controllers\MaszynyController;
 
 // Trasa główna przekierowująca na stronę logowania
 Route::get('/', function () {
@@ -20,7 +19,9 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Trasa dla strony głównej po zalogowaniu
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/home', function () {
+    return view('welcome'); // Możesz zmienić na inny istniejący widok
+})->name('home')->middleware('auth');
 
 // Trasy dla TowarController
 Route::get('/towary', [TowarController::class, 'index'])->name('towary.index');
@@ -36,5 +37,5 @@ Route::get('/wypozyczenia/{id}/edit', [WypozyczeniaController::class, 'edit'])->
 Route::put('/wypozyczenia/{id}', [WypozyczeniaController::class, 'update'])->name('wypozyczenia.update');
 Route::delete('/wypozyczenia/{id}', [WypozyczeniaController::class, 'delete'])->name('wypozyczenia.delete');
 
-// Trasy dla MaszynaController
-Route::get('/maszyny', [MaszynaController::class, 'index'])->name('maszyny.index')->middleware('auth');
+// Trasy dla MaszynyController
+Route::get('/maszyny', [MaszynyController::class, 'index'])->name('maszyny.index')->middleware('auth');
