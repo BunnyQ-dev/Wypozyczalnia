@@ -30,9 +30,41 @@ class WypozyczeniaController extends Controller
         return redirect()->route('wypozyczenia.index')->with('success', 'Sprzęt został wypożyczony pomyślnie.');
     }
 
+    public function delete($id)
+    {
+        $wypozyczenie = Wypozyczenia::findOrFail($id);
+        $wypozyczenie->delete();
+
+        return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie zostało usunięte.');
+    }
+
+    public function edit($id)
+    {
+        $wypozyczenie = Wypozyczenia::findOrFail($id);
+        $towary = Towar::all();
+        $users = User::all();
+
+        return view('wypozyczenia.edit', compact('wypozyczenie', 'towary', 'users'));
+    }
+
     public function index()
     {
         $wypozyczenia = Wypozyczenia::with(['user', 'towar'])->get();
         return view('wypozyczenia.index', compact('wypozyczenia'));
     }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'towar_id' => 'required|exists:towar,id',
+            'data_wypozyczenia' => 'required|date',
+            'data_zwrotu' => 'nullable|date|after:data_wypozyczenia',
+        ]);
+
+        $wypozyczenie = Wypozyczenia::findOrFail($id);
+        $wypozyczenie->update($request->all());
+
+        return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie zostało zaktualizowane.');
+    }
+
 }
