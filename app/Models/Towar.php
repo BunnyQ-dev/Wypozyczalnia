@@ -21,4 +21,9 @@ class Towar extends Model
     {
         return $this->hasMany(Wypozyczenia::class);
     }
+    public function index()
+    {
+        $towary = Towar::all();
+        return view('towary.index', compact('towary'));
+    }
 }
