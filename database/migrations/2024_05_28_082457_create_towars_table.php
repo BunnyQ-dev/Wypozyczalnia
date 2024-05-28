@@ -13,21 +13,20 @@ return new class extends Migration
     {
         Schema::create('towar', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('kategoria_id');
+            $table->foreignId('kategoria_id')->constrained('kategoria')->onDelete('cascade');
             $table->string('nazwa');
             $table->text('opis')->nullable();
             $table->decimal('cena', 8, 2);
             $table->timestamps();
-
-            $table->foreign('kategoria_id')->references('id')->on('kategoria')->onDelete('cascade');
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('towar');
+        Schema::dropIfExists('towars');
     }
 };

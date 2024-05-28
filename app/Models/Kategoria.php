@@ -9,6 +9,11 @@ class Kategoria extends Model
 {
     use HasFactory;
 
-    protected $table = 'kategoria'; // Nazwa tabeli w bazie danych
-    protected $fillable = ['nazwa']; // Kolumny, które mogą być zapełniane masowo
+    protected $table = 'kategoria';
+    protected $fillable = ['nazwa'];
+
+    public function towary()
+    {
+        return $this->hasMany(Towar::class);
+    }
 }
