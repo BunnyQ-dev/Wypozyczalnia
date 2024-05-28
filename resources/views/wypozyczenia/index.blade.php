@@ -1,35 +1,45 @@
 @extends('layouts.app')
-
 @section('content')
-    <h1>Lista wypożyczeń</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Użytkownik</th>
-            <th>Sprzęt</th>
-            <th>Data wypożyczenia</th>
-            <th>Data zwrotu</th>
-            <th>Akcje</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($wypozyczenia as $wypozyczenie)
-            <tr>
-                <td>{{ $wypozyczenie->id }}</td>
-                <td>{{ $wypozyczenie->user->username }}</td>
-                <td>{{ $wypozyczenie->towar->nazwa }}</td>
-                <td>{{ $wypozyczenie->data_wypozyczenia }}</td>
-                <td>{{ $wypozyczenie->data_zwrotu }}</td>
-                <td>
-                    <form action="{{ route('wypozyczenia.delete', $wypozyczenie->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Usuń</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+<head>
+    <title>Lista wypożyczeń</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .wypozyczenie {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .wypozyczenie strong {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<h1>Lista Wypożyczeń</h1>
+
+@if (session('success'))
+    <div class="flash-message">
+        {{ session('success') }}
+    </div>
+@endif
+
+<ul>
+    @foreach($wypozyczenia as $wypozyczenie)
+        <li class="wypozyczenie">
+            <strong>{{ $wypozyczenie->towar->nazwa }}</strong><br>
+            Użytkownik: {{ $wypozyczenie->user->name }}<br>
+            Data Wypożyczenia: {{ $wypozyczenie->data_wypozyczenia }}<br>
+            Data Zwrotu: {{ $wypozyczenie->data_zwrotu ?? 'Brak' }}
+            <br>
+            <!-- Przycisk do edycji -->
+            <a href="{{ route('wypozyczenia.edit', $wypozyczenie->id) }}" class="btn btn-primary">Edytuj</a>
+        </li>
+    @endforeach
+</ul>
+
+<!-- Przycisk do dodawania nowego wypożyczenia -->
+<a href="{{ route('wypozyczenia.create') }}" class="btn btn-primary">Dodaj nowe wypożyczenie</a>
+
 @endsection

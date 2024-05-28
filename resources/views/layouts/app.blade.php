@@ -1,15 +1,66 @@
-<!-- resources/views/layouts/app.blade.php -->
-
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
-    <title>Maszyny</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav {
+            background-color: #666;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a{
+            text-decoration: none;
+            color: #fff ;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        a{
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
+<header>
+    <h1>Nazwa Twojej Aplikacji</h1>
+</header>
+
+<nav>
+    <a href="#">Strona główna</a> |
+    <a href="../towary">Towary</a> |
+    <a href="#">Wypożyczenia</a> |
+    <a href="#">Użytkownicy</a>
+</nav>
+
+<main>
     @yield('content')
-</div>
-<script src="{{ asset('js/app.js') }}"></script>
+</main>
+
+<footer>
+    &copy; {{ date('Y') }} Test
+</footer>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
