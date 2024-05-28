@@ -5,6 +5,7 @@ use App\Http\Controllers\TowarController;
 use App\Http\Controllers\WypozyczeniaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MaszynaController;
 
 // Trasa główna przekierowująca na stronę logowania
 Route::get('/', function () {
@@ -34,3 +35,6 @@ Route::post('/wypozyczenia', [WypozyczeniaController::class, 'store'])->name('wy
 Route::get('/wypozyczenia/{id}/edit', [WypozyczeniaController::class, 'edit'])->name('wypozyczenia.edit');
 Route::put('/wypozyczenia/{id}', [WypozyczeniaController::class, 'update'])->name('wypozyczenia.update');
 Route::delete('/wypozyczenia/{id}', [WypozyczeniaController::class, 'delete'])->name('wypozyczenia.delete');
+
+// Trasy dla MaszynaController
+Route::get('/maszyny', [MaszynaController::class, 'index'])->name('maszyny.index')->middleware('auth');
