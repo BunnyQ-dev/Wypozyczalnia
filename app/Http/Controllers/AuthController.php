@@ -47,3 +47,5 @@ class AuthController extends Controller
         }
 
         return redirect()->route('login')->with('error', 'Nieprawidłowe dane logowania.');
+    }
+}
