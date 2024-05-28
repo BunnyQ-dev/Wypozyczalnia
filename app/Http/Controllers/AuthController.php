@@ -31,4 +31,9 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Rejestracja zakończona pomyślnie. Zaloguj się.');
     }
+
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
 }
