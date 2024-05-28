@@ -17,13 +17,11 @@ class TowarController extends Controller
 
     public function create()
     {
-        // Sprawdź, czy zalogowany użytkownik jest administratorem
         if (auth()->user()->role === 'admin') {
             $kategorie = Kategoria::all();
-            $users = User::all(); // Pobierz listę użytkowników
+            $users = User::all();
             return view('towary.create', compact('kategorie', 'users'));
         } else {
-            // Jeśli zalogowany użytkownik nie jest administratorem, przekieruj go na inną stronę lub wyświetl komunikat o braku uprawnień
             return redirect()->route('home')->with('error', 'Nie masz uprawnień do dodawania towarów.');
         }
     }
@@ -34,22 +32,19 @@ class TowarController extends Controller
             'nazwa' => 'required',
             'opis' => 'nullable',
             'cena' => 'required|numeric',
-            'kategoria_id' => 'required|exists:kategorie,id',
+            'kategoria_id' => 'required|exists:kategoria,id',
         ]);
 
-        // Utwórz nowy towar
         $towar = new Towar();
         $towar->nazwa = $request->nazwa;
         $towar->opis = $request->opis;
         $towar->cena = $request->cena;
         $towar->kategoria_id = $request->kategoria_id;
 
-        // Jeśli zalogowany użytkownik jest administratorem i wybrano użytkownika, przypisz towar do użytkownika
         if (auth()->user()->role === 'admin' && $request->has('user_id')) {
             $towar->user_id = $request->user_id;
         }
 
-        // Zapisz towar
         $towar->save();
 
         return redirect()->route('towary.index')->with('success', 'Towar został dodany pomyślnie.');
