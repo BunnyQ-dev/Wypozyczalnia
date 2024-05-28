@@ -7,11 +7,13 @@ use App\Http\Controllers\WypozyczeniaController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+//towary
 Route::get('/towary', [TowarController::class, 'index'])->name('towary.index');
 Route::get('/towary/create', [TowarController::class, 'create'])->name('towary.crate');
 Route::post('/towary', [TowarController::class, 'store'])->name('towary.store');
+Route::delete('/towary/{id}', [TowarController::class, 'destroy'])->name('towary.destroy');
 
+//wypozyczenia
 Route::get('/wypozyczenia', [WypozyczeniaController::class, 'index'])->name('wypozyczenia.index');
 Route::get('/wypozyczenia/create', [WypozyczeniaController::class, 'create'])->name('wypozyczenia.create');
 Route::post('/wypozyczenia', [WypozyczeniaController::class, 'store'])->name('wypozyczenia.store');

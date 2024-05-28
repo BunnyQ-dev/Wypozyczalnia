@@ -42,7 +42,12 @@
             <strong>{{ $towar->nazwa }}</strong><br>
             <span class="kategoria">Kategoria: {{ $towar->kategoria->nazwa }}</span><br>
             {{ $towar->opis }}<br>
-            Cena: {{ $towar->cena }} zł
+            Cena: {{ $towar->cena }} zł<br>
+            <form action="{{ route('towary.destroy', $towar->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Usuń</button>
+            </form>
         </li>
     @endforeach
 </ul>

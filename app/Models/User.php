@@ -23,5 +23,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Wypozyczenia::class);
     }
-}
 
+
+
+}
+Schema::table('users', function (Blueprint $table) {
+    $table->string('role')->default('user');
+});
