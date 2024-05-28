@@ -9,7 +9,7 @@ class Towar extends Model
 {
     use HasFactory;
 
-    protected $table = 'towar';
+    protected $table = 'towary'; // Nazwa tabeli w liczbie mnogiej
     protected $fillable = ['kategoria_id', 'nazwa', 'opis', 'cena'];
 
     public function kategoria()
@@ -19,6 +19,6 @@ class Towar extends Model
 
     public function wypozyczenia()
     {
-        return $this->hasMany(Wypozyczenia::class);
+        return $this->hasMany(Wypozyczenie::class); // Zakładając, że masz model Wypozyczenie
     }
 }

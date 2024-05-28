@@ -34,7 +34,7 @@ class TowarController extends Controller
             'nazwa' => 'required',
             'opis' => 'nullable',
             'cena' => 'required|numeric',
-            'kategoria_id' => 'required|exists:kategoria,id',
+            'kategoria_id' => 'required|exists:kategorie,id',
         ]);
 
         // Utwórz nowy towar
