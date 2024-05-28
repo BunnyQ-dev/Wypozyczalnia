@@ -1,5 +1,3 @@
-<!-- resources/views/towary/index.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -10,7 +8,6 @@
             <th>Nazwa</th>
             <th>Opis</th>
             <th>Cena</th>
-            <th>Kategoria</th>
             <th>Dostępność</th>
         </tr>
         </thead>
@@ -20,7 +17,6 @@
                 <td>{{ $towar->nazwa }}</td>
                 <td>{{ $towar->opis }}</td>
                 <td>{{ $towar->cena }}</td>
-                <td>{{ $towar->kategoria->nazwa }}</td>
                 <td>{{ $towar->dostepnosc ? 'Dostępna' : 'Niedostępna' }}</td>
             </tr>
         @endforeach

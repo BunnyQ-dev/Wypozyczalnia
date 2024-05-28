@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('wypozyczenia', function (Blueprint $table) {
-            $table->id(); // Auto-incrementing UNSIGNED BIGINT
-            $table->unsignedBigInteger('user_id'); // UNSIGNED BIGINT to match 'id' in 'users'
+            $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            // Add other columns as needed
             $table->timestamps();
         });
     }

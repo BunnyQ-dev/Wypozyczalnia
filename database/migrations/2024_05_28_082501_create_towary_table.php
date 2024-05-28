@@ -8,10 +8,8 @@ class CreateTowaryTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('towary', function (Blueprint $table) {
             $table->id();
@@ -22,16 +20,14 @@ class CreateTowaryTable extends Migration
             $table->boolean('dostepnosc')->default(true);
             $table->timestamps();
 
-            $table->foreign('kategoria_id')->references('id')->on('kategorie')->onDelete('cascade');
+            $table->foreign('kategoria_id')->references('id')->on('kategoria')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('towary');
     }
