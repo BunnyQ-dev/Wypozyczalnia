@@ -1,6 +1,9 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use App\Models\Maszyna;
+use Illuminate\Http\Request;
 
 class MaszynyController extends Controller
 {
