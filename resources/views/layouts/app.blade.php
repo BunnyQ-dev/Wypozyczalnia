@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -22,7 +23,7 @@
             padding: 10px;
             text-align: center;
         }
-        a{
+        nav a{
             text-decoration: none;
             color: #fff ;
         }
@@ -34,6 +35,10 @@
             position: fixed;
             bottom: 0;
             width: 100%;
+        }
+        a{
+            text-decoration: none;
+            color: blue;
         }
     </style>
 </head>
@@ -56,5 +61,6 @@
 <footer>
     &copy; {{ date('Y') }} Test
 </footer>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
