@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -39,16 +39,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        // Logika logowania użytkownika
+    }
 
-        if (Auth::attempt($credentials)) {
-            // Jeśli uwierzytelnienie się powiodło, przekieruj na odpowiednią stronę
-            return redirect()->intended('home');
-        }
-
-        // Jeśli uwierzytelnienie się nie powiodło, przekieruj z powrotem do formularza logowania z komunikatem błędu
-        return redirect()->back()->withInput($request->only('email'))->withErrors([
-            'email' => 'Nieprawidłowy adres email lub hasło.',
-        ]);
+    public function logout(Request $request)
+    {
+        // Logika wylogowywania użytkownika
     }
 }
