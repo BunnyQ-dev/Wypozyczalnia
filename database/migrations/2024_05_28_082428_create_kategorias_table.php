@@ -9,21 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('kategoria', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // Auto-incrementing UNSIGNED BIGINT
             $table->string('nazwa');
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('kategorias');
+        Schema::dropIfExists('kategoria');
     }
 };
