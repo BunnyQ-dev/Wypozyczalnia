@@ -5,7 +5,6 @@ use App\Http\Controllers\TowarController;
 use App\Http\Controllers\WypozyczeniaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +23,7 @@ Route::get('/wypozyczenia/{id}/edit', [WypozyczeniaController::class, 'edit'])->
 Route::put('/wypozyczenia/{id}', [WypozyczeniaController::class, 'update'])->name('wypozyczenia.update');
 Route::delete('/wypozyczenia/{id}', [WypozyczeniaController::class, 'delete'])->name('wypozyczenia.delete');
 
-// Trasy dlrejestracji, logowania i wylogowywania
+// Trasy dla rejestracji, logowania i wylogowywania
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
