@@ -9,16 +9,14 @@ class Towar extends Model
 {
     use HasFactory;
 
-    protected $table = 'towar'; // Nazwa tabeli w bazie danych
-    protected $fillable = ['kategoria_id', 'nazwa', 'opis', 'cena']; // Kolumny, które mogą być zapełniane masowo
+    protected $table = 'towar';
+    protected $fillable = ['kategoria_id', 'nazwa', 'opis', 'cena'];
 
-    // Relacja z modelem Kategoria
     public function kategoria()
     {
         return $this->belongsTo(Kategoria::class);
     }
 
-    // Relacja z modelem Wypozyczenia
     public function wypozyczenia()
     {
         return $this->hasMany(Wypozyczenia::class);

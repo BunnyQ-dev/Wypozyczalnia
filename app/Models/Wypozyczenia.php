@@ -9,16 +9,14 @@ class Wypozyczenia extends Model
 {
     use HasFactory;
 
-    protected $table = 'wypozyczenia'; // Nazwa tabeli w bazie danych
-    protected $fillable = ['user_id', 'towar_id', 'data_wypozyczenia', 'data_zwrotu']; // Kolumny, które mogą być zapełniane masowo
+    protected $table = 'wypozyczenia';
+    protected $fillable = ['user_id', 'towar_id', 'data_wypozyczenia', 'data_zwrotu'];
 
-    // Relacja z modelem User
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relacja z modelem Towar
     public function towar()
     {
         return $this->belongsTo(Towar::class);

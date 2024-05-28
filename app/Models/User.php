@@ -15,15 +15,13 @@ class User extends Authenticatable
 
     protected $hidden = [
         'password', 'remember_token',
-    ];
-
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    // Relacja z modelem Wypozyczenia
     public function wypozyczenia()
     {
         return $this->hasMany(Wypozyczenia::class);
     }
 }
+
