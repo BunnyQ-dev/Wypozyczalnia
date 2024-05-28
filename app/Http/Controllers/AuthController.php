@@ -24,6 +24,9 @@ class AuthController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'address' => $request->address,
         ]);
 
         return redirect()->route('login')->with('success', 'Rejestracja zakończona pomyślnie. Zaloguj się.');
