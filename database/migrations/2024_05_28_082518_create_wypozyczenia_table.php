@@ -16,11 +16,9 @@ class CreateWypozyczeniaTable extends Migration
         Schema::create('wypozyczenia', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            // Dodaj pozostałe kolumny w tabeli wypozyczenia
-            $table->timestamps();
-
-            // Dodaj klucz obcy
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // Dodaj tutaj pozostałe kolumny tabeli 'wypozyczenia' według potrzeb
+            $table->timestamps();
         });
     }
 
