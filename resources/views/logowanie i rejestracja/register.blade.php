@@ -1,14 +1,15 @@
+<!-- Formularz rejestracji -->
 <form method="POST" action="{{ route('register') }}">
     @csrf
 
     <div>
         <label for="name">Name</label>
-        <input id="name" type="text" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+        <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
     </div>
 
     <div>
-        <label for="email">E-Mail Address</label>
-        <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email">
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" value="{{ old('email') }}" required>
     </div>
 
     <div>
@@ -18,10 +19,8 @@
 
     <div>
         <label for="password-confirm">Confirm Password</label>
-        <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
+        <input id="password-confirm" type="password" name="password_confirmation" required>
     </div>
 
-    <div>
-        <button type="submit">Register</button>
-    </div>
+    <button type="submit">Register</button>
 </form>
