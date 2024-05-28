@@ -3,14 +3,25 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Kategoria;
+use Illuminate\Support\Facades\DB;
 
 class KategoriaSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
-        Kategoria::create(['nazwa' => 'Koparki']);
-        Kategoria::create(['nazwa' => 'Betoniarki']);
-        Kategoria::create(['nazwa' => 'Wiertarki']);
+        $kategorie = [
+            ['nazwa' => 'Koparki'],
+            ['nazwa' => 'Spycharki'],
+            ['nazwa' => 'Walce drogowe'],
+            ['nazwa' => 'Podnośniki'],
+            // Dodaj inne kategorie wypożyczalni sprzętu budowlanego
+        ];
+
+        DB::table('kategoria')->insert($kategorie);
     }
 }

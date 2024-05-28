@@ -11,7 +11,7 @@ Route::get('/', function () {
 });
 //towary
 Route::get('/towary', [TowarController::class, 'index'])->name('towary.index');
-Route::get('/towary/create', [TowarController::class, 'create'])->name('towary.crate');
+Route::get('/towary/create', [TowarController::class, 'create'])->name('towary.create');
 Route::post('/towary', [TowarController::class, 'store'])->name('towary.store');
 Route::delete('/towary/{id}', [TowarController::class, 'destroy'])->name('towary.destroy');
 
