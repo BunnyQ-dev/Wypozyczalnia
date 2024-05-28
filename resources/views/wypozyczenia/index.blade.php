@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="pl">
+@extends('layouts.app')
+@section('content')
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista Wypożyczeń</title>
+    <title>Lista wypożyczeń</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,7 +16,7 @@
         }
     </style>
 </head>
-<body>
+
 <h1>Lista Wypożyczeń</h1>
 
 @if (session('success'))
@@ -34,8 +32,14 @@
             Użytkownik: {{ $wypozyczenie->user->name }}<br>
             Data Wypożyczenia: {{ $wypozyczenie->data_wypozyczenia }}<br>
             Data Zwrotu: {{ $wypozyczenie->data_zwrotu ?? 'Brak' }}
+            <br>
+            <!-- Przycisk do edycji -->
+            <a href="{{ route('wypozyczenia.edit', $wypozyczenie->id) }}">Edytuj</a>
         </li>
     @endforeach
 </ul>
-</body>
-</html>
+
+<!-- Przycisk do dodawania nowego wypożyczenia -->
+<a href="{{ route('wypozyczenia.create') }}">Dodaj nowe wypożyczenie</a>
+
+@endsection
