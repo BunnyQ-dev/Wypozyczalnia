@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -18,17 +17,22 @@ class WypozyczeniaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'towar_id' => 'required|exists:towar,id',
-            'data_wypozyczenia' => 'required|date',
-            'data_zwrotu' => 'nullable|date|after:data_wypozyczenia',
-        ]);
+        try {
+            $request->validate([
+                'user_id' => 'required|exists:users,id',
+                'towar_id' => 'required|exists:towar,id',
+                'data_wypozyczenia' => 'required|date',
+                'data_zwrotu' => 'nullable|date|after:data_wypozyczenia',
+            ]);
 
-        Wypozyczenia::create($request->all());
+            $wypozyczenie = Wypozyczenia::create($request->all());
 
-        return redirect()->route('wypozyczenia.index')->with('success', 'Sprzęt został wypożyczony pomyślnie.');
+            return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie dla użytkownika ' . $wypozyczenie->user->username . ' zostało dodane pomyślnie.');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'Wystąpił błąd: ' . $e->getMessage());
+        }
     }
+
 
     public function delete($id)
     {
@@ -52,6 +56,7 @@ class WypozyczeniaController extends Controller
         $wypozyczenia = Wypozyczenia::with(['user', 'towar'])->get();
         return view('wypozyczenia.index', compact('wypozyczenia'));
     }
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -66,5 +71,4 @@ class WypozyczeniaController extends Controller
 
         return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie zostało zaktualizowane.');
     }
-
 }

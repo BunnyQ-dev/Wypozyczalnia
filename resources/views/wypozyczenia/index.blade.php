@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Wypożyczenia')
+
 @section('content')
 <head>
     <title>Lista wypożyczeń</title>
@@ -40,6 +42,6 @@
 </ul>
 
 <!-- Przycisk do dodawania nowego wypożyczenia -->
-<a href="{{ route('wypozyczenia.create') }}">Dodaj nowe wypożyczenie</a>
+<a href="{{ route('wypozyczenia.create') }}" class="btn btn-primary">Dodaj nowe wypożyczenie</a>
 
 @endsection

@@ -36,4 +36,4 @@ Route::get('/wypozyczenia/create', [WypozyczeniaController::class, 'create'])->n
 Route::post('/wypozyczenia', [WypozyczeniaController::class, 'store'])->name('wypozyczenia.store')->middleware('auth');
 Route::get('/wypozyczenia/{id}/edit', [WypozyczeniaController::class, 'edit'])->name('wypozyczenia.edit')->middleware('auth');
 Route::put('/wypozyczenia/{id}', [WypozyczeniaController::class, 'update'])->name('wypozyczenia.update')->middleware('auth');
-Route::delete('/wypozyczenia/{id}', [WypozyczeniaController::class, 'destroy'])->name('wypozyczenia.delete')->middleware('auth');
+Route::delete('/wypozyczenia/{id}', [WypozyczeniaController::class, 'delete'])->name('wypozyczenia.delete')->middleware('auth');
