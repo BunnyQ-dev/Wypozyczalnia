@@ -105,4 +105,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Zarejestruj się</button>
     </form>
+    <p>Masz konta? <a href="{{ route('login') }}">Zaloguj się</a></p>
 @endsection
