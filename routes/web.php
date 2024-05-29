@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriaController;
 
+
 // Trasa główna przekierowująca na stronę logowania, jeśli użytkownik nie jest zalogowany
 Route::get('/', function () {
     return redirect()->route('login');
