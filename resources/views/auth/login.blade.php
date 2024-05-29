@@ -41,6 +41,7 @@
             padding: 10px;
             border: 1px solid #ced4da;
             border-radius: 4px;
+            box-sizing: border-box;
         }
 
         .btn-primary {
@@ -51,6 +52,7 @@
             color: #fff;
             border-radius: 4px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
         .btn-primary:hover {
