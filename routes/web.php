@@ -23,12 +23,12 @@ Route::get('/home', function () {
 })->name('home')->middleware('auth');
 
 // Trasy dla TowarController
-Route::get('/towary', [TowarController::class, 'index'])->name('towary.index')->middleware('auth');
-Route::get('/towary/create', [TowarController::class, 'create'])->name('towary.create')->middleware('auth');
-Route::post('/towary', [TowarController::class, 'store'])->name('towary.store')->middleware('auth');
-Route::delete('/towary/{id}', [TowarController::class, 'destroy'])->name('towary.destroy')->middleware('auth');
-Route::get('/towary/{id}/edit', [TowarController::class, 'edit'])->name('towary.edit')->middleware('auth');
-Route::put('/towary/{id}', [TowarController::class, 'update'])->name('towary.update')->middleware('auth');
+Route::get('/towar', [TowarController::class, 'index'])->name('towar.index')->middleware('auth');
+Route::get('/towar/create', [TowarController::class, 'create'])->name('towar.create')->middleware('auth');
+Route::post('/towar', [TowarController::class, 'store'])->name('towar.store')->middleware('auth');
+Route::delete('/towar/{id}', [TowarController::class, 'destroy'])->name('towar.destroy')->middleware('auth');
+Route::get('/towar/{id}/edit', [TowarController::class, 'edit'])->name('towar.edit')->middleware('auth');
+Route::put('/towar/{id}', [TowarController::class, 'update'])->name('towar.update')->middleware('auth');
 
 // Trasy dla WypozyczeniaController
 Route::get('/wypozyczenia', [WypozyczeniaController::class, 'index'])->name('wypozyczenia.index')->middleware('auth');
