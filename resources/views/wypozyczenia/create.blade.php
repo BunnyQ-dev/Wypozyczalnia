@@ -1,35 +1,36 @@
 @extends('layouts.app')
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wypożycz Sprzęt</title>
+</head>
+<body>
+<h1>Wypożycz Sprzęt</h1>
+<form action="{{ route('wypozyczenia.store') }}" method="POST">
+    @csrf
+    <label for="user_id">Użytkownik:</label>
+    <select id="user_id" name="user_id" required>
+        @foreach($users as $user)
+            <option value="{{ $user->id }}">{{ $user->name }}</option>
+        @endforeach
+    </select><br>
 
-@section('content')
-    <h1>Wypożycz sprzęt</h1>
-    <form action="{{ route('wypozyczenia.store') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="user_id">Użytkownik:</label>
-            <select name="user_id" id="user_id" class="form-control" required>
-                <option value="">Wybierz użytkownika</option>
-                @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->username }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="towar_id">Sprzęt:</label>
-            <select name="towar_id" id="towar_id" class="form-control" required>
-                <option value="">Wybierz sprzęt</option>
-                @foreach($towary as $towar)
-                    <option value="{{ $towar->id }}">{{ $towar->nazwa }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="data_wypozyczenia">Data wypożyczenia:</label>
-            <input type="date" name="data_wypozyczenia" id="data_wypozyczenia" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="data_zwrotu">Data zwrotu:</label>
-            <input type="date" name="data_zwrotu" id="data_zwrotu" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">Wypożycz</button>
-    </form>
-@endsection
+    <label for="towar_id">Towar:</label>
+    <select id="towar_id" name="towar_id" required>
+        @foreach($towary as $towar)
+            <option value="{{ $towar->id }}">{{ $towar->nazwa }}</option>
+        @endforeach
+    </select><br>
+
+    <label for="data_wypozyczenia">Data Wypożyczenia:</label>
+    <input type="date" id="data_wypozyczenia" name="data_wypozyczenia" required><br>
+
+    <label for="data_zwrotu">Data Zwrotu:</label>
+    <input type="date" id="data_zwrotu" name="data_zwrotu"><br>
+
+    <button type="submit">Wypożycz</button>
+</form>
+</body>
+</html>
