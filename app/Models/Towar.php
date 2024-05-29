@@ -23,7 +23,7 @@ class Towar extends Model
     }
     public function index()
     {
-        $towary = Towar::all();
+        $towar = Towar::all();
         return view('towar.index', compact('towar'));
     }
 }
