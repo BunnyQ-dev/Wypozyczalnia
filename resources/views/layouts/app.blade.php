@@ -49,7 +49,7 @@
 
 <nav>
     <a href="#">Strona główna</a> |
-    <a href="../towary">Towary</a> |
+    <a href="../towar">Towary</a> |
     <a href="../wypozyczenia">Wypożyczenia</a> |
     <a href="#">Użytkownicy</a>
 </nav>
