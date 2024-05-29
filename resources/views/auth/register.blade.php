@@ -20,6 +20,18 @@
             <label for="password_confirmation">Potwierdź hasło:</label>
             <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
         </div>
+        <div class="form-group">
+            <label for="first_name">Podaj imię: </label>
+            <input type="text" id="first_name" name="first_name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Podaj nazwisko: </label>
+            <input type="text" id="last_name" name="last_name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Podaj adres: </label>
+            <input type="text" id="address" name="address" class="form-control" required>
+        </div>
         <button type="submit" class="btn btn-primary">Zarejestruj się</button>
     </form>
 @endsection

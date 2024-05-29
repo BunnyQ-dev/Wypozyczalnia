@@ -40,12 +40,32 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $request->validate([
+            'login' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $login = $request->input('login');
+        $password = $request->input('password');
+
+        // Check if the login input is an email or username
+        $credentials = filter_var($login, FILTER_VALIDATE_EMAIL)
+            ? ['email' => $login, 'password' => $password]
+            : ['username' => $login, 'password' => $password];
 
         if (Auth::attempt($credentials)) {
             return redirect()->intended('/home');
         }
 
         return redirect()->route('login')->with('error', 'Nieprawidłowe dane logowania.');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
