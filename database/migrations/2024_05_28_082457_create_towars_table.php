@@ -4,14 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class reateTowaryTable extends Migration
+class CreateTowarTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('towary', function (Blueprint $table) {
+        Schema::create('towar', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kategoria_id');
             $table->string('nazwa');
@@ -29,6 +29,6 @@ class reateTowaryTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('towary');
+        Schema::dropIfExists('towar');
     }
 }
