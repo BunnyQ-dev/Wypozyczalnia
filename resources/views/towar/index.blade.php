@@ -68,7 +68,7 @@
 </ul>
 
 <div style="margin-top: 20px;">
-    <a href="{{ route('towary.create') }}" class="btn">Dodaj nowy towar</a>
+    <a href="{{ route('towar.create') }}" class="btn">Dodaj nowy towar</a>
 </div>
 
 </body>
