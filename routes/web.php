@@ -19,7 +19,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Trasa dla strony głównej po zalogowaniu
 Route::get('/home', function () {
-    return redirect()->route('towary.index');
+    return redirect()->route('towar.index');
 })->name('home')->middleware('auth');
 
 // Trasy dla TowarController
