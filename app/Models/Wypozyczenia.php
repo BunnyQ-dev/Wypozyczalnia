@@ -10,7 +10,13 @@ class Wypozyczenia extends Model
     use HasFactory;
 
     protected $table = 'wypozyczenia';
-    protected $fillable = ['user_id', 'towar_id', 'data_wypozyczenia', 'data_zwrotu'];
+
+    protected $fillable = [
+        'user_id',
+        'towar_id',
+        'data_wypozyczenia',
+        'data_zwrotu'
+    ];
 
     public function user()
     {
