@@ -10,14 +10,14 @@ class TowarController extends Controller
 {
     public function index()
     {
-        $towary = Towar::with('kategoria')->get();
-        return view('towary.index', compact('towary'));
+        $towar = Towar::with('kategoria')->get();
+        return view('towar.index', compact('towar'));
     }
 
     public function create()
     {
         $kategorie = Kategoria::all();
-        return view('towary.create', compact('kategorie'));
+        return view('towar.create', compact('kategorie'));
     }
 
     public function store(Request $request)
@@ -31,14 +31,14 @@ class TowarController extends Controller
 
         Towar::create($request->all());
 
-        return redirect()->route('towary.index')->with('success', 'Towar został dodany pomyślnie.');
+        return redirect()->route('towar.index')->with('success', 'Towar został dodany pomyślnie.');
     }
 
     public function edit($id)
     {
         $towar = Towar::findOrFail($id);
         $kategorie = Kategoria::all();
-        return view('towary.edit', compact('towar', 'kategorie'));
+        return view('towar.edit', compact('towar', 'kategorie'));
     }
 
     public function update(Request $request, $id)
@@ -53,6 +53,6 @@ class TowarController extends Controller
         $towar = Towar::findOrFail($id);
         $towar->update($request->all());
 
-        return redirect()->route('towary.index')->with('success', 'Towar został zaktualizowany pomyślnie.');
+        return redirect()->route('towar.index')->with('success', 'Towar został zaktualizowany pomyślnie.');
     }
 }

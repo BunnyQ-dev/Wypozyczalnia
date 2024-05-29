@@ -42,7 +42,7 @@
 
 <h2>Edytuj Towar</h2>
 
-<form action="{{ route('towary.update', $towar->id) }}" method="POST">
+<form action="{{ route('towar.update', $towar->id) }}" method="POST">
     @csrf
     @method('PUT')
 

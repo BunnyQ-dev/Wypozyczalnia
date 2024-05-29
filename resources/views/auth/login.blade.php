@@ -47,7 +47,7 @@
         .btn-primary {
             width: 100%;
             padding: 10px;
-            background-color: #007bff;
+            background-color: #1f1f2b;
             border: none;
             color: #fff;
             border-radius: 4px;
