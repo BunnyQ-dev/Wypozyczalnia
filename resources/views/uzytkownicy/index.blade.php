@@ -7,7 +7,7 @@
 
     <ul>
         @foreach($users as $user)
-            <li>{{ $user->name }} ({{ $user->email }})</li>
+            <li>{{ $user->username }} - {{ $user->email }}</li>
         @endforeach
     </ul>
 @endsection
