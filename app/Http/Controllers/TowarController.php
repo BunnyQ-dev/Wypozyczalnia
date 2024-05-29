@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Towar;
 use App\Models\Kategoria;
-use App\Models\User;
 
 class TowarController extends Controller
 {
@@ -17,13 +16,8 @@ class TowarController extends Controller
 
     public function create()
     {
-        if (auth()->user()->role === 'admin') {
-            $kategorie = Kategoria::all();
-            $users = User::all();
-            return view('towary.create', compact('kategorie', 'users'));
-        } else {
-            return redirect()->route('home')->with('error', 'Nie masz uprawnień do dodawania towarów.');
-        }
+        $kategorie = Kategoria::all();
+        return view('towary.create', compact('kategorie'));
     }
 
     public function store(Request $request)
@@ -35,26 +29,30 @@ class TowarController extends Controller
             'kategoria_id' => 'required|exists:kategoria,id',
         ]);
 
-        $towar = new Towar();
-        $towar->nazwa = $request->nazwa;
-        $towar->opis = $request->opis;
-        $towar->cena = $request->cena;
-        $towar->kategoria_id = $request->kategoria_id;
-
-        if (auth()->user()->role === 'admin' && $request->has('user_id')) {
-            $towar->user_id = $request->user_id;
-        }
-
-        $towar->save();
+        Towar::create($request->all());
 
         return redirect()->route('towary.index')->with('success', 'Towar został dodany pomyślnie.');
     }
 
-    public function destroy($id)
+    public function edit($id)
     {
         $towar = Towar::findOrFail($id);
-        $towar->delete();
+        $kategorie = Kategoria::all();
+        return view('towary.edit', compact('towar', 'kategorie'));
+    }
 
-        return redirect()->route('towary.index')->with('success', 'Towar został usunięty pomyślnie.');
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nazwa' => 'required',
+            'opis' => 'nullable',
+            'cena' => 'required|numeric',
+            'kategoria_id' => 'required|exists:kategoria,id',
+        ]);
+
+        $towar = Towar::findOrFail($id);
+        $towar->update($request->all());
+
+        return redirect()->route('towary.index')->with('success', 'Towar został zaktualizowany pomyślnie.');
     }
 }

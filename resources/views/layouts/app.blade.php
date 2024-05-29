@@ -36,21 +36,21 @@
             bottom: 0;
             width: 100%;
         }
-        a{
+        a, a:hover{
             text-decoration: none;
-            color: blue;
+            color: #bbb6b6;
         }
     </style>
 </head>
 <body>
 <header>
-    <h1>Nazwa Twojej Aplikacji</h1>
+    <h1>Wypożyczalnia</h1>
 </header>
 
 <nav>
     <a href="#">Strona główna</a> |
     <a href="../towary">Towary</a> |
-    <a href="#">Wypożyczenia</a> |
+    <a href="../wypozyczenia">Wypożyczenia</a> |
     <a href="#">Użytkownicy</a>
 </nav>
 
