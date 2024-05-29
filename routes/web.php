@@ -37,3 +37,7 @@ Route::post('/wypozyczenia', [WypozyczeniaController::class, 'store'])->name('wy
 Route::get('/wypozyczenia/{id}/edit', [WypozyczeniaController::class, 'edit'])->name('wypozyczenia.edit')->middleware('auth');
 Route::put('/wypozyczenia/{id}', [WypozyczeniaController::class, 'update'])->name('wypozyczenia.update')->middleware('auth');
 Route::delete('/wypozyczenia/{id}', [WypozyczeniaController::class, 'delete'])->name('wypozyczenia.delete')->middleware('auth');
+
+
+//trasy dla ListyUzytkownikow
+Route::get('/uzytkownicy', 'UserController@index')->name('uzytkownicy.index');
