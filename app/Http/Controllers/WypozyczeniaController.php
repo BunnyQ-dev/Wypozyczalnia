@@ -27,12 +27,11 @@ class WypozyczeniaController extends Controller
 
             $wypozyczenie = Wypozyczenia::create($request->all());
 
-            return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie dla użytkownika ' . $wypozyczenie->user->username . ' zostało dodane pomyślnie.');
+            return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie dla użytkownika ' . $wypozyczenie->user->name . ' zostało dodane pomyślnie.');
         } catch (\Exception $e) {
             return back()->withInput()->with('error', 'Wystąpił błąd: ' . $e->getMessage());
         }
     }
-
 
     public function delete($id)
     {

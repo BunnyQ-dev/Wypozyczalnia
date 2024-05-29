@@ -1,16 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all(); // Pobierz wszystkich użytkowników
-
-        return view('uzytkownicy.index', ['users' => $users]);
+        $users = User::all(); // Pobieranie wszystkich użytkowników
+        return view('uzytkownicy.index', compact('users')); // Przekazywanie danych do widoku
     }
 }
