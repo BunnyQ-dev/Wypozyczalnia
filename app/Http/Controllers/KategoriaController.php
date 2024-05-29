@@ -1,9 +1,10 @@
 <?php
 
+// app/Http/Controllers/KategoriaController.php
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Kategoria; // Importujesz model Kategoria
+use App\Models\Kategoria;
 
 class KategoriaController extends Controller
 {
@@ -15,9 +16,7 @@ class KategoriaController extends Controller
      */
     public function show($id)
     {
-        $kategoria = Kategoria::findOrFail($id); // Pobierasz kategorię o określonym ID
-
-        // Przekazujesz kategorię do widoku
+        $kategoria = Kategoria::with('towary')->findOrFail($id);
         return view('kategorie.show', compact('kategoria'));
     }
 }
