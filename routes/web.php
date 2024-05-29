@@ -5,6 +5,7 @@ use App\Http\Controllers\TowarController;
 use App\Http\Controllers\WypozyczeniaController;
 use App\Http\Controllers\AuthController;
 
+
 // Trasa główna przekierowująca na stronę logowania
 Route::get('/', function () {
     return redirect()->route('login');
@@ -39,5 +40,7 @@ Route::put('/wypozyczenia/{id}', [WypozyczeniaController::class, 'update'])->nam
 Route::delete('/wypozyczenia/{id}', [WypozyczeniaController::class, 'delete'])->name('wypozyczenia.delete')->middleware('auth');
 
 
-//trasy dla ListyUzytkownikow
-Route::get('/uzytkownicy', 'UserController@index')->name('uzytkownicy.index');
+use App\Http\Controllers\UserController;
+
+Route::get('/uzytkownicy', [UserController::class, 'index'])->name('uzytkownicy.index');
+
