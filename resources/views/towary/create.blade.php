@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h1>Dodaj Nowy Towar</h1>
-        <form action="{{ route('towary.store') }}" method="POST">
+        <form action="{{ route('towar.store') }}" method="POST">
             @csrf
             <label for="nazwa">Nazwa:</label>
             <input type="text" id="nazwa" name="nazwa" required><br>

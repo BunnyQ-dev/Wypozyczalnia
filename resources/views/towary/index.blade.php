@@ -61,7 +61,7 @@
             {{ $towar->opis }}<br>
             Cena: {{ $towar->cena }} zł
             <div>
-                <a href="{{ route('towary.edit', $towar->id) }}" class="btn">Edytuj</a>
+                <a href="{{ route('towar.edit', $towar->id) }}" class="btn">Edytuj</a>
             </div>
         </li>
     @endforeach

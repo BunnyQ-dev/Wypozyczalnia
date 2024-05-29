@@ -9,7 +9,7 @@ class Towar extends Model
 {
     use HasFactory;
 
-    protected $table = 'towary';
+    protected $table = 'towar';
     protected $fillable = ['kategoria_id', 'nazwa', 'opis', 'cena'];
 
     public function kategoria()
@@ -24,6 +24,6 @@ class Towar extends Model
     public function index()
     {
         $towary = Towar::all();
-        return view('towary.index', compact('towary'));
+        return view('towar.index', compact('towar'));
     }
 }
