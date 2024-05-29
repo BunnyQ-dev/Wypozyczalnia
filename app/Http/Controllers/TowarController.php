@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Towar;
+use App\Models\Kategoria;
 
 class TowarController extends Controller
 {
@@ -33,4 +34,25 @@ class TowarController extends Controller
         return redirect()->route('towary.index')->with('success', 'Towar został dodany pomyślnie.');
     }
 
+    public function edit($id)
+    {
+        $towar = Towar::findOrFail($id);
+        $kategorie = Kategoria::all();
+        return view('towary.edit', compact('towar', 'kategorie'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nazwa' => 'required',
+            'opis' => 'nullable',
+            'cena' => 'required|numeric',
+            'kategoria_id' => 'required|exists:kategoria,id',
+        ]);
+
+        $towar = Towar::findOrFail($id);
+        $towar->update($request->all());
+
+        return redirect()->route('towary.index')->with('success', 'Towar został zaktualizowany pomyślnie.');
+    }
 }

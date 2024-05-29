@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+@extends('layouts.app')
+
+@section('title', 'Towary')
+
+@section('content')
+    <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -25,6 +30,18 @@
             border: 1px solid #c3e6cb;
             margin-bottom: 20px;
         }
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -43,8 +60,17 @@
             <span class="kategoria">Kategoria: {{ $towar->kategoria->nazwa }}</span><br>
             {{ $towar->opis }}<br>
             Cena: {{ $towar->cena }} zł
+            <div>
+                <a href="{{ route('towary.edit', $towar->id) }}" class="btn">Edytuj</a>
+            </div>
         </li>
     @endforeach
 </ul>
+
+<div style="margin-top: 20px;">
+    <a href="{{ route('towary.create') }}" class="btn">Dodaj nowy towar</a>
+</div>
+
 </body>
 </html>
+@endsection

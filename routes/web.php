@@ -9,8 +9,12 @@ Route::get('/', function () {
 });
 
 Route::get('/towary', [TowarController::class, 'index'])->name('towary.index');
-Route::get('/towary/create', [TowarController::class, 'create'])->name('towary.crate');
+Route::get('/towary/create', [TowarController::class, 'create'])->name('towary.create');
 Route::post('/towary', [TowarController::class, 'store'])->name('towary.store');
+Route::get('/towary/{id}/edit', [TowarController::class, 'edit'])->name('towary.edit');
+Route::put('/towary/{id}', [TowarController::class, 'update'])->name('towary.update');
+Route::delete('/towary/{id}', [WypozyczeniaController::class, 'delete'])->name('wypozyczenia.delete');
+
 
 Route::get('/wypozyczenia', [WypozyczeniaController::class, 'index'])->name('wypozyczenia.index');
 Route::get('/wypozyczenia/create', [WypozyczeniaController::class, 'create'])->name('wypozyczenia.create');
