@@ -10,8 +10,8 @@ class TowarController extends Controller
 {
     public function index()
     {
-        $towar = Towar::with('kategoria')->get();
-        return view('towar.index', compact('towar'));
+        $towary = Towar::with('kategoria')->get();
+        return view('towar.index', compact('towary'));
     }
 
     public function create()
