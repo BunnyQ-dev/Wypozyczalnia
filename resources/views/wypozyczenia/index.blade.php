@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Wypożyczenia')
+
 @section('content')
 <head>
     <title>Lista wypożyczeń</title>

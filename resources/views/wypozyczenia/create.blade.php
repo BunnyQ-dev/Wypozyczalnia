@@ -1,6 +1,8 @@
 @extends('layouts.app')
+@section('title', 'Dodaj nowe wypożyczenie')
+
 @section('content')
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -14,24 +16,40 @@
     <label for="user_id">Użytkownik:</label>
     <select id="user_id" name="user_id" required>
         @foreach($users as $user)
-            <option value="{{ $user->id }}">{{ $user->name }}</option>
+            <option value="{{ $user->id }}">{{ $user->username }}</option>
         @endforeach
-    </select><br>
+    </select>
+    @error('user_id')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <br>
 
     <label for="towar_id">Towar:</label>
     <select id="towar_id" name="towar_id" required>
         @foreach($towary as $towar)
             <option value="{{ $towar->id }}">{{ $towar->nazwa }}</option>
         @endforeach
-    </select><br>
+    </select>
+    @error('towar_id')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <br>
 
     <label for="data_wypozyczenia">Data Wypożyczenia:</label>
-    <input type="date" id="data_wypozyczenia" name="data_wypozyczenia" required><br>
+    <input type="date" id="data_wypozyczenia" name="data_wypozyczenia" required>
+    @error('data_wypozyczenia')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <br>
 
     <label for="data_zwrotu">Data Zwrotu:</label>
-    <input type="date" id="data_zwrotu" name="data_zwrotu"><br>
+    <input type="date" id="data_zwrotu" name="data_zwrotu">
+    @error('data_zwrotu')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <br>
 
-    <button type="submit">Wypożycz</button>
+    <button type="submit" class="btn btn-primary">Wypożycz</button>
 </form>
 </body>
 </html>
