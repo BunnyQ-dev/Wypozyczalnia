@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TowarController;
 use App\Http\Controllers\WypozyczeniaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\KategoriaController;
 
-
-// Trasa główna przekierowująca na stronę logowania
+// Trasa główna przekierowująca na stronę logowania, jeśli użytkownik nie jest zalogowany
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -19,9 +21,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Trasa dla strony głównej po zalogowaniu
-Route::get('/home', function () {
-    return redirect()->route('towar.index');
-})->name('home')->middleware('auth');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 // Trasy dla TowarController
 Route::get('/towar', [TowarController::class, 'index'])->name('towar.index')->middleware('auth');
@@ -39,8 +39,12 @@ Route::get('/wypozyczenia/{id}/edit', [WypozyczeniaController::class, 'edit'])->
 Route::put('/wypozyczenia/{id}', [WypozyczeniaController::class, 'update'])->name('wypozyczenia.update')->middleware('auth');
 Route::delete('/wypozyczenia/{id}', [WypozyczeniaController::class, 'delete'])->name('wypozyczenia.delete')->middleware('auth');
 
+// Trasy dla UserController
+Route::get('/uzytkownicy', [UserController::class, 'index'])->name('uzytkownicy.index')->middleware('auth');
 
-use App\Http\Controllers\UserController;
+// Trasa główna dla HomeController
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
-Route::get('/uzytkownicy', [UserController::class, 'index'])->name('uzytkownicy.index');
+
+Route::get('/kategorie/{id}', 'KategoriaController@show')->name('kategoria.show');
 

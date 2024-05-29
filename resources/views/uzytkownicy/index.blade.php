@@ -2,6 +2,8 @@
 
 @extends('layouts.app')
 
+@section('title', 'Lista użytkowników')
+
 @section('content')
     <div class="container">
         <h1>Lista użytkowników</h1>
@@ -26,7 +28,7 @@
             @foreach ($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->username }}</td> <!-- Zamiast 'name' używamy 'username' -->
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->created_at }}</td>
                     <td>

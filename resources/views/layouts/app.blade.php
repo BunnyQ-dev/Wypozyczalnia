@@ -8,29 +8,28 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
         }
         header {
             background-color: #333;
             color: #fff;
-            padding: 10px;
+            padding: 20px 0;
             text-align: center;
         }
         nav {
             background-color: #666;
             color: #fff;
-            padding: 10px;
+            padding: 10px 0;
             text-align: center;
         }
-        a{
+        nav a {
             text-decoration: none;
-            color: #fff ;
+            color: #fff;
+            margin: 0 15px;
         }
         footer {
             background-color: #333;
             color: #fff;
-            padding: 10px;
+            padding: 10px 0;
             text-align: center;
             position: fixed;
             bottom: 0;
@@ -40,23 +39,32 @@
 </head>
 <body>
 <header>
-    <h1>Nazwa Twojej Aplikacji</h1>
+    <div class="container">
+        <h1>Nazwa Twojej Aplikacji</h1>
+    </div>
 </header>
 
 <nav>
-    <a href="#">Strona główna</a> |
-    <a href="../towar">Towary</a> |
-    <a href="../wypozyczenia">Wypożyczenia</a> |
-    <a href="#">Użytkownicy</a>
+    <div class="container">
+        <a href="{{ route('home') }}">Strona główna</a>
+        <a href="{{ route('towar.index') }}">Towary</a>
+        <a href="{{ route('wypozyczenia.index') }}">Wypożyczenia</a>
+        <a href="{{ route('uzytkownicy.index') }}">Użytkownicy</a>
+    </div>
 </nav>
 
-<main>
+<main class="container mt-4">
     @yield('content')
 </main>
 
 <footer>
-    &copy; {{ date('Y') }} Test
+    <div class="container">
+        &copy; {{ date('Y') }} Twoja Nazwa Aplikacji
+    </div>
 </footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
