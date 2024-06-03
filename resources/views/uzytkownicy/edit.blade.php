@@ -25,9 +25,19 @@
                 <input type="text" name="username" id="username" class="form-control" value="{{ $user->username }}" required>
             </div>
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}" required>
+                <label for="first_name">Imię</label>
+                <input type="text" name="first_name" id="first_name" class="form-control" value="{{ $user->first_name }}" required>
             </div>
+            <div class="form-group">
+                <label for="last_name">Nazwisko:</label>
+                <input type="text" name="last_name" id="last_name" class="form-control" value="{{ $user->last_name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Adres:</label>
+                <input type="text" name="adress" id="adress" class="form-control" value="{{ $user->adress }}">
+            </div>
+
+
             <button type="submit" class="btn btn-success">Zapisz zmiany</button>
         </form>
     </div>
