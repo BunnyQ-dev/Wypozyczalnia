@@ -23,5 +23,6 @@
                 </div>
             @endforeach
         </div>
+        <a href="{{ route('towar.create') }}" class="btn btn-success">Dodaj nowy towar</a>
     </div>
 @endsection
