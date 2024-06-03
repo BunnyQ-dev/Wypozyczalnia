@@ -12,7 +12,9 @@
                         <p class="card-text">{{ $towar->opis }}</p>
                         <p class="card-text"><strong>Cena:</strong> {{ $towar->cena }} zł</p>
                         <p class="card-text"><strong>Kategoria:</strong> {{ $towar->kategoria->nazwa }}</p>
-                        <a href="{{ route('towar.edit', $towar->id) }}" class="btn btn-primary">Edytuj</a>
+                        @if(Auth::check() && Auth::user()->role === 'admin')
+                            <a href="{{ route('towar.edit', $towar->id) }}" class="btn btn-primary">Edytuj</a>
+                        @endif
                         <a href="{{ route('towar.index') }}" class="btn btn-info">Powrót do listy towarów</a>
                     </div>
                 </div>

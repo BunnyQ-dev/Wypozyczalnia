@@ -50,4 +50,10 @@ class UserController extends Controller
 
         return redirect()->route('uzytkownicy.index')->with('success', 'Użytkownik usunięty pomyślnie');
     }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->except(['show']);
+    }
 }

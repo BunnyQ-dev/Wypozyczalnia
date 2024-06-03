@@ -19,6 +19,8 @@ class KategoriaSeeder extends Seeder
             ['nazwa' => 'Spycharki'],
             ['nazwa' => 'Walce drogowe'],
             ['nazwa' => 'Podnośniki'],
+            ['nazwa' => 'Betoniarki'],
+            ['nazwa' => 'Wywrotki'],
             // Dodaj inne kategorie wypożyczalni sprzętu budowlanego
         ];
 

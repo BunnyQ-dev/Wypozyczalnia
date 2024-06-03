@@ -13,16 +13,21 @@
                             <h3 class="card-title"><a href="{{ route('towar.show', $towar->id) }}">{{ $towar->nazwa }}</a></h3>
                             <p class="card-text">{{ $towar->opis }}</p>
                             <p class="card-text"><strong>Cena:</strong> {{ $towar->cena }} zł</p>
-                            <form action="{{ route('towar.destroy', $towar->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć ten towar?')">Usuń</button>
-                            </form>
+                            @if(Auth::check() && Auth::user()->role === 'admin')
+                                <a href="{{ route('towar.edit', $towar->id) }}" class="btn btn-primary">Edytuj</a>
+                                <form action="{{ route('towar.destroy', $towar->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć ten towar?')">Usuń</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-        <a href="{{ route('towar.create') }}" class="btn btn-success">Dodaj nowy towar</a>
+        @if(Auth::check() && Auth::user()->role === 'admin')
+            <a href="{{ route('towar.create') }}" class="btn btn-success">Dodaj nowy towar</a>
+        @endif
     </div>
 @endsection

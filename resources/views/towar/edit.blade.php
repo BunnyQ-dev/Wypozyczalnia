@@ -38,41 +38,40 @@
         }
     </style>
 </head>
-<body>
+    <body>
+        <div class="container">
+            <h2>Edytuj Towar</h2>
+            <form action="{{ route('towar.update', $towar->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-<h2>Edytuj Towar</h2>
+                <div class="form-group">
+                    <label for="nazwa">Nazwa:</label>
+                    <input type="text" id="nazwa" name="nazwa" value="{{ $towar->nazwa }}" required>
+                </div>
 
-<form action="{{ route('towar.update', $towar->id) }}" method="POST">
-    @csrf
-    @method('PUT')
+                <div class="form-group">
+                    <label for="opis">Opis:</label>
+                    <textarea id="opis" name="opis">{{ $towar->opis }}</textarea>
+                </div>
 
-    <div class="form-group">
-        <label for="nazwa">Nazwa:</label>
-        <input type="text" id="nazwa" name="nazwa" value="{{ $towar->nazwa }}" required>
-    </div>
+                <div class="form-group">
+                    <label for="cena">Cena:</label>
+                    <input type="text" id="cena" name="cena" value="{{ $towar->cena }}" required>
+                </div>
 
-    <div class="form-group">
-        <label for="opis">Opis:</label>
-        <textarea id="opis" name="opis">{{ $towar->opis }}</textarea>
-    </div>
+                <div class="form-group">
+                    <label for="kategoria_id">Kategoria:</label>
+                    <select id="kategoria_id" name="kategoria_id" required>
+                        @foreach($kategorie as $kategoria)
+                            <option value="{{ $kategoria->id }}" {{ $towar->kategoria_id == $kategoria->id ? 'selected' : '' }}>{{ $kategoria->nazwa }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-    <div class="form-group">
-        <label for="cena">Cena:</label>
-        <input type="text" id="cena" name="cena" value="{{ $towar->cena }}" required>
-    </div>
-
-    <div class="form-group">
-        <label for="kategoria_id">Kategoria:</label>
-        <select id="kategoria_id" name="kategoria_id" required>
-            @foreach($kategorie as $kategoria)
-                <option value="{{ $kategoria->id }}" {{ $towar->kategoria_id == $kategoria->id ? 'selected' : '' }}>{{ $kategoria->nazwa }}</option>
-            @endforeach
-        </select>
-    </div>
-
-    <button type="submit" class="btn">Zapisz zmiany</button>
-</form>
-
-</body>
+                <button type="submit" class="btn btn-success">Zapisz zmiany</button>
+            </form>
+        </div>
+    </body>
 </html>
 @endsection
