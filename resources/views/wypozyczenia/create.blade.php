@@ -14,7 +14,7 @@
     <label for="user_id">Użytkownik:</label>
     <select id="user_id" name="user_id" required>
         @foreach($users as $user)
-            <option value="{{ $user->id }}">{{ $user->name }}</option>
+            <option value="{{ $user->id }}">{{ $user->username }}</option>
         @endforeach
     </select><br>
 

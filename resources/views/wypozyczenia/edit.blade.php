@@ -17,7 +17,7 @@
                                 <select id="user_id" name="user_id" class="form-control">
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}" {{ $wypozyczenie->user_id == $user->id ? 'selected' : '' }}>
-                                            {{ $user->name }}
+                                            {{ $user->username }}
                                         </option>
                                     @endforeach
                                 </select>
