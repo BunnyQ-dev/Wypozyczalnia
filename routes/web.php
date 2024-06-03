@@ -44,6 +44,7 @@ Route::delete('/wypozyczenia/{id}', [WypozyczeniaController::class, 'delete'])->
 Route::get('/uzytkownicy', [UserController::class, 'index'])->name('uzytkownicy.index');
 Route::get('/uzytkownicy/{id}/edit', [UserController::class, 'edit'])->name('uzytkownicy.edit');
 Route::post('/uzytkownicy/{id}', [UserController::class, 'update'])->name('uzytkownicy.update');
+Route::get('/uzytkownicy/{id}', [UserController::class, 'show'])->name('uzytkownicy.show');
 Route::delete('/uzytkownicy/{id}', [UserController::class, 'destroy'])->name('uzytkownicy.destroy');
 
 // Trasa główna dla HomeController

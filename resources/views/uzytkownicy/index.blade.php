@@ -27,12 +27,11 @@
             <tbody>
             @foreach ($users as $user)
                 <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->username }}</td>
+                    <td>{{ $user->id }} </td>
+                    <td><a href="{{ route('uzytkownicy.show', $user->id) }}">{{ $user->username }}</a></td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->created_at }}</td>
                     <td>
-                        <a href="{{ route('uzytkownicy.edit', $user->id) }}" class="btn btn-primary">Edytuj</a>
                         <form action="{{ route('uzytkownicy.destroy', $user->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')

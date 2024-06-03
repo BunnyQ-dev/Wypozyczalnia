@@ -33,8 +33,8 @@
                 <input type="text" name="last_name" id="last_name" class="form-control" value="{{ $user->last_name }}" required>
             </div>
             <div class="form-group">
-                <label for="last_name">Adres:</label>
-                <input type="text" name="adress" id="adress" class="form-control" value="{{ $user->adress }}">
+                <label for="adress">Adres:</label>
+                <input type="text" name="adress" id="adress" class="form-control" value="{{ $user->address }}">
             </div>
 
 
