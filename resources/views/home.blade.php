@@ -62,8 +62,35 @@
         .card-text strong {
             font-weight: bold;
         }
+
+        /* Dodatkowy styl dla informacji o zalogowanym użytkowniku */
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .user-info a {
+            color: #000;
+            text-decoration: none;
+            margin-right: 10px;
+        }
     </style>
     <div class="container">
+        <!-- Informacje o zalogowanym użytkowniku i przycisk wylogowania -->
+        <div class="user-info">
+            @auth
+                <span>Zalogowany jako: {{ Auth::user()->name }}</span>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Wyloguj się</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}">Zaloguj się</a>
+                <a href="{{ route('register') }}">Zarejestruj się</a>
+            @endauth
+        </div>
+
         <!-- Karuzela z kategoriami -->
         <div id="categoryCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">

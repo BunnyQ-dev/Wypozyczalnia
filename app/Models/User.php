@@ -23,6 +23,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'address',
+        'role', // Dodajemy pole 'role' do masowej przypisywalności
     ];
 
     /**
@@ -43,4 +44,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Check if the user is an administrator.
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 }

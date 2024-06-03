@@ -13,16 +13,20 @@
                             <h3 class="card-title"><a href="{{ route('towar.show', $towar->id) }}">{{ $towar->nazwa }}</a></h3>
                             <p class="card-text">{{ $towar->opis }}</p>
                             <p class="card-text"><strong>Cena:</strong> {{ $towar->cena }} zł</p>
-                            <form action="{{ route('towar.destroy', $towar->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć ten towar?')">Usuń</button>
-                            </form>
+                            @can('delete', $towar)
+                                <form action="{{ route('towar.destroy', $towar->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć ten towar?')">Usuń</button>
+                                </form>
+                            @endcan
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-        <a href="{{ route('towar.create') }}" class="btn btn-success">Dodaj nowy towar</a>
+        @can('create', App\Models\Towar::class)
+            <a href="{{ route('towar.create') }}" class="btn btn-success">Dodaj nowy towar</a>
+        @endcan
     </div>
 @endsection

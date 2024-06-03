@@ -23,7 +23,9 @@
                 @endforeach
             </select><br>
 
-            <button type="submit" class="btn btn-primary">Dodaj Towar</button>
+            @can('create', App\Models\Towar::class)
+                <button type="submit" class="btn btn-primary">Dodaj Towar</button>
+            @endcan
         </form>
     </div>
 @endsection

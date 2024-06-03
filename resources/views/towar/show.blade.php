@@ -12,7 +12,9 @@
                         <p class="card-text">{{ $towar->opis }}</p>
                         <p class="card-text"><strong>Cena:</strong> {{ $towar->cena }} zł</p>
                         <p class="card-text"><strong>Kategoria:</strong> {{ $towar->kategoria->nazwa }}</p>
-                        <a href="{{ route('towar.edit', $towar->id) }}" class="btn btn-primary">Edytuj</a>
+                        @can('update', $towar)
+                            <a href="{{ route('towar.edit', $towar->id) }}" class="btn btn-primary">Edytuj</a>
+                        @endcan
                         <a href="{{ route('towar.index') }}" class="btn btn-info">Powrót do listy towarów</a>
                     </div>
                 </div>

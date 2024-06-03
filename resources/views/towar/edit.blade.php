@@ -70,7 +70,9 @@
         </select>
     </div>
 
-    <button type="submit" class="btn">Zapisz zmiany</button>
+    @can('update', $towar)
+        <button type="submit" class="btn">Zapisz zmiany</button>
+    @endcan
 </form>
 
 </body>

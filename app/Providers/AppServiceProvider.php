@@ -21,4 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+    protected $policies = [
+        'App\Models\Towar' => 'App\Policies\TowarPolicy',
+    ];
 }
