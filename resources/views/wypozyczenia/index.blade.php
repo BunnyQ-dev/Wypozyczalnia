@@ -31,7 +31,7 @@
     @foreach($wypozyczenia as $wypozyczenie)
         <li class="wypozyczenie">
             <strong>{{ $wypozyczenie->towar->nazwa }}</strong><br>
-            Użytkownik: {{ $wypozyczenie->user->name }}<br>
+            Użytkownik: {{ $wypozyczenie->user->username }}<br>
             Data Wypożyczenia: {{ $wypozyczenie->data_wypozyczenia }}<br>
             Data Zwrotu: {{ $wypozyczenie->data_zwrotu ?? 'Brak' }}
             <br>
