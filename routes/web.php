@@ -25,12 +25,15 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 // Trasy dla TowarController
-Route::get('/towar', [TowarController::class, 'index'])->name('towar.index')->middleware('auth');
-Route::get('/towar/create', [TowarController::class, 'create'])->name('towar.create')->middleware('auth');
-Route::post('/towar', [TowarController::class, 'store'])->name('towar.store')->middleware('auth');
-Route::delete('/towar/{id}', [TowarController::class, 'destroy'])->name('towar.destroy')->middleware('auth');
-Route::get('/towar/{id}/edit', [TowarController::class, 'edit'])->name('towar.edit')->middleware('auth');
-Route::put('/towar/{id}', [TowarController::class, 'update'])->name('towar.update')->middleware('auth');
+Route::get('/towary', [TowarController::class, 'index'])->name('towar.index');
+Route::get('/towary/create', [TowarController::class, 'create'])->name('towar.create');
+Route::post('/towary', [TowarController::class, 'store'])->name('towar.store');
+Route::get('/towary/{id}', [TowarController::class, 'show'])->name('towar.show');
+Route::get('/towary/{id}/edit', [TowarController::class, 'edit'])->name('towar.edit');
+Route::put('/towary/{id}', [TowarController::class, 'update'])->name('towar.update');
+Route::delete('/towary/{id}', [TowarController::class, 'destroy'])->name('towar.destroy');
+
+
 
 // Trasy dla WypozyczeniaController
 Route::get('/wypozyczenia', [WypozyczeniaController::class, 'index'])->name('wypozyczenia.index')->middleware('auth');
@@ -50,7 +53,14 @@ Route::delete('/uzytkownicy/{id}', [UserController::class, 'destroy'])->name('uz
 // Trasa główna dla HomeController
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
+// Trasy dla KategoriaController
+Route::get('/kategorie', [KategoriaController::class, 'index'])->name('kategorie.index');
+Route::get('/kategorie/create', [KategoriaController::class, 'create'])->name('kategorie.create');
+Route::post('/kategorie', [KategoriaController::class, 'store'])->name('kategorie.store');
+Route::get('/kategorie/{id}', [KategoriaController::class, 'show'])->name('kategorie.show');
+Route::get('/kategorie/{id}/edit', [KategoriaController::class, 'edit'])->name('kategorie.edit');
+Route::put('/kategorie/{id}', [KategoriaController::class, 'update'])->name('kategorie.update');
+Route::delete('/kategorie/{id}', [KategoriaController::class, 'destroy'])->name('kategorie.destroy');
 
-Route::get('/kategorie/{id}', 'KategoriaController@show')->name('kategoria.show');
 
 

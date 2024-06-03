@@ -55,4 +55,18 @@ class TowarController extends Controller
 
         return redirect()->route('towar.index')->with('success', 'Towar został zaktualizowany pomyślnie.');
     }
+
+    public function show($id)
+    {
+        $towar = Towar::with('kategoria')->findOrFail($id);
+        return view('towar.show', compact('towar'));
+    }
+
+    public function destroy($id)
+    {
+        $towar = Towar::findOrFail($id);
+        $towar->delete();
+
+        return redirect()->route('towar.index')->with('success', 'Towar został usunięty pomyślnie.');
+    }
 }

@@ -69,7 +69,7 @@
             <div class="carousel-inner">
                 @foreach ($kategorie as $kategoria)
                     <div class="carousel-item @if($loop->first) active @endif">
-                        <a href="{{ route('kategoria.show', $kategoria->id) }}"><h2>{{ $kategoria->nazwa }}</h2></a>
+                        <a href="{{ route('kategorie.index', $kategoria->id) }}"><h2>{{ $kategoria->nazwa }}</h2></a>
                         <ul class="list-unstyled">
                             @foreach ($kategoria->towary as $towar)
                                 <li>{{ $towar->nazwa }}</li>
