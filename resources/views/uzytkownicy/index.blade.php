@@ -28,13 +28,16 @@
             @foreach ($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->username }}</td> <!-- Zamiast 'name' używamy 'username' -->
+                    <td>{{ $user->username }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->created_at }}</td>
                     <td>
-                        <!-- Możesz tutaj dodać przyciski edycji lub usuwania -->
-                        <a href="#" class="btn btn-primary">Edytuj</a>
-                        <a href="#" class="btn btn-danger">Usuń</a>
+                        <a href="{{ route('uzytkownicy.edit', $user->id) }}" class="btn btn-primary">Edytuj</a>
+                        <form action="{{ route('uzytkownicy.destroy', $user->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć tego użytkownika?')">Usuń</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

@@ -41,11 +41,15 @@ Route::put('/wypozyczenia/{id}', [WypozyczeniaController::class, 'update'])->nam
 Route::delete('/wypozyczenia/{id}', [WypozyczeniaController::class, 'delete'])->name('wypozyczenia.delete')->middleware('auth');
 
 // Trasy dla UserController
-Route::get('/uzytkownicy', [UserController::class, 'index'])->name('uzytkownicy.index')->middleware('auth');
+Route::get('/uzytkownicy', [UserController::class, 'index'])->name('uzytkownicy.index');
+Route::get('/uzytkownicy/{id}/edit', [UserController::class, 'edit'])->name('uzytkownicy.edit');
+Route::post('/uzytkownicy/{id}', [UserController::class, 'update'])->name('uzytkownicy.update');
+Route::delete('/uzytkownicy/{id}', [UserController::class, 'destroy'])->name('uzytkownicy.destroy');
 
 // Trasa główna dla HomeController
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 
 Route::get('/kategorie/{id}', 'KategoriaController@show')->name('kategoria.show');
+
 
