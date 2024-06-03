@@ -26,6 +26,10 @@
             color: #fff;
             margin: 0 15px;
         }
+        nav a:hover{
+            text-decoration: none;
+            color: #9ca3af;
+        }
         footer {
             background-color: #333;
             color: #fff;
@@ -50,6 +54,7 @@
         <a href="{{ route('towar.index') }}">Towary</a>
         <a href="{{ route('wypozyczenia.index') }}">Wypożyczenia</a>
         <a href="{{ route('uzytkownicy.index') }}">Użytkownicy</a>
+        <a href="{{ route('kategorie.index') }}">Kategorie</a> <!-- Dodany link -->
     </div>
 </nav>
 
