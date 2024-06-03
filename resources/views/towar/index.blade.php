@@ -8,7 +8,7 @@
         <div class="row mt-3">
             @foreach ($towary as $towar)
                 <div class="col-md-4 mb-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body">
                             <h3 class="card-title"><a href="{{ route('towar.show', $towar->id) }}">{{ $towar->nazwa }}</a></h3>
                             <p class="card-text">{{ $towar->opis }}</p>
