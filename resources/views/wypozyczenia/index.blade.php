@@ -36,7 +36,7 @@
             Data Zwrotu: {{ $wypozyczenie->data_zwrotu ?? 'Brak' }}
             <br>
             <!-- Przycisk do edycji -->
-            <a href="{{ route('wypozyczenia.edit', $wypozyczenie->id) }}">Edytuj</a>
+            <a href="{{ route('wypozyczenia.edit', $wypozyczenie->id) }}" class="btn btn-primary">Edytuj</a>
         </li>
     @endforeach
 </ul>
