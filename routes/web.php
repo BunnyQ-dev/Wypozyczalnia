@@ -17,24 +17,28 @@ Route::get('/', function () {
 Route::get('/main', [TowarController::class, 'main'])->name('main');
 
 Route::get('/onas', function () {
-    return view('onas'); // Сторінка "О нас"
+    return view('onas');
 })->name('onas');
 
 Route::get('/kontakt', function () {
-    return view('kontakt'); // Сторінка "Контакт"
+    return view('kontakt');
 })->name('kontakt');
 
 Route::get('/oferta', function () {
-    return view('oferta'); // Сторінка "Оферта"
+    return view('oferta');
 })->name('oferta');
 
 Route::get('/zarezerwuj', function () {
-    return view('zarezerwuj'); // Сторінка "Зареєструватися"
+    return view('zarezerwuj');
 })->name('zarezerwuj');
 
 Route::get('/login', function () {
-    return view('auth.login'); // Сторінка "Логування"
+    return view('auth.login');
 })->name('login');
+
+Route::get('/regulamin', function () {
+    return view('regulamin');
+})->name('regulamin');
 
 
 // Trasy dla rejestracji, logowania i wylogowywania

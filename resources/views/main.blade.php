@@ -39,7 +39,7 @@
                 <div class="row">
                     @foreach($towary as $towar)
                         <div class="col-12 col-md-6 col-lg-3">
-                            <div class="card mb-4">
+                            <div class="card mb-4 h-100">
                                 <div id="carouselExampleIndicators{{ $towar->id }}" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
                                         @if($towar->zdjecie1)

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
     <style>
@@ -11,15 +11,13 @@
             padding: 0;
         }
 
-        .AppName h1 {
-            text-align: center;
-            margin-top: 20px;
-            color: #ffffff;
-        }
-
         h1 {
             text-align: center;
             margin-top: 20px;
+        }
+
+        .space {
+            padding-top: 120px;
         }
 
         form {
@@ -49,19 +47,25 @@
             box-sizing: border-box;
         }
 
-        .btn-primary {
-            width: 100%;
-            padding: 10px;
-            background-color: #1f1f2b;
-            border: none;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
+        .btn-zaloguj-container {
+            text-align: center; /* Центрування контейнера */
             margin-top: 10px;
         }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
+        .btn-zaloguj {
+            width: 100%;
+            max-width: 200px; /* Максимальна ширина кнопки */
+            padding: 10px;
+            background-color: #06A77D;
+            border: none;
+            color: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-zaloguj:hover {
+            background-color: #18c598;
+            color: #ffffff;
         }
 
         p {
@@ -75,8 +79,8 @@
         p a:hover {
             text-decoration: underline;
         }
-
     </style>
+    <div class="space"></div>
     <h1>Logowanie</h1>
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -88,7 +92,9 @@
             <label for="password">Hasło:</label>
             <input type="password" id="password" name="password" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-primary">Zaloguj się</button>
+        <div class="btn-zaloguj-container">
+            <button type="submit" class="btn btn-zaloguj">Zaloguj się</button>
+        </div>
     </form>
     <p>Nie masz konta? <a href="{{ route('register') }}">Zarejestruj się</a></p>
 @endsection

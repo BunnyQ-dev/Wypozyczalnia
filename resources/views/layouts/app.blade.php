@@ -15,6 +15,7 @@
             padding: 20px 0;
             text-align: center;
         }
+
         nav {
             background-color: #666;
             color: #fff;
