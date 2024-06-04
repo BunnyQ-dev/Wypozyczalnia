@@ -42,7 +42,7 @@
 
 <h2>Edytuj Towar</h2>
 
-<form action="{{ route('towar.update', $towar->id) }}" method="POST">
+<form action="{{ route('towar.update', $towar->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
@@ -70,6 +70,14 @@
         </select>
     </div>
 
+    <label for="zdjecie1">Zdjęcie 1:</label>
+    <input type="file" id="zdjecie1" name="zdjecie1">
+
+    <label for="zdjecie2">Zdjęcie 2:</label>
+    <input type="file" id="zdjecie2" name="zdjecie2">
+
+    <label for="zdjecie3">Zdjęcie 3:</label>
+    <input type="file" id="zdjecie3" name="zdjecie3">
     <button type="submit" class="btn">Zapisz zmiany</button>
 </form>
 

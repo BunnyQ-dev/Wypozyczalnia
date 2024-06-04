@@ -137,7 +137,7 @@
                 <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="#">Rentify</a></span>
             </div>
                 <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
-                        <a class="nav-link link text-black display-4" href="#">O nas</a>
+                        <a class="nav-link link text-black display-4" href="#" aria-expanded="false">O nas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link text-black display-4" href="#" aria-expanded="false">Kontakt</a>
