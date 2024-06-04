@@ -23,8 +23,6 @@
 
 
 
-
-
     <style>
         .navbar-fixed-top {
             top: auto;
@@ -130,27 +128,24 @@
         <div class="container">
             <div class="navbar-brand">
 				<span class="navbar-logo">
-					<a href="#">
-						<img src="https://r.mobirisesite.com/485019/assets/images/photo-1585110587043-36d457f3e803.jpeg" alt="Mobirise Website Builder" style="height: 4.3rem;">
+					<a href="{{ route('main') }}">
+						<img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 4.3rem;">
 					</a>
 				</span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="#">Rentify</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="{{ route('main') }}">Rentify</a></span>
             </div>
                 <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
-                        <a class="nav-link link text-black display-4" href="#" aria-expanded="false">O nas</a>
+                        <a class="nav-link link text-black display-4" href="{{ route('onas') }}" aria-expanded="false">O nas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link text-black display-4" href="#" aria-expanded="false">Kontakt</a>
+                        <a class="nav-link link text-black display-4" href="{{ route('kontakt') }}" aria-expanded="false">Kontakt</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link text-black display-4" href="#" aria-expanded="false">Oferta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link text-black display-4" href="#" aria-expanded="false">Zarezerwuj</a>
+                        <a class="nav-link link text-black display-4" href="{{ route('wypozyczenia.index') }}" aria-expanded="false">Zarezerwuj</a>
                     </li>
                 </ul>
 
-                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="#">Logowanie</a></div>
+                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="{{ route('login') }}">Logowanie</a></div>
 
         </div>
     </nav>
@@ -192,7 +187,24 @@
 <script src="https://r.mobirisesite.com/485019/assets/dropdown/js/navbar-dropdown.js?rnd=1717420586975"></script>
 <script src="https://r.mobirisesite.com/485019/assets/theme/js/script.js?rnd=1717420586975"></script>
 <script src="https://r.mobirisesite.com/485019/assets/formoid/formoid.min.js?rnd=1717420586975"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.carousel').carousel({
+            interval: false // Disable automatic slide switching
+        });
 
+        $('.carousel .carousel-control-prev').click(function(e) {
+            var id = $(this).closest('.carousel').attr('id');
+            $('#' + id).carousel('prev');
+        });
+
+        $('.carousel .carousel-control-next').click(function(e) {
+            var id = $(this).closest('.carousel').attr('id');
+            $('#' + id).carousel('next');
+        });
+    });
+</script>
 
 
 </body>
