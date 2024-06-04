@@ -112,4 +112,12 @@ class TowarController extends Controller
 
         return redirect()->route('towar.index')->with('success', 'Towar został usunięty pomyślnie.');
     }
+
+    public function main()
+    {
+        $towary = Towar::all(); // Assuming Towar is your product model
+
+        return view('main', compact('towary'));
+    }
+
 }

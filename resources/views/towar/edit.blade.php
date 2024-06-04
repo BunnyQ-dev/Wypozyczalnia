@@ -12,6 +12,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            height: 200vh;
         }
         .form-group {
             margin-bottom: 20px;
@@ -20,7 +21,7 @@
             display: block;
             font-weight: bold;
         }
-        input[type="text"], select {
+        input[type="text"], select, textarea {
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
@@ -35,6 +36,10 @@
         }
         .btn:hover {
             background-color: #45a049;
+        }
+        .img-preview {
+            max-width: 200px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -53,7 +58,7 @@
 
     <div class="form-group">
         <label for="opis">Opis:</label>
-        <textarea id="opis" name="opis">{{ $towar->opis }}</textarea>
+        <textarea id="opis" name="opis" rows="4" required>{{ $towar->opis }}</textarea>
     </div>
 
     <div class="form-group">
@@ -70,14 +75,30 @@
         </select>
     </div>
 
-    <label for="zdjecie1">Zdjęcie 1:</label>
-    <input type="file" id="zdjecie1" name="zdjecie1">
+    <div class="form-group">
+        <label for="zdjecie1">Zdjęcie 1:</label>
+        @if($towar->zdjecie1)
+            <img src="{{ asset('storage/' . $towar->zdjecie1) }}" alt="Zdjęcie 1" class="img-preview">
+        @endif
+        <input type="file" id="zdjecie1" name="zdjecie1">
+    </div>
 
-    <label for="zdjecie2">Zdjęcie 2:</label>
-    <input type="file" id="zdjecie2" name="zdjecie2">
+    <div class="form-group">
+        <label for="zdjecie2">Zdjęcie 2:</label>
+        @if($towar->zdjecie2)
+            <img src="{{ asset('storage/' . $towar->zdjecie2) }}" alt="Zdjęcie 2" class="img-preview">
+        @endif
+        <input type="file" id="zdjecie2" name="zdjecie2">
+    </div>
 
-    <label for="zdjecie3">Zdjęcie 3:</label>
-    <input type="file" id="zdjecie3" name="zdjecie3">
+    <div class="form-group">
+        <label for="zdjecie3">Zdjęcie 3:</label>
+        @if($towar->zdjecie3)
+            <img src="{{ asset('storage/' . $towar->zdjecie3) }}" alt="Zdjęcie 3" class="img-preview">
+        @endif
+        <input type="file" id="zdjecie3" name="zdjecie3">
+    </div>
+
     <button type="submit" class="btn">Zapisz zmiany</button>
 </form>
 

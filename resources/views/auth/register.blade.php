@@ -11,10 +11,15 @@
             padding: 0;
         }
 
-        h1 {
+        .AppName h1 {
             text-align: center;
             margin-top: 20px;
             color: #ffffff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
         }
 
         form {

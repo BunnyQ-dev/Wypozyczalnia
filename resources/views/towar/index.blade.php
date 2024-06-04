@@ -3,6 +3,11 @@
 @section('title', 'Lista Towarów')
 
 @section('content')
+    <style>
+        body{
+            height: 150vh;
+        }
+    </style>
     <div class="container">
         <h1 class="mt-5">Lista Towarów</h1>
         <div class="row mt-3">
