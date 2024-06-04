@@ -18,6 +18,9 @@ class CreateTowarsTable extends Migration
             $table->text('opis')->nullable();
             $table->decimal('cena', 8, 2);
             $table->boolean('dostepnosc')->default(true);
+            $table->string('zdjecie1')->nullable();
+            $table->string('zdjecie2')->nullable();
+            $table->string('zdjecie3')->nullable();
             $table->timestamps();
 
             $table->foreign('kategoria_id')->references('id')->on('kategoria')->onDelete('cascade');

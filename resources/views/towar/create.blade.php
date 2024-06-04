@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h1>Dodaj Nowy Towar</h1>
-        <form action="{{ route('towar.store') }}" method="POST">
+        <form action="{{ route('towar.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <label for="nazwa">Nazwa:</label>
             <input type="text" id="nazwa" name="nazwa" required><br>
@@ -22,6 +22,15 @@
                     <option value="{{ $kategoria->id }}">{{ $kategoria->nazwa }}</option>
                 @endforeach
             </select><br>
+            <label for="zdjecie1">Zdjęcie 1:</label>
+            <input type="file" id="zdjecie1" name="zdjecie1">
+
+            <label for="zdjecie2">Zdjęcie 2:</label>
+            <input type="file" id="zdjecie2" name="zdjecie2">
+
+            <label for="zdjecie3">Zdjęcie 3:</label>
+            <input type="file" id="zdjecie3" name="zdjecie3">
+
 
             <button type="submit" class="btn btn-primary">Dodaj Towar</button>
         </form>
