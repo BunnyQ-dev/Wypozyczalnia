@@ -14,6 +14,18 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('/main', function () {
+    return view('main');
+});
+
+Route::get('/kontakt', function () {
+    return view('kontakt');
+});
+Route::get('/onas', function () {
+    return view('onas');
+});
+
+
 // Trasy dla rejestracji, logowania i wylogowywania
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
