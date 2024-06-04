@@ -10,7 +10,7 @@ class Towar extends Model
     use HasFactory;
 
     protected $table = 'towar';
-    protected $fillable = ['kategoria_id', 'nazwa', 'opis', 'cena'];
+    protected $fillable = ['kategoria_id', 'nazwa', 'opis', 'cena', 'zdjecie1','zdjecie2','zdjecie3'];
 
     public function kategoria()
     {
