@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
     <style>
-        /* public/css/styles.css */
 
         body {
             font-family: Arial, sans-serif;
@@ -30,6 +29,9 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .space{
+            padding-top: 120px;
+        }
 
         .form-group {
             margin-bottom: 15px;
@@ -49,19 +51,25 @@
             box-sizing: border-box;
         }
 
-        .btn-primary {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            border: none;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
+        .btn-zaloguj-container {
+            text-align: center;
+            margin-top: 20px;
         }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
+        .btn-zaloguj {
+            width: 100%;
+            max-width: 200px;
+            padding: 10px;
+            background-color: #06A77D;
+            border: none;
+            color: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-zaloguj:hover {
+            background-color: #18c598;
+            color: #ffffff;
         }
 
         p {
@@ -77,6 +85,7 @@
         }
 
     </style>
+    <div class="space"></div>
     <h1>Rejestracja</h1>
     <form method="POST" action="{{ route('register') }}">
         @csrf
@@ -108,7 +117,9 @@
             <label for="address">Podaj adres: </label>
             <input type="text" id="address" name="address" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-primary">Zarejestruj się</button>
+        <div class="btn-zaloguj-container">
+            <button type="submit" class="btn btn-zaloguj">Zarejestruj się</button>
+        </div>
     </form>
-    <p>Masz konta? <a href="{{ route('login') }}">Zaloguj się</a></p>
+    <p>Masz konto? <a href="{{ route('login') }}">Zaloguj się</a></p>
 @endsection

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="generator" content="Mobirise v5.9.13, a.mobirise.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <link rel="shortcut icon" href="https://r.mobirisesite.com/485019/assets/images/photo-1585110587043-36d457f3e803.jpeg" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
     <meta name="description" content="Strona internetowa oferująca szeroki wybór wynajmu sprzętu budowlanego w Polsce. Znajdź, porównaj i wynajmij sprzęt budowlany online już dziś!">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://r.mobirisesite.com/485019/assets/web/assets/mobirise-icons2/mobirise2.css?rnd=1717420586975">
@@ -122,31 +122,37 @@
 <body>
 
 <section data-bs-version="5.1" class="menu menu2 cid-ueDKg7QU0K" once="menu" id="menu-5-ueDKg7QU0K">
-
-
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-        <div class="container">
-            <div class="navbar-brand">
+        <div class="container" bis_skin_checked="1">
+            <div class="navbar-brand" bis_skin_checked="1">
 				<span class="navbar-logo">
-					<a href="{{ route('main') }}">
-						<img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 4.3rem;">
+					<a href="{{ route('main') }}" bis_skin_checked="1" bis_size="{&quot;x&quot;:109,&quot;y&quot;:26,&quot;w&quot;:103,&quot;h&quot;:68,&quot;abs_x&quot;:109,&quot;abs_y&quot;:26}">
+						<img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 4.3rem;" bis_size="{&quot;x&quot;:109,&quot;y&quot;:26,&quot;w&quot;:103,&quot;h&quot;:68,&quot;abs_x&quot;:109,&quot;abs_y&quot;:26}" bis_id="bn_ey694vk0limpu498l2qohc">
 					</a>
 				</span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="{{ route('main') }}">Rentify</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="{{ route('main') }}" bis_skin_checked="1">Rentify</a></span>
             </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="hamburger" bis_skin_checked="1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" bis_skin_checked="1">
                 <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
-                        <a class="nav-link link text-black display-4" href="{{ route('onas') }}" aria-expanded="false">O nas</a>
+                        <a class="nav-link link text-black display-4" href="{{ route('onas') }}" bis_skin_checked="1">O nas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link text-black display-4" href="{{ route('kontakt') }}" aria-expanded="false">Kontakt</a>
+                        <a class="nav-link link text-black display-4" href="{{ route('kontakt') }}" aria-expanded="false" bis_skin_checked="1">Kontakt</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link text-black display-4" href="{{ route('wypozyczenia.index') }}" aria-expanded="false">Zarezerwuj</a>
+                        <a class="nav-link link text-black display-4" href="{{ route('wypozyczenia.index') }}" aria-expanded="false" bis_skin_checked="1">Zarezerwuj</a>
                     </li>
                 </ul>
-
-                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="{{ route('login') }}">Logowanie</a></div>
-
+                <div class="navbar-buttons mbr-section-btn" bis_skin_checked="1"><a class="btn btn-primary display-4" href="{{ route('login') }}" bis_skin_checked="1">Logowanie</a></div>
+            </div>
         </div>
     </nav>
 </section>
@@ -160,13 +166,13 @@
             <div class="row-links">
                 <ul class="header-menu">
                     <li class="header-menu-item mbr-fonts-style display-5">
-                        <a href="#" class="text-white">O nas</a>
-                    </li><li class="header-menu-item mbr-fonts-style display-5">
-                        <a href="#" class="text-white">Oferta</a>
-                    </li><li class="header-menu-item mbr-fonts-style display-5">
+                        <a href="onas" class="text-white">O nas</a>
+                    </li>
+                    <li class="header-menu-item mbr-fonts-style display-5">
                         <a href="#" class="text-white">Regulamin</a>
-                    </li><li class="header-menu-item mbr-fonts-style display-5">
-                        <a href="#" class="text-white">Kontakt</a>
+                    </li>
+                    <li class="header-menu-item mbr-fonts-style display-5">
+                        <a href="kontakt" class="text-white">Kontakt</a>
                     </li></ul>
             </div>
 
