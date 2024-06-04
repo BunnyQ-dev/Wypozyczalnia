@@ -68,6 +68,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
+            color: #ffffff;
         }
 
         .user-info a {
@@ -80,7 +81,7 @@
         <!-- Informacje o zalogowanym użytkowniku i przycisk wylogowania -->
         <div class="user-info">
             @auth
-                <span>Zalogowany jako: {{ Auth::user()->name }}</span>
+                <span>Witaj {{ Auth::user()->first_name }}</span>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit">Wyloguj się</button>
