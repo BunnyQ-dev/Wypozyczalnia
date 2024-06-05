@@ -51,7 +51,7 @@
 
 <nav>
     <div class="container">
-        <a href="{{ route('home') }}">Strona główna</a>
+        <a href="{{ route('main') }}">Strona główna</a>
         <a href="{{ route('towar.index') }}">Towary</a>
         <a href="{{ route('wypozyczenia.index') }}">Wypożyczenia</a>
         <a href="{{ route('uzytkownicy.index') }}">Użytkownicy</a>
