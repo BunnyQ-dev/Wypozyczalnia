@@ -166,13 +166,13 @@
             <div class="row-links">
                 <ul class="header-menu">
                     <li class="header-menu-item mbr-fonts-style display-5">
-                        <a href="onas" class="text-white">O nas</a>
+                        <a href="{{route('onas')}}" class="text-white">O nas</a>
                     </li>
                     <li class="header-menu-item mbr-fonts-style display-5">
-                        <a href="#" class="text-white">Regulamin</a>
+                        <a href="{{ route('regulamin') }}" class="text-white">Regulamin</a>
                     </li>
                     <li class="header-menu-item mbr-fonts-style display-5">
-                        <a href="kontakt" class="text-white">Kontakt</a>
+                        <a href="{{route('kontakt')}}" class="text-white">Kontakt</a>
                     </li></ul>
             </div>
 
