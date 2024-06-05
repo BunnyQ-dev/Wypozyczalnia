@@ -74,7 +74,7 @@
                                     <h5 class="card-title"><strong>{{ $towar->nazwa }}</strong></h5>
                                     <p class="card-text">{{ $towar->opis }}</p>
                                     <p class="card-text"><strong>Cena:</strong> {{ $towar->cena }} zł</p>
-                                    <a href="{{ route('towar.show', $towar->id) }}" class="btn btn-primary">Zarezerwować</a>
+                                    <a href="{{ route('klient.towar.show', $towar->id) }}" class="btn btn-primary">Zarezerwować</a>
                                 </div>
                             </div>
                         </div>
