@@ -50,6 +50,7 @@
 
                     <form action="{{ route('klient.rent.store') }}" method="POST">
                         @csrf
+                        <input type="hidden" name="user_id" value="{{ $user->id+ }}">
                         <input type="hidden" name="towar_id" value="{{ $towar->id }}">
                         <div class="form-group">
                             <label for="data_wypozyczenia">Data Wypożyczenia</label>

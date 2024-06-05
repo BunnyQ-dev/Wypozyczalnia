@@ -19,6 +19,7 @@ class KlientWypozyczeniaController extends Controller
     {
         try {
             $request->validate([
+                'user_id' => 'required|exists:users,id',
                 'towar_id' => 'required|exists:towary,id',
                 'data_wypozyczenia' => 'required|date',
                 'data_zwrotu' => 'required|date|after:data_wypozyczenia',
@@ -34,7 +35,7 @@ class KlientWypozyczeniaController extends Controller
                 'data_zwrotu' => $request->data_zwrotu,
             ]);
 
-            return redirect()->route('klient.towar.show', $towar->id)->with('success', 'Wypożyczenie dla użytkownika ' . $user->name . ' zostało dodane pomyślnie.');
+            return redirect()->route('klient.towar.show', $towar->id)->with('success', 'Wypożyczenie dla użytkownika ' . $user->username . ' zostało dodane pomyślnie.');
         } catch (\Exception $e) {
             return back()->withInput()->with('error', 'Wystąpił błąd: ' . $e->getMessage());
         }

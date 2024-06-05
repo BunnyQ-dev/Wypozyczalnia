@@ -16,7 +16,7 @@
 
                     <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">Znajdź idealne narzędzia budowlane i ruszaj z kopyta w swoje projekty!</p>
                     <div class="mbr-section-btn">
-                        <a class="btn btn-white-outline display-7" href="https://mobiri.se">Zobacz Towary</a>
+                        <a class="btn btn-white-outline display-7" href="#">Zobacz Towary</a>
                     </div>
                 </div>
             </div>
