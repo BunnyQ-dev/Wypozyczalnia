@@ -5,29 +5,36 @@ use Illuminate\Http\Request;
 use App\Models\Wypozyczenia;
 use App\Models\Towar;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class WypozyczeniaController extends Controller
 {
     public function create()
     {
         $towary = Towar::all();
-        $users = User::all();
-        return view('wypozyczenia.create', compact('towary', 'users'));
+        return view('wypozyczenia.create', compact('towary'));
     }
 
     public function store(Request $request)
     {
         try {
             $request->validate([
-                'user_id' => 'required|exists:users,id',
-                'towar_id' => 'required|exists:towar,id',
+                'towar_id' => 'required|exists:towary,id',
                 'data_wypozyczenia' => 'required|date',
-                'data_zwrotu' => 'nullable|date|after:data_wypozyczenia',
+                'data_zwrotu' => 'required|date|after:data_wypozyczenia',
             ]);
 
-            $wypozyczenie = Wypozyczenia::create($request->all());
+            $user = Auth::user(); // Assuming the user is logged in
+            $towar = Towar::findOrFail($request->towar_id);
 
-            return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie dla użytkownika ' . $wypozyczenie->user->name . ' zostało dodane pomyślnie.');
+            $wypozyczenie = Wypozyczenia::create([
+                'user_id' => $user->id,
+                'towar_id' => $towar->id,
+                'data_wypozyczenia' => $request->data_wypozyczenia,
+                'data_zwrotu' => $request->data_zwrotu,
+            ]);
+
+            return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie dla użytkownika ' . $user->name . ' zostało dodane pomyślnie.');
         } catch (\Exception $e) {
             return back()->withInput()->with('error', 'Wystąpił błąd: ' . $e->getMessage());
         }
@@ -60,7 +67,7 @@ class WypozyczeniaController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'towar_id' => 'required|exists:towar,id',
+            'towar_id' => 'required|exists:towary,id',
             'data_wypozyczenia' => 'required|date',
             'data_zwrotu' => 'nullable|date|after:data_wypozyczenia',
         ]);

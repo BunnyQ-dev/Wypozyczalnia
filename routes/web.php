@@ -89,5 +89,11 @@ Route::get('/kategorie/{id}/edit', [KategoriaController::class, 'edit'])->name('
 Route::put('/kategorie/{id}', [KategoriaController::class, 'update'])->name('kategorie.update');
 Route::delete('/kategorie/{id}', [KategoriaController::class, 'destroy'])->name('kategorie.destroy');
 
+use App\Http\Controllers\KlientWypozyczeniaController;
+
+Route::get('/klient/towar/{id}', [KlientWypozyczeniaController::class, 'show'])->name('klient.towar.show');
+Route::post('/klient/rent', [KlientWypozyczeniaController::class, 'store'])->name('klient.rent.store');
+
+
 
 
