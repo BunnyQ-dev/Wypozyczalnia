@@ -20,6 +20,15 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;700&display=swap&display=swap"></noscript>
     <link rel="stylesheet" href="https://r.mobirisesite.com/485019/assets/css/mbr-additional.css?rnd=1717420586975" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 
 
@@ -123,11 +132,11 @@
         <div class="container" bis_skin_checked="1">
             <div class="navbar-brand" bis_skin_checked="1">
                 <span class="navbar-logo">
-                    <a href="{{ route('main') }}" bis_skin_checked="1" bis_size="{&quot;x&quot;:109,&quot;y&quot;:26,&quot;w&quot;:103,&quot;h&quot;:68,&quot;abs_x&quot;:109,&quot;abs_y&quot;:26}">
+                    <a href="{{ route('home') }}" bis_skin_checked="1" bis_size="{&quot;x&quot;:109,&quot;y&quot;:26,&quot;w&quot;:103,&quot;h&quot;:68,&quot;abs_x&quot;:109,&quot;abs_y&quot;:26}">
                         <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 4.3rem;" bis_size="{&quot;x&quot;:109,&quot;y&quot;:26,&quot;w&quot;:103,&quot;h&quot;:68,&quot;abs_x&quot;:109,&quot;abs_y&quot;:26}" bis_id="bn_ey694vk0limpu498l2qohc">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="{{ route('main') }}" bis_skin_checked="1">Rentify</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="{{ route('home') }}" bis_skin_checked="1">Rentify</a></span>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger" bis_skin_checked="1">
@@ -146,7 +155,7 @@
                         <a class="nav-link link text-black display-4" href="{{ route('kontakt') }}" aria-expanded="false" bis_skin_checked="1">Kontakt</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link text-black display-4" href="{{ route('wypozyczenia.index') }}" aria-expanded="false" bis_skin_checked="1">Zarezerwuj</a>
+                        <a class="nav-link link text-black display-4" href="{{ route('klient.towary.index') }}" aria-expanded="false" bis_skin_checked="1">Towary</a>
                     </li>
                 </ul>
                 <div class="navbar-buttons mbr-section-btn" bis_skin_checked="1">
@@ -157,7 +166,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" bis_skin_checked="1">
                                 <a class="dropdown-item" href="{{ route('klient.uzytkownicy.show', auth()->user()->id) }}">Moje konto</a>
-                                <a class="dropdown-item" href="#">Rezerwacje</a>
+                                <a class="dropdown-item" href="{{ route('klient.wypozyczenia.show') }}">Rezerwacje</a>
                                 <div class="dropdown-divider" bis_skin_checked="1"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Wyloguj

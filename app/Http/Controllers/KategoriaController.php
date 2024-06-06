@@ -10,12 +10,12 @@ class KategoriaController extends Controller
     public function index()
     {
         $kategorie = Kategoria::all();
-        return view('kategorie.index', compact('kategorie'));
+        return view('admin.kategorie.index', compact('kategorie'));
     }
 
     public function create()
     {
-        return view('kategorie.create');
+        return view('admin.kategorie.create');
     }
 
     public function store(Request $request)
@@ -28,19 +28,19 @@ class KategoriaController extends Controller
             'nazwa' => $request->nazwa
         ]);
 
-        return redirect()->route('kategorie.index')->with('success', 'Kategoria dodana pomyślnie');
+        return redirect()->route('admin.kategorie.index')->with('success', 'Kategoria dodana pomyślnie');
     }
 
     public function show($id)
     {
         $kategoria = Kategoria::with('towary')->findOrFail($id);
-        return view('kategorie.show', compact('kategoria'));
+        return view('admin.kategorie.show', compact('kategoria'));
     }
 
     public function edit($id)
     {
         $kategoria = Kategoria::findOrFail($id);
-        return view('kategorie.edit', compact('kategoria'));
+        return view('admin.kategorie.edit', compact('kategoria'));
     }
 
     public function update(Request $request, $id)
@@ -53,7 +53,7 @@ class KategoriaController extends Controller
         $kategoria->nazwa = $request->nazwa;
         $kategoria->save();
 
-        return redirect()->route('kategorie.index')->with('success', 'Kategoria zaktualizowana pomyślnie');
+        return redirect()->route('admin.kategorie.index')->with('success', 'Kategoria zaktualizowana pomyślnie');
     }
 
     public function destroy($id)
@@ -61,6 +61,6 @@ class KategoriaController extends Controller
         $kategoria = Kategoria::findOrFail($id);
         $kategoria->delete();
 
-        return redirect()->route('kategorie.index')->with('success', 'Kategoria usunięta pomyślnie');
+        return redirect()->route('admin.kategorie.index')->with('success', 'Kategoria usunięta pomyślnie');
     }
 }

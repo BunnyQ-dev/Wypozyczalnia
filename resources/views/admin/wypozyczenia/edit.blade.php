@@ -14,7 +14,7 @@
                     <div class="card-header"><h1>Edytuj wypożyczenie</h1></div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('wypozyczenia.update', $wypozyczenie->id) }}">
+                        <form method="POST" action="{{ route('admin.wypozyczenia.update', $wypozyczenie->id) }}">
                             @csrf
                             @method('PUT')
 
@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" action="{{ route('wypozyczenia.update', $wypozyczenie->id) }}">
+                                <form method="POST" action="{{ route('admin.wypozyczenia.update', $wypozyczenie->id) }}">
                                     @csrf
                                     @method('PUT')
 
@@ -61,7 +61,7 @@
                                 </form>
 
                                 <!-- Delete button -->
-                                <form method="POST" action="{{ route('wypozyczenia.delete', $wypozyczenie->id) }}" style="margin-top: 10px;">
+                                <form method="POST" action="{{ route('admin.wypozyczenia.delete', $wypozyczenie->id) }}" style="margin-top: 10px;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć to wypożyczenie?')">Usuń wypożyczenie</button>

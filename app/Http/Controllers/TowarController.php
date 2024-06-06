@@ -11,13 +11,13 @@ class TowarController extends Controller
     public function index()
     {
         $towary = Towar::with('kategoria')->get();
-        return view('towar.index', compact('towary'));
+        return view('admin.towar.index', compact('towary'));
     }
 
     public function create()
     {
         $kategorie = Kategoria::all();
-        return view('towar.create', compact('kategorie'));
+        return view('admin.towar.create', compact('kategorie'));
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class TowarController extends Controller
 
         Towar::create($towarData);
 
-        return redirect()->route('towar.index')->with('success', 'Towar został dodany pomyślnie.');
+        return redirect()->route('admin.towar.index')->with('success', 'Towar został dodany pomyślnie.');
     }
 
 
@@ -60,7 +60,7 @@ class TowarController extends Controller
     {
         $towar = Towar::findOrFail($id);
         $kategorie = Kategoria::all();
-        return view('towar.edit', compact('towar', 'kategorie'));
+        return view('admin.towar.edit', compact('towar', 'kategorie'));
     }
 
     public function update(Request $request, $id)
@@ -95,14 +95,14 @@ class TowarController extends Controller
         $towar = Towar::findOrFail($id);
         $towar->update($towarData);
 
-        return redirect()->route('towar.index')->with('success', 'Towar został zaktualizowany pomyślnie.');
+        return redirect()->route('admin.towar.index')->with('success', 'Towar został zaktualizowany pomyślnie.');
     }
 
 
     public function show($id)
     {
         $towar = Towar::with('kategoria')->findOrFail($id);
-        return view('towar.show', compact('towar'));
+        return view('admin.towar.show', compact('towar'));
     }
 
     public function destroy($id)
@@ -110,7 +110,7 @@ class TowarController extends Controller
         $towar = Towar::findOrFail($id);
         $towar->delete();
 
-        return redirect()->route('towar.index')->with('success', 'Towar został usunięty pomyślnie.');
+        return redirect()->route('admin.towar.index')->with('success', 'Towar został usunięty pomyślnie.');
     }
 
     public function main()
@@ -119,6 +119,27 @@ class TowarController extends Controller
         $towary = Towar::take(4)->get();
 
         return view('main', compact('towary'));
+    }
+
+    public function checkAvailability($towar_id, Request $request)
+    {
+        $data_wypozyczenia = $request->input('data_wypozyczenia');
+        $data_zwrotu = $request->input('data_zwrotu');
+
+        $towar = Towar::findOrFail($towar_id);
+
+        $available = true;
+
+        // Перевірка доступності товару на обрані дати
+        if ($towar->available_from && $towar->available_to) {
+            if ($data_wypozyczenia >= $towar->available_from && $data_zwrotu <= $towar->available_to) {
+                $available = true;
+            } else {
+                $available = false;
+            }
+        }
+
+        return response()->json(['available' => $available]);
     }
 
 }

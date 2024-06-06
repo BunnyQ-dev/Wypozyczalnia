@@ -11,29 +11,29 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('uzytkownicy.index', compact('users'));
+        return view('admin.uzytkownicy.index', compact('users'));
     }
 
     public function edit($id)
     {
         $user = User::findOrFail($id);
 
-        if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
+        if ($user->id !== Auth::id() && !Auth::user()->admin) {
             return redirect()->route('uzytkownicy.index')->with('error', 'You do not have permission to edit this user.');
         }
 
-        return view('uzytkownicy.edit', compact('user'));
+        return view('admin.uzytkownicy.edit', compact('user'));
     }
 
     public function show($id)
     {
         $user = User::findOrFail($id);
 
-        if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
+        if ($user->id !== Auth::id() && !Auth::user()->admin) {
             return redirect()->back()->with('error', 'You do not have access to this profile.');
         }
 
-        return view('uzytkownicy.show', compact('user'));
+        return view('admin.uzytkownicy.show', compact('user'));
     }
 
     public function update(Request $request, User $user)
@@ -47,25 +47,25 @@ class UserController extends Controller
 
         $user->update($request->only(['username', 'first_name', 'last_name', 'address']));
 
-        return redirect()->route('uzytkownicy.show', $user->id)->with('success', 'User updated successfully.');
+        return redirect()->route('admin.uzytkownicy.show', $user->id)->with('success', 'User updated successfully.');
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
 
-        if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
-            return redirect()->route('uzytkownicy.index')->with('error', 'You do not have permission to delete this user.');
+        if ($user->id !== Auth::id() && !Auth::user()->admin) {
+            return redirect()->route('admin.uzytkownicy.index')->with('error', 'You do not have permission to delete this user.');
         }
 
         $user->delete();
 
-        return redirect()->route('uzytkownicy.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin.uzytkownicy.index')->with('success', 'User deleted successfully.');
     }
 
     public function showForClient(User $user)
     {
-        if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
+        if ($user->id !== Auth::id() && !Auth::user()->admin) {
             return redirect()->route('klient.uzytkownicy.index')->with('error', 'You do not have access to this profile.');
         }
 
@@ -74,7 +74,7 @@ class UserController extends Controller
 
     public function editForClient(User $user)
     {
-        if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
+        if ($user->id !== Auth::id() && !Auth::user()->admin) {
             return redirect()->route('klient.uzytkownicy.index')->with('error', 'You do not have permission to edit this user.');
         }
 

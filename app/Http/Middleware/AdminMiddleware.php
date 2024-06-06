@@ -7,12 +7,18 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->is_admin) {
-            return redirect('/uzytkownicy'); // Редирект адміністратора на /admin/dashboard
+        if (Auth::check() && Auth::user()->admin) {
+            return $next($request);
         }
-
-        return redirect('/'); // Редирект звичайного користувача на головну сторінку
+        return redirect('/noaccess')->with('error', 'Access denied');
     }
 }
