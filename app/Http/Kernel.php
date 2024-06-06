@@ -3,15 +3,27 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\AdminMiddleware;
 
 class Kernel extends HttpKernel
 {
+    protected $middleware = [
+        // Додайте сюди ваші глобальні middleware
+    ];
+
     protected $middlewareGroups = [
         'web' => [
-            // Inne middleware...
-            \App\Http\Middleware\CheckRole::class,
+            // Інші middleware...
+        ],
+
+        'api' => [
+            'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
 
-    // Inne metody...
+    protected $routeMiddleware = [
+        'admin' => AdminMiddleware::class,
+    ];
+
 }

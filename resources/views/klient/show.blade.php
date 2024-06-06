@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $towar->nazwa }}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .carousel-inner img {
+            width: 100%;
+            height: 400px; /* встановіть бажану висоту */
+            object-fit: cover; /* зберегти пропорції зображення */
+        }
+        .carousel {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -50,7 +60,6 @@
 
                     <form action="{{ route('klient.rent.store') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="user_id" value="{{ $user->id+ }}">
                         <input type="hidden" name="towar_id" value="{{ $towar->id }}">
                         <div class="form-group">
                             <label for="data_wypozyczenia">Data Wypożyczenia</label>
