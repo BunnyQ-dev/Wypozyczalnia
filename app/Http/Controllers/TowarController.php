@@ -115,7 +115,8 @@ class TowarController extends Controller
 
     public function main()
     {
-        $towary = Towar::all(); // Assuming Towar is your product model
+        // Отримати перші чотири товари
+        $towary = Towar::take(4)->get();
 
         return view('main', compact('towary'));
     }

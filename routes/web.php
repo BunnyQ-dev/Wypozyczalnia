@@ -8,7 +8,8 @@ use App\Http\Controllers\WypozyczeniaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriaController;
 use App\Http\Controllers\KlientWypozyczeniaController;
-use App\Http\Controllers\KlientController;
+use App\Http\Controllers\KlientTowaryController;
+use App\Http\Middleware\EnsureUserIsOwner;
 
 // Trasy autoryzacji
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
@@ -17,7 +18,7 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Trasy dla HomeController
+// Trasy для HomeController
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
@@ -47,8 +48,7 @@ Route::get('/regulamin', function () {
     return view('regulamin');
 })->name('regulamin');
 
-
-// Trasy dla TowarController
+// Trasy для TowarController
 Route::prefix('towary')->group(function () {
     Route::get('/', [TowarController::class, 'index'])->name('towar.index');
     Route::get('/create', [TowarController::class, 'create'])->name('towar.create');
@@ -59,7 +59,7 @@ Route::prefix('towary')->group(function () {
     Route::delete('/{id}', [TowarController::class, 'destroy'])->name('towar.destroy');
 });
 
-// Trasy dla WypozyczeniaController
+// Trasy для WypozyczeniaController
 Route::prefix('wypozyczenia')->middleware('auth')->group(function () {
     Route::get('/', [WypozyczeniaController::class, 'index'])->name('wypozyczenia.index');
     Route::get('/create', [WypozyczeniaController::class, 'create'])->name('wypozyczenia.create');
@@ -69,17 +69,17 @@ Route::prefix('wypozyczenia')->middleware('auth')->group(function () {
     Route::delete('/{id}', [WypozyczeniaController::class, 'delete'])->name('wypozyczenia.delete');
 });
 
-// Trasy dla UserController
-Route::prefix('uzytkownicy')->group(function () {
+// Trasy для UserController
+Route::prefix('uzytkownicy')->middleware('auth')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('uzytkownicy.index');
-    Route::get('/{id}/edit', [UserController::class, 'edit'])->name('uzytkownicy.edit');
-    Route::post('/{id}', [UserController::class, 'update'])->name('uzytkownicy.update');
-    Route::get('/{id}', [UserController::class, 'show'])->name('uzytkownicy.show');
-    Route::delete('/{id}', [UserController::class, 'destroy'])->name('uzytkownicy.destroy');
+    Route::get('/{user}/edit', [UserController::class, 'edit'])->name('uzytkownicy.edit');
+    Route::put('/{user}', [UserController::class, 'update'])->name('uzytkownicy.update');
+    Route::get('/{user}', [UserController::class, 'show'])->name('uzytkownicy.show');
+    Route::delete('/{user}', [UserController::class, 'destroy'])->name('uzytkownicy.destroy');
 });
 
-// Trasy dla KategoriaController
-    Route::prefix('kategorie')->group(function () {
+// Trasy для KategoriaController
+Route::prefix('kategorie')->middleware('auth')->group(function () {
     Route::get('/', [KategoriaController::class, 'index'])->name('kategorie.index');
     Route::get('/create', [KategoriaController::class, 'create'])->name('kategorie.create');
     Route::post('/', [KategoriaController::class, 'store'])->name('kategorie.store');
@@ -89,11 +89,13 @@ Route::prefix('uzytkownicy')->group(function () {
     Route::delete('/{id}', [KategoriaController::class, 'destroy'])->name('kategorie.destroy');
 });
 
-Route::prefix('klient')->group(function () {
-    Route::get('/towar/{id}', [KlientController::class, 'show'])->name('klient.towar.show');
+// Trasy для KlientController
+Route::prefix('klient')->middleware('auth')->group(function () {
+    Route::get('/towar/{id}', [KlientTowaryController::class, 'show'])->name('klient.towar.show');
     Route::post('/rent', [KlientWypozyczeniaController::class, 'store'])->name('klient.rent.store');
     Route::get('/uzytkownicy/{user}', [UserController::class, 'showForClient'])->name('klient.uzytkownicy.show');
     Route::get('/uzytkownicy/{user}/edit', [UserController::class, 'editForClient'])->name('klient.uzytkownicy.edit');
+    Route::put('/uzytkownicy/{user}', [UserController::class, 'updateForClient'])->name('klient.uzytkownicy.update');
+    Route::get('/towary', [KlientTowaryController::class, 'index'])->name('klient.towary.index');
+    Route::get('/towar/{id}', [KlientTowaryController::class, 'show'])->name('klient.towar.show');
 });
-Route::put('/uzytkownicy/{id}', [UserController::class, 'updateForClient'])->name('uzytkownicy.update');
-

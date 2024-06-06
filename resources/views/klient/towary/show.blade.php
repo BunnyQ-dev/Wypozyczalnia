@@ -1,25 +1,23 @@
-<!-- resources/views/klient/show.blade.php -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $towar->nazwa }}</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+@extends('layouts.main')
+@section('title', $towar->nazwa)
+
+@section('content')
+
     <style>
         .carousel-inner img {
             width: 100%;
-            height: 400px; /* встановіть бажану висоту */
-            object-fit: cover; /* зберегти пропорції зображення */
+            height: 400px;
+            object-fit: cover;
         }
         .carousel {
             margin-bottom: 30px;
         }
+        #data_wypozyczenia, #data_zwrotu{
+            font-size: 2.7vh;
+        }
     </style>
-</head>
-<body>
-<div class="container">
-    <div class="row">
+<div class="container pt-5">
+    <div class="row pt-5">
         <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-body">
@@ -29,7 +27,7 @@
                     <p class="card-text"><strong>Kategoria:</strong> {{ $towar->kategoria->nazwa }}</p>
 
                     @if($towar->zdjecie1 || $towar->zdjecie2 || $towar->zdjecie3)
-                        <div id="photoCarousel" class="carousel slide mb-3" data-ride="carousel">
+                        <div id="photoCarousel" class="carousel slide mb-3">
                             <div class="carousel-inner">
                                 @if($towar->zdjecie1)
                                     <div class="carousel-item active">
@@ -49,14 +47,15 @@
                             </div>
                             <a class="carousel-control-prev" href="#photoCarousel" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
+                                <span class="sr-only"></span>
                             </a>
                             <a class="carousel-control-next" href="#photoCarousel" role="button" data-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
+                                <span class="sr-only"></span>
                             </a>
                         </div>
                     @endif
+
 
                     <form action="{{ route('klient.rent.store') }}" method="POST">
                         @csrf
@@ -77,8 +76,4 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+@endsection

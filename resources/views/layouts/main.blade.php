@@ -156,11 +156,11 @@
                                 {{ Auth::user()->username }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" bis_skin_checked="1">
-                                <a class="dropdown-item" href="{{ route('klient.uzytkownicy.show', auth()->user()->id) }}">Мій профіль</a>
+                                <a class="dropdown-item" href="{{ route('klient.uzytkownicy.show', auth()->user()->id) }}">Moje konto</a>
                                 <a class="dropdown-item" href="#">Rezerwacje</a>
                                 <div class="dropdown-divider" bis_skin_checked="1"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Вийти
+                                    Wyloguj
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
@@ -217,7 +217,7 @@
 <script src="https://r.mobirisesite.com/485019/assets/dropdown/js/navbar-dropdown.js?rnd=1717420586975"></script>
 <script src="https://r.mobirisesite.com/485019/assets/theme/js/script.js?rnd=1717420586975"></script>
 <script src="https://r.mobirisesite.com/485019/assets/formoid/formoid.min.js?rnd=1717420586975"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('.carousel').carousel({

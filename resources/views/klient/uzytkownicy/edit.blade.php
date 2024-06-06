@@ -24,40 +24,40 @@
             }
         }
 
-        /* Стили для кнопок */
         .btn-custom,
         .btn-secondary {
-            border-radius: 25px; /* Круглые углы */
-            padding: 15px 30px; /* Увеличение отступов */
-            font-size: 18px; /* Увеличение размера шрифта */
-            margin-right: 10px; /* Отступ между кнопками */
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 18px;
+            margin-right: 10px;
         }
 
         .btn-custom {
-            background-color: #06a77d; /* Цвет кнопки сохранить */
-            border: none; /* Убираем границу */
-            color: #fff; /* Цвет текста */
+            background-color: #06a77d;
+            border: none;
+            color: #fff;
         }
 
         .btn-secondary {
-            background-color: #f0f0f0; /* Цвет кнопки отмены */
-            border: 1px solid #ccc; /* Граница */
-            color: #333; /* Цвет текста */
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            color: #333;
         }
 
         .btn-custom:hover {
-            background-color: #08d8a2; /* Изменение цвета при наведении */
+            background-color: #08d8a2;
             color: #ffffff;
         }
 
         .btn-secondary:hover {
-            background-color: #ddd; /* Изменение цвета при наведении */
+            background-color: #ddd;
         }
+
     </style>
     <div class="container full-height centered pt-5">
         <div class="card card-custom pt-5">
             <div class="card-body">
-                <form method="POST" action="{{ route('uzytkownicy.update', $user->id) }}">
+                <form method="POST" action="{{ route('klient.uzytkownicy.update', $user->id) }}">
                     @csrf
                     @method('PUT')
 
@@ -81,7 +81,6 @@
                         <input type="text" class="form-control" id="address" name="address" value="{{ $user->address }}">
                     </div>
 
-                    <!-- Изменение стилей кнопок -->
                     <button type="submit" class="btn btn-custom">Zapisz zmiany</button>
                     <a href="{{ route('klient.uzytkownicy.show', $user->id) }}" class="btn btn-secondary">Anuluj</a>
                 </form>

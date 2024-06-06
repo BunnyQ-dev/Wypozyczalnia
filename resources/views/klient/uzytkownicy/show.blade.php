@@ -31,7 +31,7 @@
             color: #fff; /* Button text color */
             border: none; /* Remove button border */
         }
-        .btn-custom:hover{
+        .btn-custom:hover {
             color: #ffffff;
             background-color: #08d8a2;
         }
@@ -47,8 +47,9 @@
                 <p><strong>Imię:</strong> {{ $user->first_name }}</p>
                 <p><strong>Nazwisko:</strong> {{ $user->last_name }}</p>
                 <p><strong>Adres:</strong> {{ $user->address }}</p>
-                <!-- Add an ID to the button for styling -->
-                <a href="{{ route('klient.uzytkownicy.edit', $user->id) }}" id="edit-btn" class="btn btn-custom">Edytuj</a>
+                @if (Auth::id() === $user->id)
+                    <a href="{{ route('klient.uzytkownicy.edit', $user->id) }}" id="edit-btn" class="btn btn-custom">Edytuj</a>
+                @endif
             </div>
         </div>
     </div>
