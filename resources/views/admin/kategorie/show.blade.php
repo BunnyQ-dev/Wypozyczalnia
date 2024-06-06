@@ -14,7 +14,7 @@
             @endforeach
         </ul>
 
-        <a href="{{ route('kategorie.edit', $kategoria->id) }}" class="btn btn-primary">Edytuj</a>
-        <a href="{{ route('kategorie.index') }}" class="btn btn-info">Powrót do listy</a>
+        <a href="{{ route('admin.kategorie.edit', $kategoria->id) }}" class="btn btn-primary">Edytuj</a>
+        <a href="{{ route('admin.kategorie.index') }}" class="btn btn-info">Powrót do listy</a>
     </div>
 @endsection

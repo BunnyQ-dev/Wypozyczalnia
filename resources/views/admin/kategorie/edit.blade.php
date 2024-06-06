@@ -1,12 +1,12 @@
-<!-- resources/views/kategorie/create.blade.php -->
+<!-- resources/views/kategorie/edit.blade.php -->
 
 @extends('layouts.app')
 
-@section('title', 'Dodaj kategorię')
+@section('title', 'Edytuj kategorię')
 
 @section('content')
     <div class="container">
-        <h1>Dodaj kategorię</h1>
+        <h1>Edytuj kategorię</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -18,13 +18,14 @@
             </div>
         @endif
 
-        <form action="{{ route('kategorie.store') }}" method="POST">
+        <form action="{{ route('admin.kategorie.update', $kategoria->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="form-group">
                 <label for="nazwa">Nazwa kategorii:</label>
-                <input type="text" name="nazwa" id="nazwa" class="form-control" required>
+                <input type="text" name="nazwa" id="nazwa" class="form-control" value="{{ $kategoria->nazwa }}" required>
             </div>
-            <button type="submit" class="btn btn-success">Dodaj kategorię</button>
+            <button type="submit" class="btn btn-success">Zapisz zmiany</button>
         </form>
     </div>
 @endsection

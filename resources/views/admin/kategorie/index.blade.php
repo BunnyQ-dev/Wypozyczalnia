@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <a href="{{ route('kategorie.create') }}" class="btn btn-success mb-3">Dodaj nową kategorię</a>
+        <a href="{{ route('admin.kategorie.create') }}" class="btn btn-success mb-3">Dodaj nową kategorię</a>
 
         <table class="table">
             <thead>
@@ -28,9 +28,9 @@
             @foreach ($kategorie as $kategoria)
                 <tr>
                     <td>{{ $kategoria->id }}</td>
-                    <td><a href="{{ route('kategorie.show', $kategoria->id) }}">{{ $kategoria->nazwa }}</a> </td>
+                    <td><a href="{{ route('admin.kategorie.show', $kategoria->id) }}">{{ $kategoria->nazwa }}</a> </td>
                     <td>
-                        <form action="{{ route('kategorie.destroy', $kategoria->id) }}" method="POST" style="display:inline-block;">
+                        <form action="{{ route('admin.kategorie.destroy', $kategoria->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć tę kategorię?')">Usuń</button>

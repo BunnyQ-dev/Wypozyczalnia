@@ -7,8 +7,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .carousel-item img {
-            height: 400px; /* встановіть бажану висоту */
-            object-fit: cover; /* забезпечує адаптацію без деформацій */
+            height: 400px;
+            object-fit: cover;
             width: 100%;
         }
     </style>
@@ -54,16 +54,13 @@
                         </div>
                     @endif
 
-                    <a href="{{ route('towar.edit', $towar->id) }}" class="btn btn-primary">Edytuj</a>
-                    <a href="{{ route('towar.index') }}" class="btn btn-info">Powrót do listy towarów</a>
+                    <a href="{{ route('admin.towar.edit', $towar->id) }}" class="btn btn-primary">Edytuj</a>
+                    <a href="{{ route('admin.towar.index') }}" class="btn btn-info">Powrót do listy towarów</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

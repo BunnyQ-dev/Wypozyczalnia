@@ -47,7 +47,7 @@
 
 <h2>Edytuj Towar</h2>
 
-<form action="{{ route('towar.update', $towar->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.towar.update', $towar->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 

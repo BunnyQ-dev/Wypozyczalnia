@@ -30,7 +30,7 @@
 <ul>
     @foreach($wypozyczenia as $wypozyczenie)
         <li class="wypozyczenie">
-            <strong><a href="{{ route('wypozyczenia.edit', $wypozyczenie->id) }}">{{ $wypozyczenie->towar->nazwa }} </a></strong><br>
+            <strong><a href="{{ route('admin.wypozyczenia.edit', $wypozyczenie->id) }}">{{ $wypozyczenie->towar->nazwa }} </a></strong><br>
             Użytkownik: {{ $wypozyczenie->user->username }}<br>
             Data Wypożyczenia: {{ $wypozyczenie->data_wypozyczenia }}<br>
             Data Zwrotu: {{ $wypozyczenie->data_zwrotu ?? 'Brak' }}
@@ -40,6 +40,6 @@
 </ul>
 
 <!-- Przycisk do dodawania nowego wypożyczenia -->
-<a href="{{ route('wypozyczenia.create') }}" class="btn btn-primary">Dodaj nowe wypożyczenie</a>
+<a href="{{ route('admin.wypozyczenia.create') }}" class="btn btn-primary">Dodaj nowe wypożyczenie</a>
 
 @endsection

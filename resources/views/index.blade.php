@@ -16,7 +16,7 @@
 
                     <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">Znajdź idealne narzędzia budowlane i ruszaj z kopyta w swoje projekty!</p>
                     <div class="mbr-section-btn">
-                        <a class="btn btn-white-outline display-7" href="#">Zobacz Towary</a>
+                        <a class="btn btn-white-outline display-7" href="{{ route('klient.towary.index') }}">Zobacz Towary</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                             </h4>
                             <p class="mbr-text mbr-fonts-style mt-4 display-7">Skorzystaj z naszej wypożyczalni i znajdź idealny sprzęt do Twojego projektu budowlanego już dziś!</p>
                             <div class="mbr-section-btn mt-4">
-                                <a class="btn btn-primary display-4" href="#">Zarezerwuj</a>
+                                <a class="btn btn-primary display-4" href="{{ route('klient.towary.index') }}">Zarezerwuj</a>
                             </div>
                         </div>
                     </div>

@@ -1,9 +1,13 @@
-@extends('layouts.main')
-@section('title', $towar->nazwa)
-
-@section('content')
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $towar->nazwa }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <style>
+
         .carousel-inner img {
             width: 100%;
             height: 400px;
@@ -12,12 +16,19 @@
         .carousel {
             margin-bottom: 30px;
         }
-        #data_wypozyczenia, #data_zwrotu{
+        #data_wypozyczenia, #data_zwrotu {
             font-size: 2.7vh;
         }
+        .btn-primary{
+            border-radius: 100px;
+        }
     </style>
-<div class="container pt-5">
-    <div class="row pt-5">
+</head>
+<body>
+<div class="container-fluid"><a href="javascript:history.go(-1)" class="btn btn-primary mt-3">Powrót</a></div>
+
+<div class="container">
+    <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-body">
@@ -56,17 +67,16 @@
                         </div>
                     @endif
 
-
                     <form action="{{ route('klient.rent.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="towar_id" value="{{ $towar->id }}">
                         <div class="form-group">
                             <label for="data_wypozyczenia">Data Wypożyczenia</label>
-                            <input type="date" class="form-control" id="data_wypozyczenia" name="data_wypozyczenia" required>
+                            <input type="text" class="form-control" id="data_wypozyczenia" name="data_wypozyczenia" required>
                         </div>
                         <div class="form-group">
                             <label for="data_zwrotu">Data Zwrotu</label>
-                            <input type="date" class="form-control" id="data_zwrotu" name="data_zwrotu" required>
+                            <input type="text" class="form-control" id="data_zwrotu" name="data_zwrotu" required>
                         </div>
                         <button type="submit" class="btn btn-success">Wynajmij</button>
                     </form>
@@ -76,4 +86,58 @@
     </div>
 </div>
 
-@endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const towarId = {{ $towar->id }};
+        const dataWypozyczenia = document.getElementById('data_wypozyczenia');
+        const dataZwrotu = document.getElementById('data_zwrotu');
+
+        fetch(`/blocked-dates/${towarId}`)
+            .then(response => response.json())
+            .then(dates => {
+                const blockedDates = dates.map(range => {
+                    const start = new Date(range.data_wypozyczenia);
+                    const end = new Date(range.data_zwrotu);
+                    const dateArray = [];
+                    let currentDate = start;
+                    while (currentDate <= end) {
+                        dateArray.push(currentDate.toISOString().split('T')[0]);
+                        currentDate.setDate(currentDate.getDate() + 1);
+                    }
+                    return dateArray;
+                }).flat();
+
+                // Initialize Datepicker
+                const initializeDatepicker = (inputElement) => {
+                    $(inputElement).datepicker({
+                        format: 'yyyy-mm-dd',
+                        autoclose: true,
+                        beforeShowDay: function(date) {
+                            const dateString = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+                            return blockedDates.includes(dateString) ? false : true;
+                        }
+                    });
+                };
+
+                initializeDatepicker(dataWypozyczenia);
+                initializeDatepicker(dataZwrotu);
+
+                // Function to disable dates in the Datepicker
+                const disableBlockedDates = () => {
+                    $('.datepicker').datepicker('update');
+                };
+
+                dataWypozyczenia.addEventListener('change', function() {
+                    disableBlockedDates();
+                });
+
+                dataZwrotu.addEventListener('change', function() {
+                    disableBlockedDates();
+                });
+            });
+    });
+</script>
+</body>
+</html>

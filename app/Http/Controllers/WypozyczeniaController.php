@@ -12,7 +12,7 @@ class WypozyczeniaController extends Controller
     public function create()
     {
         $towary = Towar::all();
-        return view('wypozyczenia.create', compact('towary'));
+        return view('admin.wypozyczenia.create', compact('towary'));
     }
 
     public function store(Request $request)
@@ -24,19 +24,35 @@ class WypozyczeniaController extends Controller
                 'data_zwrotu' => 'required|date|after:data_wypozyczenia',
             ]);
 
-            $user = Auth::user(); // Assuming the user is logged in
+            $user = Auth::user();
             $towar = Towar::findOrFail($request->towar_id);
 
-            $wypozyczenie = Wypozyczenia::create([
+            // Перевірка наявності пересічень дат оренди
+            $overlap = Wypozyczenia::where('towar_id', $towar->id)
+                ->where(function($query) use ($request) {
+                    $query->whereBetween('data_wypozyczenia', [$request->data_wypozyczenia, $request->data_zwrotu])
+                        ->orWhereBetween('data_zwrotu', [$request->data_wypozyczenia, $request->data_zwrotu])
+                        ->orWhere(function($query) use ($request) {
+                            $query->where('data_wypozyczenia', '<=', $request->data_wypozyczenia)
+                                ->where('data_zwrotu', '>=', $request->data_zwrotu);
+                        });
+                })
+                ->exists();
+
+            if ($overlap) {
+                return back()->withInput()->with('error', 'Товар недоступний для оренди на обрані дати.');
+            }
+
+            Wypozyczenia::create([
                 'user_id' => $user->id,
                 'towar_id' => $towar->id,
                 'data_wypozyczenia' => $request->data_wypozyczenia,
                 'data_zwrotu' => $request->data_zwrotu,
             ]);
 
-            return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie dla użytkownika ' . $user->name . ' zostało dodane pomyślnie.');
+            return redirect()->route('admin.wypozyczenia.index')->with('success', 'Wypożyczenie для użytkownika ' . $user->name . ' zostało додане успішно.');
         } catch (\Exception $e) {
-            return back()->withInput()->with('error', 'Wystąpił błąd: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Виникла помилка: ' . $e->getMessage());
         }
     }
 
@@ -45,7 +61,7 @@ class WypozyczeniaController extends Controller
         $wypozyczenie = Wypozyczenia::findOrFail($id);
         $wypozyczenie->delete();
 
-        return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie zostało usunięte.');
+        return redirect()->route('admin.wypozyczenia.index')->with('success', 'Wypożyczenie zostało usunięte.');
     }
 
     public function edit($id)
@@ -54,13 +70,13 @@ class WypozyczeniaController extends Controller
         $towary = Towar::all();
         $users = User::all();
 
-        return view('wypozyczenia.edit', compact('wypozyczenie', 'towary', 'users'));
+        return view('admin.wypozyczenia.edit', compact('wypozyczenie', 'towary', 'users'));
     }
 
     public function index()
     {
         $wypozyczenia = Wypozyczenia::with(['user', 'towar'])->get();
-        return view('wypozyczenia.index', compact('wypozyczenia'));
+        return view('admin.wypozyczenia.index', compact('wypozyczenia'));
     }
 
     public function update(Request $request, $id)
@@ -75,6 +91,16 @@ class WypozyczeniaController extends Controller
         $wypozyczenie = Wypozyczenia::findOrFail($id);
         $wypozyczenie->update($request->all());
 
-        return redirect()->route('wypozyczenia.index')->with('success', 'Wypożyczenie zostało zaktualizowane.');
+        return redirect()->route('admin.wypozyczenia.index')->with('success', 'Wypożyczenie zostało zaktualizowane.');
     }
+
+    public function getBlockedDates($towar_id)
+    {
+        $wypozyczenia = Wypozyczenia::where('towar_id', $towar_id)->get(['data_wypozyczenia', 'data_zwrotu']);
+        return response()->json($wypozyczenia);
+    }
+
+
+
+
 }

@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Towar;
-use App\Models\Kategoria;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $towary = Towar::all();
-        $kategorie = Kategoria::all();
+        // Получаем товары для отображения на главной странице
+        $towary = Towar::take(4)->get();
 
-        return view('home', compact('towary', 'kategorie'));
+        return view('index', compact('towary'));
     }
 }

@@ -64,7 +64,7 @@
 </head>
 <body>
 <h1>Wypożycz Sprzęt</h1>
-<form action="{{ route('wypozyczenia.store') }}" method="POST">
+<form action="{{ route('admin.wypozyczenia.store') }}" method="POST">
     @csrf
     <label for="user_id">Użytkownik:</label>
     <select id="user_id" name="user_id" required>

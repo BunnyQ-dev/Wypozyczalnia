@@ -1,5 +1,3 @@
-<!-- resources/views/uzytkownicy/edit.blade.php -->
-
 @extends('layouts.app')
 
 @section('title', 'Edycja użytkownika')
@@ -18,8 +16,9 @@
             </div>
         @endif
 
-        <form action="{{ route('uzytkownicy.update', $user->id) }}" method="POST">
+        <form action="{{ route('admin.uzytkownicy.update', $user->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="form-group">
                 <label for="username">Nazwa użytkownika:</label>
                 <input type="text" name="username" id="username" class="form-control" value="{{ $user->username }}" required>
@@ -33,10 +32,9 @@
                 <input type="text" name="last_name" id="last_name" class="form-control" value="{{ $user->last_name }}" required>
             </div>
             <div class="form-group">
-                <label for="adress">Adres:</label>
-                <input type="text" name="adress" id="adress" class="form-control" value="{{ $user->address }}">
+                <label for="address">Adres:</label>
+                <input type="text" name="address" id="address" class="form-control" value="{{ $user->address }}">
             </div>
-
 
             <button type="submit" class="btn btn-success">Zapisz zmiany</button>
         </form>
