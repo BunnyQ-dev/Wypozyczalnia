@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <style>
-
         .carousel-inner img {
             width: 100%;
             height: 400px;
@@ -19,7 +18,7 @@
         #data_wypozyczenia, #data_zwrotu {
             font-size: 2.7vh;
         }
-        .btn-primary{
+        .btn-primary {
             border-radius: 100px;
         }
     </style>
@@ -67,16 +66,28 @@
                         </div>
                     @endif
 
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     <form action="{{ route('klient.rent.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="towar_id" value="{{ $towar->id }}">
                         <div class="form-group">
                             <label for="data_wypozyczenia">Data Wypożyczenia</label>
-                            <input type="text" class="form-control" id="data_wypozyczenia" name="data_wypozyczenia" required>
+                            <input type="text" class="form-control @error('data_wypozyczenia') is-invalid @enderror" id="data_wypozyczenia" name="data_wypozyczenia" value="{{ old('data_wypozyczenia') }}" required>
+                            @error('data_wypozyczenia')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="data_zwrotu">Data Zwrotu</label>
-                            <input type="text" class="form-control" id="data_zwrotu" name="data_zwrotu" required>
+                            <input type="text" class="form-control @error('data_zwrotu') is-invalid @enderror" id="data_zwrotu" name="data_zwrotu" value="{{ old('data_zwrotu') }}" required>
+                            @error('data_zwrotu')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-success">Wynajmij</button>
                     </form>
@@ -109,11 +120,12 @@
                     return dateArray;
                 }).flat();
 
-                // Initialize Datepicker
+                // Initialize Datepicker with today's date as the minimum selectable date
                 const initializeDatepicker = (inputElement) => {
                     $(inputElement).datepicker({
                         format: 'yyyy-mm-dd',
                         autoclose: true,
+                        startDate: new Date(), // Prevent dates before today
                         beforeShowDay: function(date) {
                             const dateString = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
                             return blockedDates.includes(dateString) ? false : true;
@@ -123,19 +135,6 @@
 
                 initializeDatepicker(dataWypozyczenia);
                 initializeDatepicker(dataZwrotu);
-
-                // Function to disable dates in the Datepicker
-                const disableBlockedDates = () => {
-                    $('.datepicker').datepicker('update');
-                };
-
-                dataWypozyczenia.addEventListener('change', function() {
-                    disableBlockedDates();
-                });
-
-                dataZwrotu.addEventListener('change', function() {
-                    disableBlockedDates();
-                });
             });
     });
 </script>
