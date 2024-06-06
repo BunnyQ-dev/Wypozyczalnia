@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,6 +17,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+
+        if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
+            return redirect()->route('uzytkownicy.index')->with('error', 'You do not have permission to edit this user.');
+        }
+
         return view('uzytkownicy.edit', compact('user'));
     }
 
@@ -22,72 +29,75 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // Перевірка, чи користувач має доступ до цього профілю
-        if ($user->id !== auth()->id() && !auth()->user()->is_admin) {
-            return redirect()->back()->with('error', 'У вас немає доступу до цього профілю');
+        if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
+            return redirect()->back()->with('error', 'You do not have access to this profile.');
         }
 
         return view('uzytkownicy.show', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         $request->validate([
             'username' => 'required|string|max:255',
             'first_name' => 'nullable|string|max:255',
             'last_name' => 'nullable|string|max:255',
-            'address' => 'nullable|string|max:255'
+            'address' => 'nullable|string|max:255',
         ]);
 
-        $user = User::findOrFail($id);
-        $user->username = $request->username;
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->address = $request->address;
-        $user->save();
+        $user->update($request->only(['username', 'first_name', 'last_name', 'address']));
 
-        return redirect()->route('uzytkownicy.index')->with('success', 'Użytkownik zaktualizowany pomyślnie');
+        return redirect()->route('uzytkownicy.show', $user->id)->with('success', 'User updated successfully.');
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+
+        if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
+            return redirect()->route('uzytkownicy.index')->with('error', 'You do not have permission to delete this user.');
+        }
+
         $user->delete();
 
-        return redirect()->route('uzytkownicy.index')->with('success', 'Użytkownik usunięty pomyślnie');
+        return redirect()->route('uzytkownicy.index')->with('success', 'User deleted successfully.');
     }
 
     public function showForClient(User $user)
     {
+        if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
+            return redirect()->route('klient.uzytkownicy.index')->with('error', 'You do not have access to this profile.');
+        }
+
         return view('klient.uzytkownicy.show', compact('user'));
     }
 
     public function editForClient(User $user)
     {
-        // Method for client edit view
+        if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
+            return redirect()->route('klient.uzytkownicy.index')->with('error', 'You do not have permission to edit this user.');
+        }
+
         return view('klient.uzytkownicy.edit', compact('user'));
     }
 
-    public function updateForClient(Request $request, $id)
+    public function updateForClient(Request $request, User $user)
     {
+        // Ensure the authenticated user can only update their own profile
+        if ($user->id !== Auth::id()) {
+            return redirect()->route('klient.uzytkownicy.show', $user->id)->with('error', 'You do not have permission to edit this user.');
+        }
+
         $request->validate([
             'username' => 'required|string|max:255',
             'first_name' => 'nullable|string|max:255',
             'last_name' => 'nullable|string|max:255',
-            'address' => 'nullable|string|max:255'
+            'address' => 'nullable|string|max:255',
         ]);
 
-        $user = User::findOrFail($id);
-
-        // Here you can add any additional client-specific validation or authorization logic if needed
-
-        // Update the user
-        $user->username = $request->username;
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->address = $request->address;
-        $user->save();
+        $user->update($request->only(['username', 'first_name', 'last_name', 'address']));
 
         return redirect()->route('klient.uzytkownicy.show', $user->id)->with('success', 'Dane użytkownika zaktualizowane pomyślnie');
     }
+
 }

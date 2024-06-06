@@ -36,10 +36,10 @@
                 </div>
             </div>
             <div class="container">
-                <div class="row">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4"> <!-- Додано клас g-4 для вирівнювання проміжку між картками -->
                     @foreach($towary as $towar)
-                        <div class="col-12 col-md-6 col-lg-3">
-                            <div class="card mb-4 h-100">
+                        <div class="col">
+                            <div class="card h-100">
                                 <div id="carouselExampleIndicators{{ $towar->id }}" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
                                         @if($towar->zdjecie1)
@@ -70,12 +70,13 @@
                                         <span class="sr-only"></span>
                                     </a>
                                 </div>
+
                                 <div class="card-body">
-                                    <h5 class="card-title"><strong>{{ $towar->nazwa }}</strong></h5>
+                                    <h5 class="card-title mb-3"><strong>{{ $towar->nazwa }}</strong></h5>
                                     <p class="card-text">{{ $towar->opis }}</p>
                                     <p class="card-text"><strong>Cena:</strong> {{ $towar->cena }} zł</p>
-                                    <a href="{{ route('klient.towar.show', ['id' => $towar->id]) }}" class="btn btn-primary">Zarezerwować</a>
                                 </div>
+                                <a href="{{ route('klient.towar.show', ['id' => $towar->id]) }}" class="btn btn-primary btn-block">Zarezerwować</a>
                             </div>
                         </div>
                     @endforeach
@@ -103,7 +104,6 @@
             </div>
         </div>
     </section>
-
 
 @endsection
 
