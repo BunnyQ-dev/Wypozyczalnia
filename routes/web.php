@@ -108,9 +108,12 @@ Route::prefix('klient')->middleware('auth')->group(function () {
     Route::get('/towary', [KlientTowaryController::class, 'index'])->name('klient.towary.index');
     Route::get('/towar/{id}', [KlientTowaryController::class, 'show'])->name('klient.towar.show');
 
-    Route::get('/wypozyczenia/{id}/edit', [KlientWypozyczeniaController::class, 'edit'])->name('klient.wypozyczenia.edit');
-    Route::delete('/klient/wypozyczenia/{id}', [KlientWypozyczeniaController::class, 'destroy'])->name('klient.wypozyczenia.delete');
     Route::get('/wypozyczenia', [KlientWypozyczeniaController::class, 'showAll'])->name('klient.wypozyczenia.show');
+    Route::delete('/wypozyczenia/{id}', [KlientWypozyczeniaController::class, 'destroy'])->name('klient.wypozyczenia.destroy');
+    Route::get('/wypozyczenia/{id}/edit', [KlientWypozyczeniaController::class, 'edit'])->name('klient.wypozyczenia.edit');
+    Route::put('/wypozyczenia/{id}', [KlientWypozyczeniaController::class, 'update'])->name('klient.wypozyczenia.update');
+    Route::post('/wypozyczenia', [KlientWypozyczeniaController::class, 'store'])->name('klient.wypozyczenia.store');;
+
 });
 
 

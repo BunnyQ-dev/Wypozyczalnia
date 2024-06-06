@@ -15,20 +15,43 @@
                 <div class="card-header">Edytuj Wypożyczenie</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.wypozyczenia.update', $wypozyczenie->id) }}">
+                    <!-- Display success and error messages -->
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('klient.wypozyczenia.update', $wypozyczenie->id) }}">
                         @csrf
                         @method('PUT')
 
+                        <!-- Hidden input for towar_id -->
+                        <input type="hidden" name="towar_id" value="{{ $wypozyczenie->towar_id }}">
+
                         <div class="form-group">
                             <label for="data_wypozyczenia">Data Wypożyczenia:</label>
-                            <input type="text" class="form-control datepicker mt-3" id="data_wypozyczenia" name="data_wypozyczenia" value="{{ $wypozyczenie->data_wypozyczenia }}">
+                            <input type="text" class="form-control datepicker mt-3" id="data_wypozyczenia" name="data_wypozyczenia" value="{{ old('data_wypozyczenia', $wypozyczenie->data_wypozyczenia) }}">
                         </div>
 
                         <div class="form-group">
                             <label for="data_zwrotu" class="mt-3">Data Zwrotu:</label>
-                            <input type="text" class="form-control datepicker mt-3" id="data_zwrotu" name="data_zwrotu" value="{{ $wypozyczenie->data_zwrotu }}">
+                            <input type="text" class="form-control datepicker mt-3" id="data_zwrotu" name="data_zwrotu" value="{{ old('data_zwrotu', $wypozyczenie->data_zwrotu) }}">
                         </div>
-
                         <button type="submit" class="btn btn-primary mt-3">Zapisz</button>
                     </form>
                 </div>
@@ -60,11 +83,12 @@
                     return dateArray;
                 }).flat();
 
-                // Initialize Datepicker
+                // Initialize Datepicker with today's date as the minimum selectable date
                 const initializeDatepicker = (inputElement) => {
                     $(inputElement).datepicker({
                         format: 'yyyy-mm-dd',
                         autoclose: true,
+                        startDate: new Date(), // Prevent dates before today
                         beforeShowDay: function(date) {
                             const dateString = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
                             return blockedDates.includes(dateString) ? false : true;
@@ -74,21 +98,9 @@
 
                 initializeDatepicker(dataWypozyczenia);
                 initializeDatepicker(dataZwrotu);
-
-                // Function to disable dates in the Datepicker
-                const disableBlockedDates = () => {
-                    $('.datepicker').datepicker('update');
-                };
-
-                dataWypozyczenia.addEventListener('change', function() {
-                    disableBlockedDates();
-                });
-
-                dataZwrotu.addEventListener('change', function() {
-                    disableBlockedDates();
-                });
             });
     });
+
 </script>
 </body>
 </html>

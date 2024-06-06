@@ -100,7 +100,4 @@ class WypozyczeniaController extends Controller
         return response()->json($wypozyczenia);
     }
 
-
-
-
 }

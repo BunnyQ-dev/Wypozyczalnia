@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Nasze towary')
+
 @section('content')
     <section data-bs-version="5.1" class="features03 cid-ueDKg7VR0d" id="events-1-ueDKg7VR0d">
         <div class="container-fluid">
