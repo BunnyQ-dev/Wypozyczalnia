@@ -11,7 +11,7 @@
                 <div class="col-12 col-md">
 
                     <h6 class="mbr-section-subtitle mbr-fonts-style mt-0 mb-4 display-5">
-                        <strong>Witaj w Rentify- Twoim miejscu do wynajmu sprzętu budowlanego. Oferujemy najlepsze narzędzia dla Twoich potrzeb!</strong>
+                        <strong>Witaj w Rentify - Twoim miejscu do wynajmu sprzętu budowlanego. Oferujemy najlepsze narzędzia dla Twoich potrzeb!</strong>
                     </h6>
                 </div>
                 <div class="col-md-12 col-lg-6">

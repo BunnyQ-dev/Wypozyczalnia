@@ -97,9 +97,6 @@
         @keyframes animationClosing { 0% { height: 8rem; opacity: 1; } 30% { height: 8rem; opacity: 0.5;} 100% { height: 0; opacity: 0;} }
 
         @media(max-width: 767px) {
-            #mobiriseBanner.container-banner {
-                height: 12rem;
-            }
             #mobiriseBanner .banner {
                 min-height: 12rem;
             }
@@ -125,11 +122,11 @@
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container" bis_skin_checked="1">
             <div class="navbar-brand" bis_skin_checked="1">
-				<span class="navbar-logo">
-					<a href="{{ route('main') }}" bis_skin_checked="1" bis_size="{&quot;x&quot;:109,&quot;y&quot;:26,&quot;w&quot;:103,&quot;h&quot;:68,&quot;abs_x&quot;:109,&quot;abs_y&quot;:26}">
-						<img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 4.3rem;" bis_size="{&quot;x&quot;:109,&quot;y&quot;:26,&quot;w&quot;:103,&quot;h&quot;:68,&quot;abs_x&quot;:109,&quot;abs_y&quot;:26}" bis_id="bn_ey694vk0limpu498l2qohc">
-					</a>
-				</span>
+                <span class="navbar-logo">
+                    <a href="{{ route('main') }}" bis_skin_checked="1" bis_size="{&quot;x&quot;:109,&quot;y&quot;:26,&quot;w&quot;:103,&quot;h&quot;:68,&quot;abs_x&quot;:109,&quot;abs_y&quot;:26}">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 4.3rem;" bis_size="{&quot;x&quot;:109,&quot;y&quot;:26,&quot;w&quot;:103,&quot;h&quot;:68,&quot;abs_x&quot;:109,&quot;abs_y&quot;:26}" bis_id="bn_ey694vk0limpu498l2qohc">
+                    </a>
+                </span>
                 <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="{{ route('main') }}" bis_skin_checked="1">Rentify</a></span>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,7 +138,8 @@
                 </div>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent" bis_skin_checked="1">
-                <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
+                <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+                    <li class="nav-item">
                         <a class="nav-link link text-black display-4" href="{{ route('onas') }}" bis_skin_checked="1">O nas</a>
                     </li>
                     <li class="nav-item">
@@ -151,11 +149,37 @@
                         <a class="nav-link link text-black display-4" href="{{ route('wypozyczenia.index') }}" aria-expanded="false" bis_skin_checked="1">Zarezerwuj</a>
                     </li>
                 </ul>
-                <div class="navbar-buttons mbr-section-btn" bis_skin_checked="1"><a class="btn btn-primary display-4" href="{{ route('login') }}" bis_skin_checked="1">Logowanie</a></div>
+                <div class="navbar-buttons mbr-section-btn" bis_skin_checked="1">
+                    @auth
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-black display-4 btn btn-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" bis_skin_checked="1">
+                                {{ Auth::user()->username }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" bis_skin_checked="1">
+                                <a class="dropdown-item" href="{{ route('klient.uzytkownicy.show', auth()->user()->id) }}">Мій профіль</a>
+                                <a class="dropdown-item" href="#">Rezerwacje</a>
+                                <div class="dropdown-divider" bis_skin_checked="1"></div>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Вийти
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+
+                            </div>
+                        </li>
+                    @endauth
+                    @guest
+                        <a class="btn btn-primary display-4" href="{{ route('login') }}" bis_skin_checked="1">Logowanie</a>
+                    @endguest
+                </div>
             </div>
         </div>
     </nav>
 </section>
+
+
+
 
 @yield('content')
 
@@ -197,7 +221,7 @@
 <script>
     $(document).ready(function() {
         $('.carousel').carousel({
-            interval: false // Disable automatic slide switching
+            interval: false
         });
 
         $('.carousel .carousel-control-prev').click(function(e) {
