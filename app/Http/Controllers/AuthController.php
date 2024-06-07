@@ -54,7 +54,7 @@ class AuthController extends Controller
             : ['username' => $login, 'password' => $password];
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/home');
+            return redirect()->intended('/');
         }
 
         return redirect()->route('login')->with('error', 'Nieprawidłowe dane logowania.');
