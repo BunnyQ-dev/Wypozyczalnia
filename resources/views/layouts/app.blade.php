@@ -16,8 +16,6 @@
             text-align: center;
         }
 
-
-
         nav {
             background-color: #666;
             color: #fff;
@@ -29,7 +27,7 @@
             color: #fff;
             margin: 0 15px;
         }
-        nav a:hover{
+        nav a:hover {
             text-decoration: none;
             color: #9ca3af;
         }
@@ -42,11 +40,19 @@
             bottom: 0;
             width: 100%;
         }
+        #admin a{
+            font-size: xx-large;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        #admin a:hover{
+            color: #cccaca;
+        }
     </style>
 </head>
 <body>
 <header>
-    <div class="container">
+    <div class="container" id="admin">
         <a href="{{ route('admin.home') }}">Admin Rentify</a>
     </div>
 </header>

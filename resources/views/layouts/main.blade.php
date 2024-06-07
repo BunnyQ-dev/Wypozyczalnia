@@ -211,7 +211,7 @@
 
 
             <div class="col-12 mt-4">
-                <p class="mbr-fonts-style copyright display-7">© 2024 Wypożyczalnia Sprzętu Budowlanego. Wszelkie prawa zastrzeżone.</p>
+                <p class="mbr-fonts-style copyright display-7">© 2024 Rentify - Wypożyczalnia Sprzętu Budowlanego. Wszelkie prawa zastrzeżone.</p>
             </div>
         </div>
     </div>

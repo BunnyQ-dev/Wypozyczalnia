@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Twoje wypożyczenia')
+
 @section('content')
     <div class="container-fluid pt-5">
         <div class="row justify-content-center">
@@ -8,7 +10,7 @@
                 <div class="card">
                     <div class="card-body">
                         @if ($wypozyczenia->count() > 0)
-                            <table class="table table-lg">
+                            <table class="table table-lg text-center"> <!-- Додано клас 'text-center' для центрування тексту в таблиці -->
                                 <thead>
                                 <tr>
                                     <th class="fs-5">Towar</th>
