@@ -27,7 +27,6 @@ class WypozyczeniaController extends Controller
             $user = Auth::user();
             $towar = Towar::findOrFail($request->towar_id);
 
-            // Перевірка наявності пересічень дат оренди
             $overlap = Wypozyczenia::where('towar_id', $towar->id)
                 ->where(function($query) use ($request) {
                     $query->whereBetween('data_wypozyczenia', [$request->data_wypozyczenia, $request->data_zwrotu])
@@ -40,7 +39,7 @@ class WypozyczeniaController extends Controller
                 ->exists();
 
             if ($overlap) {
-                return back()->withInput()->with('error', 'Товар недоступний для оренди на обрані дати.');
+                return back()->withInput()->with('error', 'Towar nie jest dostępny w podanych dniach.');
             }
 
             Wypozyczenia::create([
@@ -52,7 +51,7 @@ class WypozyczeniaController extends Controller
 
             return redirect()->route('admin.wypozyczenia.index')->with('success', 'Wypożyczenie для użytkownika ' . $user->name . ' zostało додане успішно.');
         } catch (\Exception $e) {
-            return back()->withInput()->with('error', 'Виникла помилка: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Wystąpił błąd: ' . $e->getMessage());
         }
     }
 
@@ -83,7 +82,7 @@ class WypozyczeniaController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'towar_id' => 'required|exists:towary,id',
+            'towar_id' => 'required|exists:towar,id',
             'data_wypozyczenia' => 'required|date',
             'data_zwrotu' => 'nullable|date|after:data_wypozyczenia',
         ]);

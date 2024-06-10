@@ -113,6 +113,6 @@ class KlientWypozyczeniaController extends Controller
             'data_zwrotu' => $request->data_zwrotu,
         ]);
 
-        return redirect()->route('klient.towary.index')->with('success', 'Towar został wynajęty pomyślnie.');
+        return redirect()->route('klient.wypozyczenia.show')->with('success', 'Towar został wynajęty pomyślnie.');
     }
 }

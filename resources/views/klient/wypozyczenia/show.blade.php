@@ -6,11 +6,11 @@
     <div class="container-fluid pt-5">
         <div class="row justify-content-center">
             <div class="col-md-8 pt-5">
-                <h1 class="pt-3">Twoje wypożyczenia</h1>
+                <h1 class="pt-3">Twoje rezerwacje</h1>
                 <div class="card">
                     <div class="card-body">
                         @if ($wypozyczenia->count() > 0)
-                            <table class="table table-lg text-center"> <!-- Додано клас 'text-center' для центрування тексту в таблиці -->
+                            <table class="table table-lg text-center">
                                 <thead>
                                 <tr>
                                     <th class="fs-5">Towar</th>

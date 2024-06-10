@@ -31,11 +31,6 @@
         <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="card-title">{{ $towar->nazwa }}</h1>
-                    <p class="card-text">{{ $towar->opis }}</p>
-                    <p class="card-text"><strong>Cena:</strong> {{ $towar->cena }} zł</p>
-                    <p class="card-text"><strong>Kategoria:</strong> {{ $towar->kategoria->nazwa }}</p>
-
                     @if($towar->zdjecie1 || $towar->zdjecie2 || $towar->zdjecie3)
                         <div id="photoCarousel" class="carousel slide mb-3">
                             <div class="carousel-inner">
@@ -65,6 +60,13 @@
                             </a>
                         </div>
                     @endif
+
+                    <h1 class="card-title">{{ $towar->nazwa }}</h1>
+                    <p class="card-text">{{ $towar->opis }}</p>
+                    <p class="card-text"><strong>Cena:</strong> {{ $towar->cena }} zł</p>
+                    <p class="card-text"><strong>Kategoria:</strong> {{ $towar->kategoria->nazwa }}</p>
+
+
 
                     @if(session('error'))
                         <div class="alert alert-danger">

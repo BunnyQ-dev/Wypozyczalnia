@@ -11,6 +11,7 @@ use App\Http\Controllers\KlientWypozyczeniaController;
 use App\Http\Controllers\KlientTowaryController;
 use App\Http\Middleware\EnsureUserIsOwner;
 use App\Http\Controllers\AdminHomeController;
+use App\Http\Controllers\ChangePasswordController;
 
 // Trasy autoryzacji
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
@@ -28,6 +29,14 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [AdminHomeController::class, 'index'])->name('admin.home');
 });
 
+Route::get('/rezerwacje', function () {
+    return view('rezerwacje');
+})->name('rezerwacje');
+
+
+Route::get('/onas', function () {
+    return view('onas');
+})->name('onas');
 
 Route::get('/onas', function () {
     return view('onas');
@@ -48,6 +57,10 @@ Route::get('/zarezerwuj', function () {
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+
+Route::get('/change-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('change.password.form');
+Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('change.password');
+
 
 Route::get('/regulamin', function () {
     return view('regulamin');
