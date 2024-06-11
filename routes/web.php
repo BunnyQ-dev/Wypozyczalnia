@@ -86,6 +86,8 @@ Route::prefix('wypozyczenia')->middleware(['auth', 'admin'])->group(function () 
     Route::get('/{id}/edit', [WypozyczeniaController::class, 'edit'])->name('admin.wypozyczenia.edit');
     Route::put('/{id}', [WypozyczeniaController::class, 'update'])->name('admin.wypozyczenia.update');
     Route::delete('/{id}', [WypozyczeniaController::class, 'delete'])->name('admin.wypozyczenia.delete');
+    Route::put('/change-status/{id}', [WypozyczeniaController::class, 'changeStatus'])->name('admin.wypozyczenia.changeStatus');
+
 });
 
 
@@ -111,7 +113,6 @@ Route::prefix('kategorie')->middleware(['auth', 'admin'])->group(function () {
 });
 
 
-// Trasy для KlientController
 Route::prefix('klient')->middleware('auth')->group(function () {
     Route::get('/towar/{id}', [KlientTowaryController::class, 'show'])->name('klient.towar.show');
     Route::post('/rent', [KlientWypozyczeniaController::class, 'store'])->name('klient.rent.store');
@@ -126,6 +127,11 @@ Route::prefix('klient')->middleware('auth')->group(function () {
     Route::get('/wypozyczenia/{id}/edit', [KlientWypozyczeniaController::class, 'edit'])->name('klient.wypozyczenia.edit');
     Route::put('/wypozyczenia/{id}', [KlientWypozyczeniaController::class, 'update'])->name('klient.wypozyczenia.update');
     Route::post('/wypozyczenia', [KlientWypozyczeniaController::class, 'store'])->name('klient.wypozyczenia.store');;
+
+
+    Route::get('/wypozyczenia/in-progress', [KlientWypozyczeniaController::class, 'showInProgress'])->name('klient.wypozyczenia.in_progress');
+    Route::post('/wypozyczenia/{id}/return', [KlientWypozyczeniaController::class, 'returnRental'])->name('klient.wypozyczenia.return');
+
 
 });
 

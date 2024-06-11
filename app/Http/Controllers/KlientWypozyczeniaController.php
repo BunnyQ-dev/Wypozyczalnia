@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Towar;
 use Illuminate\Support\Facades\Validator;
 
+
 class KlientWypozyczeniaController extends Controller
 {
     public function showAll()
@@ -30,7 +31,7 @@ class KlientWypozyczeniaController extends Controller
         $wypozyczenie = Wypozyczenia::findOrFail($id);
 
         if(Auth::id() !== $wypozyczenie->user_id) {
-            return redirect()->route('klient.wypozyczenia.show')->with('error', 'You are not authorized to edit this order.');
+            return redirect()->route('klient.wypozyczenia.show')->with('error', 'Nie masz uprawnień do edycji tego zamówienia.');
         }
 
         return view('klient.wypozyczenia.edit', compact('wypozyczenie'));
@@ -46,9 +47,8 @@ class KlientWypozyczeniaController extends Controller
 
         $wypozyczenie = Wypozyczenia::findOrFail($id);
 
-        // Перевірка на наявність пересічення дат
         $exists = Wypozyczenia::where('towar_id', $request->towar_id)
-            ->where('id', '!=', $id) // Виключити поточне замовлення
+            ->where('id', '!=', $id)
             ->where(function ($query) use ($request) {
                 $query->whereBetween('data_wypozyczenia', [$request->data_wypozyczenia, $request->data_zwrotu])
                     ->orWhereBetween('data_zwrotu', [$request->data_wypozyczenia, $request->data_zwrotu])
@@ -90,7 +90,6 @@ class KlientWypozyczeniaController extends Controller
             return redirect()->route('login')->with('error', 'Musisz być zalogowany, aby wynająć towar.');
         }
 
-        // Перевірка на наявність пересічення дат
         $exists = Wypozyczenia::where('towar_id', $request->towar_id)
             ->where(function ($query) use ($request) {
                 $query->whereBetween('data_wypozyczenia', [$request->data_wypozyczenia, $request->data_zwrotu])
@@ -115,4 +114,35 @@ class KlientWypozyczeniaController extends Controller
 
         return redirect()->route('klient.wypozyczenia.show')->with('success', 'Towar został wynajęty pomyślnie.');
     }
+
+    public function returnRental(Request $request, $id)
+    {
+        $wypozyczenie = Wypozyczenia::findOrFail($id);
+
+        // Sprawdź, czy wypożyczenie jest już zwrócone
+        if ($wypozyczenie->status === 'zwrocone') {
+            return redirect()->route('klient.wypozyczenia.showInProgress')->with('error', 'To wypożyczenie zostało już zwrócone.');
+        }
+
+        // Aktualizuj status wypożyczenia na 'returned'
+        $wypozyczenie->update(['status' => 'zwrocone']);
+
+        // Aktualizuj datę zwrotu na dzisiejszą datę
+        $wypozyczenie->update(['data_zwrotu' => now()->toDateString()]);
+
+        return redirect()->route('klient.wypozyczenia.in_progress')->with('success', 'Wypożyczenie zostało zakończone.');
+    }
+
+    public function showInProgress()
+    {
+        $user = Auth::user();
+        $wypozyczenia = Wypozyczenia::where('user_id', $user->id)
+            ->where('status', 'w_trakcie')
+            ->get();
+
+        return view('klient.wypozyczenia.in_progress', compact('user', 'wypozyczenia'));
+    }
+
+
+
 }

@@ -14,6 +14,7 @@ class Wypozyczenia extends Model
     protected $fillable = [
         'user_id',
         'towar_id',
+        'status',
         'data_wypozyczenia',
         'data_zwrotu'
     ];

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('towar_id');
             $table->date('data_wypozyczenia');
             $table->date('data_zwrotu')->nullable();
+            $table->string('status')->default('zarezerwowane');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -32,3 +33,4 @@ return new class extends Migration
         Schema::dropIfExists('wypozyczenia');
     }
 };
+

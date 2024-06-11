@@ -170,7 +170,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" bis_skin_checked="1">
                                 <a class="dropdown-item" href="{{ route('klient.uzytkownicy.show', auth()->user()->id) }}">Moje konto</a>
                                 <a class="dropdown-item" href="{{ route('klient.wypozyczenia.show') }}">Moje rezerwacje</a>
-                                <a class="dropdown-item" href="#">Moje wypożyczenia</a>
+                                <a class="dropdown-item" href="{{ route('klient.wypozyczenia.in_progress') }}">Moje wypożyczenia</a>
                                 <a class="dropdown-item" href="{{ route('change.password.form') }}">Zmień hasło</a>
 
                                 <div class="dropdown-divider" bis_skin_checked="1"></div>
