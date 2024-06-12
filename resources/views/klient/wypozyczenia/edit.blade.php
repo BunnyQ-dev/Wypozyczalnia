@@ -64,7 +64,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const towarId = {{ $wypozyczenie->towar_id }};
+        const towarId = {{ $towar->id }};
         const dataWypozyczenia = document.getElementById('data_wypozyczenia');
         const dataZwrotu = document.getElementById('data_zwrotu');
 

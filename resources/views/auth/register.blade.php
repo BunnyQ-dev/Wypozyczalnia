@@ -2,7 +2,6 @@
 
 @section('content')
     <style>
-
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
@@ -29,7 +28,8 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .space{
+
+        .space {
             padding-top: 120px;
         }
 
@@ -49,6 +49,21 @@
             border: 1px solid #ced4da;
             border-radius: 4px;
             box-sizing: border-box;
+        }
+
+        .form-group .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .form-group .checkbox-container input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .form-group .checkbox-container label {
+            margin: 0;
         }
 
         .btn-zaloguj-container {
@@ -83,6 +98,12 @@
         p a:hover {
             text-decoration: underline;
         }
+        .checkbox-container{
+            display: flex;
+            flex-direction: row;
+            margin-right: 7vw ;
+            justify-content: space-around;
+        }
 
     </style>
     <div class="space"></div>
@@ -116,6 +137,10 @@
         <div class="form-group">
             <label for="address">Podaj adres: </label>
             <input type="text" id="address" name="address" class="form-control" required>
+        </div>
+        <div class="form-group checkbox-container">
+            <div class="checkbox"> <input type="checkbox" id="terms" name="terms" required> </div>
+            <label for="terms">Zapoznałem się z <a href="{{ route('regulamin') }}">regulaminem</a></label>
         </div>
         <div class="btn-zaloguj-container">
             <button type="submit" class="btn btn-zaloguj">Zarejestruj się</button>

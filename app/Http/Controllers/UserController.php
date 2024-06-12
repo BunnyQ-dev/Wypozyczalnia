@@ -66,7 +66,7 @@ class UserController extends Controller
     public function showForClient(User $user)
     {
         if ($user->id !== Auth::id() && !Auth::user()->admin) {
-            return redirect()->route('klient.uzytkownicy.index')->with('error', 'You do not have access to this profile.');
+            return redirect()->route('klient.uzytkownicy.show', $user->id)->with('error', 'You do not have access to this profile.');
         }
 
         return view('klient.uzytkownicy.show', compact('user'));

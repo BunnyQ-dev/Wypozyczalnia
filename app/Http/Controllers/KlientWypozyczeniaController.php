@@ -29,26 +29,31 @@ class KlientWypozyczeniaController extends Controller
     public function edit($id)
     {
         $wypozyczenie = Wypozyczenia::findOrFail($id);
+        $towar = Towar::findOrFail($wypozyczenie->towar_id);
 
         if(Auth::id() !== $wypozyczenie->user_id) {
             return redirect()->route('klient.wypozyczenia.show')->with('error', 'Nie masz uprawnień do edycji tego zamówienia.');
         }
 
-        return view('klient.wypozyczenia.edit', compact('wypozyczenie'));
+        return view('klient.wypozyczenia.edit', compact('wypozyczenie', 'towar'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'towar_id' => 'required|exists:towar,id',
             'data_wypozyczenia' => 'required|date|after_or_equal:today',
             'data_zwrotu' => 'required|date|after:data_wypozyczenia',
         ]);
 
         $wypozyczenie = Wypozyczenia::findOrFail($id);
 
-        $exists = Wypozyczenia::where('towar_id', $request->towar_id)
-            ->where('id', '!=', $id)
+        if(Auth::id() !== $wypozyczenie->user_id) {
+            return redirect()->route('klient.wypozyczenia.show')->with('error', 'Nie masz uprawnień do edycji tego zamówienia.');
+        }
+
+        // Перевіряємо, чи є інші резервування, які перетинаються з поточним
+        $existingReservations = Wypozyczenia::where('id', '!=', $id)
+            ->where('towar_id', $wypozyczenie->towar_id)
             ->where(function ($query) use ($request) {
                 $query->whereBetween('data_wypozyczenia', [$request->data_wypozyczenia, $request->data_zwrotu])
                     ->orWhereBetween('data_zwrotu', [$request->data_wypozyczenia, $request->data_zwrotu])
@@ -59,18 +64,19 @@ class KlientWypozyczeniaController extends Controller
             })
             ->exists();
 
-        if ($exists) {
-            return redirect()->back()->with('error', 'Nie możesz wybrać taki zakres dat.')->withInput();
+        if ($existingReservations) {
+            return redirect()->back()->with('error', 'Nie można wybrać tego zakresu dat, ponieważ przecina się z inną rezerwacją.')->withInput();
         }
 
+        // Оновлюємо дані резервування
         $wypozyczenie->update([
-            'towar_id' => $request->towar_id,
             'data_wypozyczenia' => $request->data_wypozyczenia,
             'data_zwrotu' => $request->data_zwrotu,
         ]);
 
         return redirect()->route('klient.wypozyczenia.show')->with('success', 'Zamówienie zostało pomyślnie zaktualizowane.');
     }
+
 
     public function store(Request $request)
     {

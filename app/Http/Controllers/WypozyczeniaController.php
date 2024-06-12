@@ -109,6 +109,37 @@ class WypozyczeniaController extends Controller
         return response()->json($wypozyczenia);
     }
 
+    public function indexo()
+    {
+        $towary = Towar::all();
+        return view('orders.index', compact('towary'));
+    }
+
+    public function getBlockedDateso($towar_id)
+    {
+        $wypozyczenia = Wypozyczenia::where('towar_id', $towar_id)->get(['data_wypozyczenia', 'data_zwrotu']);
+
+        $events = [];
+        foreach ($wypozyczenia as $wypozyczenie) {
+            // Include both start and end dates in the blocked dates list
+            $events[] = [
+                'title' => 'zarezerwowane',
+                'start' => $wypozyczenie->data_wypozyczenia,
+                'end' => date('Y-m-d', strtotime($wypozyczenie->data_zwrotu . ' +1 day')) // Add 1 day to include the end date
+            ];
+        }
+
+        return response()->json($events);
+    }
+
+
+
+
+    public function calendar(Towar $towar)
+    {
+        return view('orders.calendar', compact('towar'));
+    }
+
     public function changeStatus(Request $request, $id)
     {
         $wypozyczenie = Wypozyczenia::findOrFail($id);
@@ -121,8 +152,5 @@ class WypozyczeniaController extends Controller
 
         return redirect()->route('admin.wypozyczenia.index')->with('success', 'Wypożyczenie zostało rozpoczęte.');
     }
-
-
-
 
 }

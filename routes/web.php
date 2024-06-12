@@ -138,6 +138,9 @@ Route::prefix('klient')->middleware('auth')->group(function () {
 
 
 Route::get('/blocked-dates/{towar_id}', [WypozyczeniaController::class, 'getBlockedDates']);
+Route::get('/orders/{towar}/blocked-dates', [WypozyczeniaController::class, 'getBlockedDateso'])->name('orders.blocked-dates');
+Route::get('/orders', [WypozyczeniaController::class, 'indexo'])->name('orders.index');
+Route::get('/orders/{towar}/calendar', [WypozyczeniaController::class, 'calendar'])->name('orders.calendar');
 
 
 Route::get('/noaccess', function () {

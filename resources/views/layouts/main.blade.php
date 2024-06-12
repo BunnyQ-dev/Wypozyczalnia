@@ -158,7 +158,7 @@
                         <a class="nav-link link text-black display-4" href="{{ route('klient.towary.index') }}" aria-expanded="false" bis_skin_checked="1">Towary</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link text-black display-4" href="#" aria-expanded="false" bis_skin_checked="1">Lista rezerwacji</a>
+                        <a class="nav-link link text-black display-4" href="{{ route('orders.index') }}" aria-expanded="false" bis_skin_checked="1">Lista rezerwacji</a>
                     </li>
                 </ul>
                 <div class="navbar-buttons mbr-section-btn" bis_skin_checked="1">
