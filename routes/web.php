@@ -85,6 +85,13 @@ Route::prefix('wypozyczenia')->middleware(['auth', 'admin'])->group(function () 
     Route::delete('/{id}', [WypozyczeniaController::class, 'delete'])->name('admin.wypozyczenia.delete');
     Route::put('/change-status/{id}', [WypozyczeniaController::class, 'changeStatus'])->name('admin.wypozyczenia.changeStatus');
 
+
+    Route::get('wypozyczenia/in_progress', [WypozyczeniaController::class, 'inProgress'])->name('admin.wypozyczenia.in_progress');
+    Route::get('wypozyczenia/returned', [WypozyczeniaController::class, 'returned'])->name('admin.wypozyczenia.returned');
+    Route::get('wypozyczenia/overdue', [WypozyczeniaController::class, 'overdue'])->name('admin.wypozyczenia.overdue');
+    Route::get('wypozyczenia/reserved', [WypozyczeniaController::class, 'reserved'])->name('admin.wypozyczenia.reserved');
+
+
 });
 
 

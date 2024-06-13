@@ -79,14 +79,14 @@
                         <input type="hidden" name="towar_id" value="{{ $towar->id }}">
                         <div class="form-group">
                             <label for="data_wypozyczenia">Data Wypożyczenia</label>
-                            <input type="text" class="form-control @error('data_wypozyczenia') is-invalid @enderror" id="data_wypozyczenia" name="data_wypozyczenia" value="{{ old('data_wypozyczenia') }}" required>
+                            <input type="text" class="form-control @error('data_wypozyczenia') is-invalid @enderror" id="data_wypozyczenia" name="data_wypozyczenia" value="{{ old('data_wypozyczenia') }}" required autocomplete="off">
                             @error('data_wypozyczenia')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="data_zwrotu">Data Zwrotu</label>
-                            <input type="text" class="form-control @error('data_zwrotu') is-invalid @enderror" id="data_zwrotu" name="data_zwrotu" value="{{ old('data_zwrotu') }}" required>
+                            <input type="text" class="form-control @error('data_zwrotu') is-invalid @enderror" id="data_zwrotu" name="data_zwrotu" value="{{ old('data_zwrotu') }}" required autocomplete="off">
                             @error('data_zwrotu')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

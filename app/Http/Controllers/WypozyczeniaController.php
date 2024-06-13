@@ -7,6 +7,7 @@ use App\Models\Towar;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class WypozyczeniaController extends Controller
 {
@@ -143,6 +144,45 @@ class WypozyczeniaController extends Controller
         $wypozyczenie->update(['status' => 'w_trakcie']);
 
         return redirect()->route('admin.wypozyczenia.index')->with('success', 'Wypożyczenie zostało rozpoczęte.');
+    }
+
+    public function inProgress()
+    {
+        $wypozyczenia = Wypozyczenia::with(['user', 'towar'])
+            ->where('status', 'w_trakcie')
+            ->get();
+        return view('admin.wypozyczenia.in_progress', compact('wypozyczenia'));
+    }
+
+    public function returned()
+    {
+        $wypozyczenia = Wypozyczenia::with(['user', 'towar'])
+            ->where('status', 'zwrocone')
+            ->get();
+        return view('admin.wypozyczenia.returned', compact('wypozyczenia'));
+    }
+
+    public function overdue()
+    {
+        $today = Carbon::today();
+        $wypozyczenia = Wypozyczenia::with(['user', 'towar'])
+            ->where('status', '!=', 'zwrocone')
+            ->where('data_zwrotu', '<', $today)
+            ->get();
+
+        foreach ($wypozyczenia as $wypozyczenie) {
+            $wypozyczenie->update(['status' => 'przekroczone']);
+        }
+
+        return view('admin.wypozyczenia.overdue', compact('wypozyczenia'));
+    }
+
+    public function reserved()
+    {
+        $wypozyczenia = Wypozyczenia::with(['user', 'towar'])
+            ->where('status', 'zarezerwowane')
+            ->get();
+        return view('admin.wypozyczenia.reserved', compact('wypozyczenia'));
     }
 
 }

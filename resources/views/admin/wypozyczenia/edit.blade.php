@@ -42,12 +42,12 @@
 
                             <div class="form-group">
                                 <label for="data_wypozyczenia">Data wypożyczenia</label>
-                                <input type="date" id="data_wypozyczenia" name="data_wypozyczenia" class="form-control" value="{{ $wypozyczenie->data_wypozyczenia }}">
+                                <input type="date" id="data_wypozyczenia" name="data_wypozyczenia" class="form-control" value="{{ $wypozyczenie->data_wypozyczenia }}" autocomplete="off">
                             </div>
 
                             <div class="form-group">
                                 <label for="data_zwrotu">Data zwrotu</label>
-                                <input type="date" id="data_zwrotu" name="data_zwrotu" class="form-control" value="{{ $wypozyczenie->data_zwrotu }}">
+                                <input type="date" id="data_zwrotu" name="data_zwrotu" class="form-control" value="{{ $wypozyczenie->data_zwrotu }}" autocomplete="off">
                             </div>
 
                             <div class="card-body">

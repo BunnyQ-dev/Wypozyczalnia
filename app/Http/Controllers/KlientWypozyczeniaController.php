@@ -84,7 +84,7 @@ class KlientWypozyczeniaController extends Controller
         $validator = Validator::make($request->all(), [
             'towar_id' => 'required|exists:towar,id',
             'data_wypozyczenia' => 'required|date|after_or_equal:today',
-            'data_zwrotu' => 'required|date|after:data_wypozyczenia',
+            'data_zwrotu' => 'required|date|after_or_equal:data_wypozyczenia',
         ]);
 
         if ($validator->fails()) {
@@ -99,17 +99,21 @@ class KlientWypozyczeniaController extends Controller
 
         $exists = Wypozyczenia::where('towar_id', $request->towar_id)
             ->where(function ($query) use ($request) {
-                $query->whereBetween('data_wypozyczenia', [$request->data_wypozyczenia, $request->data_zwrotu])
-                    ->orWhereBetween('data_zwrotu', [$request->data_wypozyczenia, $request->data_zwrotu])
-                    ->orWhere(function ($query) use ($request) {
-                        $query->where('data_wypozyczenia', '<=', $request->data_wypozyczenia)
-                            ->where('data_zwrotu', '>=', $request->data_zwrotu);
-                    });
+                $query->where(function ($query) use ($request) {
+                    $query->where('data_wypozyczenia', '<=', $request->data_wypozyczenia)
+                        ->where('data_zwrotu', '>=', $request->data_wypozyczenia);
+                })->orWhere(function ($query) use ($request) {
+                    $query->where('data_wypozyczenia', '<=', $request->data_zwrotu)
+                        ->where('data_zwrotu', '>=', $request->data_zwrotu);
+                })->orWhere(function ($query) use ($request) {
+                    $query->where('data_wypozyczenia', '>=', $request->data_wypozyczenia)
+                        ->where('data_zwrotu', '<=', $request->data_zwrotu);
+                });
             })
             ->exists();
 
         if ($exists) {
-            return redirect()->back()->with('error', 'Nie możesz wybrać taki zakres dat.')->withInput();
+            return redirect()->back()->with('error', 'Nie możesz wybrać taki zakres dat, ponieważ przecina się z inną rezerwacją.')->withInput();
         }
 
         Wypozyczenia::create([
@@ -117,10 +121,12 @@ class KlientWypozyczeniaController extends Controller
             'towar_id' => $request->towar_id,
             'data_wypozyczenia' => $request->data_wypozyczenia,
             'data_zwrotu' => $request->data_zwrotu,
+            'status' => 'zarezerwowane',
         ]);
 
         return redirect()->route('klient.wypozyczenia.show')->with('success', 'Towar został wynajęty pomyślnie.');
     }
+
 
     public function returnRental(Request $request, $id)
     {
