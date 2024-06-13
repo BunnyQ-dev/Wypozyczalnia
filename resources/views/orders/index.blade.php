@@ -17,7 +17,6 @@
                                     <thead>
                                     <tr>
                                         <th class="fs-5">Nazwa produktu</th>
-                                        <th class="fs-5">Opis</th>
                                         <th class="fs-5">Cena</th>
                                         <th class="fs-5">Działania</th>
                                     </tr>
@@ -26,7 +25,6 @@
                                     @foreach ($towary as $towar)
                                         <tr>
                                             <td class="fs-5"><a href="{{ route('klient.towar.show', $towar->id) }}">{{ $towar->nazwa }}</a></td>
-                                            <td class="fs-5">{{ $towar->opis }}</td>
                                             <td class="fs-5">{{ $towar->cena }}</td>
                                             <td class="fs-5">
                                                 <a href="{{ route('orders.calendar', $towar->id) }}" class="btn btn-primary">Zobacz kalendarz</a>
