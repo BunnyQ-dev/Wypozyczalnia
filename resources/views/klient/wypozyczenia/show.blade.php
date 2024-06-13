@@ -2,10 +2,6 @@
 
 @section('title', 'Twoje rezerwacje')
 
-@php
-    use Carbon\Carbon;
-@endphp
-
 @section('content')
     <style>
         .actions {
@@ -22,7 +18,8 @@
             white-space: nowrap;
             min-width: 70px;
         }
-        .space{
+
+        .space {
             height: 30vh;
         }
 
@@ -65,7 +62,7 @@
                                                 <td class="fs-5">{{ $wypozyczenie->data_zwrotu }}</td>
                                                 <td class="fs-5">{{ $wypozyczenie->status }}</td>
                                                 <td class="fs-5">
-                                                    @if (Carbon::parse($wypozyczenie->data_wypozyczenia)->isAfter(Carbon::today()))
+                                                    @if (Carbon\Carbon::parse($wypozyczenie->data_wypozyczenia)->isAfter(Carbon\Carbon::today()))
                                                         <div class="actions">
                                                             <form action="{{ route('klient.wypozyczenia.edit', $wypozyczenie->id) }}" method="GET">
                                                                 @csrf

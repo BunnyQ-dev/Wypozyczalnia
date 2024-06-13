@@ -15,8 +15,11 @@ class KlientWypozyczeniaController extends Controller
     {
         $user = Auth::user();
         $towar = Towar::all();
-        $wypozyczenia = Wypozyczenia::where('user_id', $user->id)->get();
-        return view('klient.wypozyczenia.show', compact('user','wypozyczenia', 'towar'));
+        $wypozyczenia = Wypozyczenia::where('user_id', $user->id)
+            ->where('status', 'zarezerwowane')
+            ->get();
+
+        return view('klient.wypozyczenia.show', compact('user', 'wypozyczenia', 'towar'));
     }
 
     public function destroy($id)
