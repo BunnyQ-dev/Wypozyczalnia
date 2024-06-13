@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
-@section('title', 'Календар для ' . $towar->nazwa)
+@section('title', 'Kałendarz dla  ' . $towar->nazwa)
 
 @section('content')
     <div class="container-fluid pt-5">
         <div class="row justify-content-center">
             <div class="col-md-8 pt-5">
-                <h1 class="pt-3">Календар для {{ $towar->nazwa }}</h1>
+                <h1 class="pt-3">Kałendarz dla {{ $towar->nazwa }}</h1>
                 <div id="calendar"></div>
             </div>
         </div>
@@ -19,7 +19,7 @@
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth', // Показати місяць з днями
+                initialView: 'dayGridMonth',
                 events: {
                     url: '{{ route('orders.blocked-dates', $towar->id) }}',
                     method: 'GET',
@@ -28,11 +28,9 @@
                     }
                 },
                 eventDidMount: function(info) {
-                    // Відключення заброньованих дат додаванням власного класу або стилів
                     info.el.classList.add('booked-date');
                 },
                 dateClick: function(info) {
-                    // Блокування клацання на даті
                     info.dayEl.style.pointerEvents = 'none';
                 }
             });

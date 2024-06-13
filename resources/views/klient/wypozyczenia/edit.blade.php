@@ -15,7 +15,6 @@
                 <div class="card-header">Edytuj Wypożyczenie</div>
 
                 <div class="card-body">
-                    <!-- Display success and error messages -->
                     @if(session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
@@ -40,7 +39,6 @@
                         @csrf
                         @method('PUT')
 
-                        <!-- Hidden input for towar_id -->
                         <input type="hidden" name="towar_id" value="{{ $wypozyczenie->towar_id }}">
 
                         <div class="form-group">
@@ -83,12 +81,11 @@
                     return dateArray;
                 }).flat();
 
-                // Initialize Datepicker with today's date as the minimum selectable date
                 const initializeDatepicker = (inputElement) => {
                     $(inputElement).datepicker({
                         format: 'yyyy-mm-dd',
                         autoclose: true,
-                        startDate: new Date(), // Prevent dates before today
+                        startDate: new Date(),
                         beforeShowDay: function(date) {
                             const dateString = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
                             return blockedDates.includes(dateString) ? false : true;

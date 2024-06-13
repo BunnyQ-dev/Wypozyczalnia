@@ -15,21 +15,20 @@
         }
 
         .card-custom {
-            width: 70%; /* Increase the width of the card */
-            background-color: #f0f0f0; /* Background color for the card */
-            padding: 20px; /* Add padding to the card */
-            border-radius: 15px; /* Add border-radius to make the corners round */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+            width: 70%;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Style for the primary button */
         .btn-custom {
-            border-radius: 25px; /* Make the button round */
-            padding: 15px 30px; /* Increase padding to make the button larger */
-            font-size: 18px; /* Increase font size */
-            background-color: #06a77d; /* Button background color */
-            color: #fff; /* Button text color */
-            border: none; /* Remove button border */
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #06a77d;
+            color: #fff;
+            border: none;
         }
         .btn-custom:hover {
             color: #ffffff;

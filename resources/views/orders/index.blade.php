@@ -1,5 +1,3 @@
-<!-- resources/views/orders/index.blade.php -->
-
 @extends('layouts.main')
 
 @section('title', 'Lista zamówień')

@@ -1,5 +1,3 @@
-<!-- resources/views/kategorie/edit.blade.php -->
-
 @extends('layouts.app')
 
 @section('title', 'Edytuj kategorię')

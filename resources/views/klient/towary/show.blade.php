@@ -122,12 +122,11 @@
                     return dateArray;
                 }).flat();
 
-                // Initialize Datepicker with today's date as the minimum selectable date
                 const initializeDatepicker = (inputElement) => {
                     $(inputElement).datepicker({
                         format: 'yyyy-mm-dd',
                         autoclose: true,
-                        startDate: new Date(), // Prevent dates before today
+                        startDate: new Date(),
                         beforeShowDay: function(date) {
                             const dateString = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
                             return blockedDates.includes(dateString) ? false : true;

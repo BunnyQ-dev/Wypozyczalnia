@@ -11,27 +11,27 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f2f2f2; /* Tło */
+            background-color: #f2f2f2;
         }
 
         .no-access-container {
             text-align: center;
             max-width: 80%;
             padding: 20px;
-            background-color: #fff; /* Kolor tła kontenera */
+            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Cień */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
         .no-access-container h1 {
             font-size: 24px;
-            color: #ff0000; /* Czerwony kolor */
+            color: #ff0000;
             margin-bottom: 10px;
         }
 
         .no-access-container p {
             font-size: 16px;
-            color: #333; /* Czarny kolor */
+            color: #333;
         }
 
         @media (max-width: 768px) {

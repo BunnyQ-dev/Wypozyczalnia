@@ -14,8 +14,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Форма пошуку та фільтрування -->
             <div class="row justify-content-center mb-5">
                 <div class="col-12">
                     <form method="GET" action="{{ route('klient.towary.index') }}">
@@ -33,7 +31,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-4 mb-3"> <!-- Змінено ширину на 4 стовпці -->
+                            <div class="col-md-4 mb-3">
                                 <button type="submit" class="btn btn-primary custom-button">Znajdź</button>
                             </div>
                         </div>
@@ -93,14 +91,12 @@
 
     <style>
         .card img {
-            height: 200px; /* Задайте бажану висоту для зображень */
-            object-fit: cover; /* Щоб зображення повністю вміщалися у виділену область */
+            height: 200px;
+            object-fit: cover;
         }
         .card {
-            min-height: 450px; /* Задайте мінімальну висоту для картки, щоб вирівняти їх */
+            min-height: 450px;
         }
-        /* Вирівнювання полів пошуку та фільтрації */
-        /* Вирівнювання полів пошуку та фільтрації */
         .mb-5.pt-3 .content-head {
             display: flex;
             justify-content: center;
@@ -109,13 +105,13 @@
         }
 
         .mb-5 {
-            margin-bottom: 20px; /* Якщо потрібно, змініть значення відступу */
+            margin-bottom: 20px;
         }
 
         .custom-input,
         .custom-select,
         .custom-button {
-            width: 100%; /* Ширина полів вводу та вибору */
+            width: 100%;
             height: 100%;
         }
 
@@ -123,13 +119,13 @@
             .custom-input,
             .custom-select,
             .custom-button {
-                margin-left: 20vh; /* Встановлюємо відстань тільки на екранах з шириною не менше 768px */
+                margin-left: 20vh;
             }
         }
 
         .custom-button {
-            max-width: 200px; /* Максимальна ширина кнопки, якщо потрібно */
-            margin-top: 0; /* Відмініть маргін, якщо потрібно */
+            max-width: 200px;
+            margin-top: 0;
             border-radius: 100px;
         }
 

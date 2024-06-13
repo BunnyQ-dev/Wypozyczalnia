@@ -83,7 +83,6 @@ class UserController extends Controller
 
     public function updateForClient(Request $request, User $user)
     {
-        // Ensure the authenticated user can only update their own profile
         if ($user->id !== Auth::id()) {
             return redirect()->route('klient.uzytkownicy.show', $user->id)->with('error', 'You do not have permission to edit this user.');
         }

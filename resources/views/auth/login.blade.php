@@ -2,7 +2,6 @@
 
 @section('content')
     <style>
-        /* public/css/styles.css */
 
         body {
             font-family: Arial, sans-serif;
@@ -48,13 +47,13 @@
         }
 
         .btn-zaloguj-container {
-            text-align: center; /* Центрування контейнера */
+            text-align: center;
             margin-top: 10px;
         }
 
         .btn-zaloguj {
             width: 100%;
-            max-width: 200px; /* Максимальна ширина кнопки */
+            max-width: 200px;
             padding: 10px;
             background-color: #06A77D;
             border: none;

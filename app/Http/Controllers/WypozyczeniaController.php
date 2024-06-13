@@ -19,22 +19,18 @@ class WypozyczeniaController extends Controller
 
     public function store(Request $request)
     {
-        // Retrieve the authenticated user
         $user = Auth::user();
 
-        // Validate the request data
         $validator = Validator::make($request->all(), [
-            'towar_id' => 'required|exists:towar,id', // should be 'towary' instead of 'towar'
+            'towar_id' => 'required|exists:towar,id',
             'data_wypozyczenia' => 'required|date|after_or_equal:today',
             'data_zwrotu' => 'required|date|after:data_wypozyczenia',
         ]);
 
-        // If validation fails, return to the previous page with errors and input
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Check for overlapping rental periods
         $exists = Wypozyczenia::where('towar_id', $request->towar_id)
             ->where(function ($query) use ($request) {
                 $query->whereBetween('data_wypozyczenia', [$request->data_wypozyczenia, $request->data_zwrotu])
@@ -46,20 +42,17 @@ class WypozyczeniaController extends Controller
             })
             ->exists();
 
-        // If there's an overlap, return to the previous page with an error message
         if ($exists) {
             return redirect()->back()->with('error', 'Nie możesz wybrać taki zakres dat.')->withInput();
         }
 
-        // Create a new rental record
         Wypozyczenia::create([
-            'user_id' => $user->id, // Use the authenticated user's ID
+            'user_id' => $user->id,
             'towar_id' => $request->towar_id,
             'data_wypozyczenia' => $request->data_wypozyczenia,
             'data_zwrotu' => $request->data_zwrotu,
         ]);
 
-        // Redirect to the rentals page with a success message
         return redirect()->route('admin.wypozyczenia.index')->with('success', 'Towar został wynajęty pomyślnie.');
     }
 
@@ -121,11 +114,10 @@ class WypozyczeniaController extends Controller
 
         $events = [];
         foreach ($wypozyczenia as $wypozyczenie) {
-            // Include both start and end dates in the blocked dates list
             $events[] = [
                 'title' => 'zarezerwowane',
                 'start' => $wypozyczenie->data_wypozyczenia,
-                'end' => date('Y-m-d', strtotime($wypozyczenie->data_zwrotu . ' +1 day')) // Add 1 day to include the end date
+                'end' => date('Y-m-d', strtotime($wypozyczenie->data_zwrotu . ' +1 day'))
             ];
         }
 

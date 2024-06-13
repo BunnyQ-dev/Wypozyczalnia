@@ -50,8 +50,6 @@
             </li>
         @endforeach
     </ul>
-
-    <!-- Przycisk do dodawania nowego wypożyczenia -->
     <a href="{{ route('admin.wypozyczenia.create') }}" class="btn btn-primary">Dodaj nowe wypożyczenie</a>
 
 @endsection

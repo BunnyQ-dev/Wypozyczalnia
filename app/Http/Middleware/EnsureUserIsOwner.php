@@ -19,7 +19,6 @@ class EnsureUserIsOwner
     {
         $user = $request->route('user');
 
-        // Ensure the user object is not null
         if (!$user || ($user->id !== Auth::id() && !Auth::user()->is_admin)) {
             return redirect()->route('uzytkownicy.index')->with('error', 'You do not have permission to edit this user.');
         }

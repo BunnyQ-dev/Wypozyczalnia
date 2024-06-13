@@ -51,7 +51,6 @@ class KlientWypozyczeniaController extends Controller
             return redirect()->route('klient.wypozyczenia.show')->with('error', 'Nie masz uprawnień do edycji tego zamówienia.');
         }
 
-        // Перевіряємо, чи є інші резервування, які перетинаються з поточним
         $existingReservations = Wypozyczenia::where('id', '!=', $id)
             ->where('towar_id', $wypozyczenie->towar_id)
             ->where(function ($query) use ($request) {
@@ -125,15 +124,12 @@ class KlientWypozyczeniaController extends Controller
     {
         $wypozyczenie = Wypozyczenia::findOrFail($id);
 
-        // Sprawdź, czy wypożyczenie jest już zwrócone
         if ($wypozyczenie->status === 'zwrocone') {
             return redirect()->route('klient.wypozyczenia.showInProgress')->with('error', 'To wypożyczenie zostało już zwrócone.');
         }
 
-        // Aktualizuj status wypożyczenia na 'returned'
         $wypozyczenie->update(['status' => 'zwrocone']);
 
-        // Aktualizuj datę zwrotu na dzisiejszą datę
         $wypozyczenie->update(['data_zwrotu' => now()->toDateString()]);
 
         return redirect()->route('klient.wypozyczenia.in_progress')->with('success', 'Wypożyczenie zostało zakończone.');

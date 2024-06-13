@@ -11,7 +11,7 @@
         .actions {
             display: flex;
             justify-content: center;
-            gap: 10px; /* Space between buttons */
+            gap: 10px;
         }
 
         .actions form {
@@ -19,11 +19,11 @@
         }
 
         .actions button {
-            white-space: nowrap; /* Ensure buttons don't wrap text */
-            min-width: 70px; /* Minimum width to prevent buttons from becoming too narrow */
+            white-space: nowrap;
+            min-width: 70px;
         }
 
-        @media (max-width: 576px) { /* Extra small devices (phones, less than 576px) */
+        @media (max-width: 576px) {
             .actions {
                 flex-direction: column;
                 gap: 5px;

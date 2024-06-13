@@ -1,5 +1,3 @@
-<!-- resources/views/kategorie/create.blade.php -->
-
 @extends('layouts.app')
 
 @section('title', 'Dodaj kategorię')

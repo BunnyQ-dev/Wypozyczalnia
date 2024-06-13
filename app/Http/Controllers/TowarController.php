@@ -34,7 +34,6 @@ class TowarController extends Controller
 
         $towarData = $request->except(['zdjecie1', 'zdjecie2', 'zdjecie3']);
 
-        // Handle file uploads
         if ($request->hasFile('zdjecie1')) {
             $path = $request->file('zdjecie1')->store('public/images');
             $towarData['zdjecie1'] = $path;
@@ -76,7 +75,6 @@ class TowarController extends Controller
         ]);
         $towarData = $request->except(['zdjecie1', 'zdjecie2', 'zdjecie3']);
 
-        // Handle file uploads
         if ($request->hasFile('zdjecie1')) {
             $path = $request->file('zdjecie1')->store('public/images');
             $towarData['zdjecie1'] = $path;
@@ -115,7 +113,6 @@ class TowarController extends Controller
 
     public function main()
     {
-        // Отримати перші чотири товари
         $towary = Towar::take(4)->get();
 
         return view('main', compact('towary'));
@@ -130,7 +127,6 @@ class TowarController extends Controller
 
         $available = true;
 
-        // Перевірка доступності товару на обрані дати
         if ($towar->available_from && $towar->available_to) {
             if ($data_wypozyczenia >= $towar->available_from && $data_zwrotu <= $towar->available_to) {
                 $available = true;

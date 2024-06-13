@@ -1,5 +1,3 @@
-<!-- resources/views/kategorie/show.blade.php -->
-
 @extends('layouts.app')
 
 @section('title', 'Kategoria: ' . $kategoria->nazwa)

@@ -55,12 +55,8 @@
                                     @csrf
                                     @method('PUT')
 
-                                    <!-- Form fields -->
-
                                     <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
                                 </form>
-
-                                <!-- Delete button -->
                                 <form method="POST" action="{{ route('admin.wypozyczenia.delete', $wypozyczenie->id) }}" style="margin-top: 10px;">
                                     @csrf
                                     @method('DELETE')

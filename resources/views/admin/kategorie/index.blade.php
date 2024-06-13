@@ -1,5 +1,3 @@
-<!-- resources/views/kategorie/index.blade.php -->
-
 @extends('layouts.app')
 
 @section('title', 'Lista kategorii')
