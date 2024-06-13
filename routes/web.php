@@ -29,9 +29,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [AdminHomeController::class, 'index'])->name('admin.home');
 });
 
-Route::get('/rezerwacje', function () {
-    return view('rezerwacje');
-})->name('rezerwacje');
 
 
 Route::get('/onas', function () {
@@ -131,6 +128,7 @@ Route::prefix('klient')->middleware('auth')->group(function () {
 
     Route::get('/wypozyczenia/in-progress', [KlientWypozyczeniaController::class, 'showInProgress'])->name('klient.wypozyczenia.in_progress');
     Route::post('/wypozyczenia/{id}/return', [KlientWypozyczeniaController::class, 'returnRental'])->name('klient.wypozyczenia.return');
+    Route::get('/wypozyczenia/historia', [KlientWypozyczeniaController::class, 'showCompleted'])->name('klient.wypozyczenia.completed');
 
 
 });

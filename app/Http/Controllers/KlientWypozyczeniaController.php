@@ -67,7 +67,6 @@ class KlientWypozyczeniaController extends Controller
             return redirect()->back()->with('error', 'Nie można wybrać tego zakresu dat, ponieważ przecina się z inną rezerwacją.')->withInput();
         }
 
-        // Оновлюємо дані резервування
         $wypozyczenie->update([
             'data_wypozyczenia' => $request->data_wypozyczenia,
             'data_zwrotu' => $request->data_zwrotu,
@@ -145,6 +144,13 @@ class KlientWypozyczeniaController extends Controller
         return view('klient.wypozyczenia.in_progress', compact('user', 'wypozyczenia'));
     }
 
+    public function showCompleted()
+    {
+        $user = Auth::user();
+        $wypozyczenia = Wypozyczenia::where('user_id', $user->id)
+            ->where('status', 'zwrocone')
+            ->get();
 
-
+        return view('klient.wypozyczenia.completed', compact('user', 'wypozyczenia'));
+    }
 }

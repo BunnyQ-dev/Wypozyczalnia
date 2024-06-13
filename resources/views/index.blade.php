@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="container">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4"> <!-- Додано клас g-4 для вирівнювання проміжку між картками -->
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                     @foreach($towary as $towar)
                         <div class="col">
                             <div class="card h-100">
