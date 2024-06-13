@@ -32,7 +32,7 @@
         @foreach($wypozyczenia as $wypozyczenie)
             <li class="wypozyczenie">
                 <strong>{{ $wypozyczenie->towar->nazwa }}</strong><br>
-                Użytkownik: {{ $wypozyczenie->user->username }}<br>
+                Użytkownik: <a href="{{ route('klient.uzytkownicy.show', $wypozyczenie->user->id) }}">{{ $wypozyczenie->user->username }}</a> <br>
                 Data Wypożyczenia: {{ $wypozyczenie->data_wypozyczenia }}<br>
                 Data Zwrotu: {{ $wypozyczenie->data_zwrotu }}<br>
                 Status: {{ $wypozyczenie->status }}

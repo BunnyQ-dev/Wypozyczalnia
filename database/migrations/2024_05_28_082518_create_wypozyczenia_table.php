@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('data_wypozyczenia');
             $table->date('data_zwrotu')->nullable();
             $table->string('status')->default('zarezerwowane');
+            $table->string('payment_status')->default('nie zaplacone');
+            $table->decimal('summary', 8, 2)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

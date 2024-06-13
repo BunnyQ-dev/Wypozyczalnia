@@ -132,10 +132,11 @@ Route::prefix('klient')->middleware('auth')->group(function () {
     Route::put('/wypozyczenia/{id}', [KlientWypozyczeniaController::class, 'update'])->name('klient.wypozyczenia.update');
     Route::post('/wypozyczenia', [KlientWypozyczeniaController::class, 'store'])->name('klient.wypozyczenia.store');;
 
-
     Route::get('/wypozyczenia/in-progress', [KlientWypozyczeniaController::class, 'showInProgress'])->name('klient.wypozyczenia.in_progress');
     Route::post('/wypozyczenia/{id}/return', [KlientWypozyczeniaController::class, 'returnRental'])->name('klient.wypozyczenia.return');
     Route::get('/wypozyczenia/historia', [KlientWypozyczeniaController::class, 'showCompleted'])->name('klient.wypozyczenia.completed');
+
+    Route::get('/wypozyczenia/{id}', [KlientWypozyczeniaController::class, 'showDetails'])->name('klient.wypozyczenia.details');
 
 
 });

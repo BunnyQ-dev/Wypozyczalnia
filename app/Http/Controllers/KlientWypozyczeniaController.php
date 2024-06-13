@@ -7,6 +7,7 @@ use App\Models\Wypozyczenia;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Towar;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 
 
 class KlientWypozyczeniaController extends Controller
@@ -136,9 +137,18 @@ class KlientWypozyczeniaController extends Controller
             return redirect()->route('klient.wypozyczenia.showInProgress')->with('error', 'To wypożyczenie zostało już zwrócone.');
         }
 
-        $wypozyczenie->update(['status' => 'zwrocone']);
+        $towar = Towar::findOrFail($wypozyczenie->towar_id);
+        $cena = $towar->cena;
+        $days = Carbon::parse($wypozyczenie->data_wypozyczenia)->diffInDays(Carbon::parse($wypozyczenie->data_zwrotu));
 
-        $wypozyczenie->update(['data_zwrotu' => now()->toDateString()]);
+        $cena_do_zaplaty = $cena * $days;
+
+        $wypozyczenie->update([
+            'status' => 'zwrocone',
+            'data_zwrotu' => now()->toDateString(),
+            'cena_do_zaplaty' => $cena_do_zaplaty,
+            'payment_status' => 'nie zaplacone',
+        ]);
 
         return redirect()->route('klient.wypozyczenia.in_progress')->with('success', 'Wypożyczenie zostało zakończone.');
     }
@@ -146,11 +156,15 @@ class KlientWypozyczeniaController extends Controller
     public function showInProgress()
     {
         $user = Auth::user();
-        $wypozyczenia = Wypozyczenia::where('user_id', $user->id)
+        $wypozyczeniaAktualne = Wypozyczenia::where('user_id', $user->id)
             ->where('status', 'w_trakcie')
             ->get();
 
-        return view('klient.wypozyczenia.in_progress', compact('user', 'wypozyczenia'));
+        $wypozyczeniaPrzekroczone = Wypozyczenia::where('user_id', $user->id)
+            ->where('status', 'przekroczone')
+            ->get();
+
+        return view('klient.wypozyczenia.in_progress', compact('user', 'wypozyczeniaAktualne', 'wypozyczeniaPrzekroczone'));
     }
 
     public function showCompleted()
@@ -161,5 +175,32 @@ class KlientWypozyczeniaController extends Controller
             ->get();
 
         return view('klient.wypozyczenia.completed', compact('user', 'wypozyczenia'));
+    }
+
+    public function showDetails($id)
+    {
+        $wypozyczenie = Wypozyczenia::findOrFail($id);
+
+        if ($wypozyczenie->user_id !== Auth::id()) {
+            return redirect()->route('index')->with('error', 'Nie masz uprawnień do przeglądania tego zakończonego wypożyczenia.');
+        }
+
+        return view('klient.wypozyczenia.details', compact('wypozyczenie'));
+    }
+
+    public function sumTotalCost()
+    {
+        $user = Auth::user();
+
+        $wypozyczenia = Wypozyczenia::where('user_id', $user->id)
+            ->where('status', 'zwrocone')
+            ->get();
+
+        $totalCost = 0;
+        foreach ($wypozyczenia as $wypozyczenie) {
+            $totalCost += $wypozyczenie->cena_do_zaplaty;
+        }
+
+        return view('klient.wypozyczenia.total_cost', compact('user', 'totalCost'));
     }
 }
