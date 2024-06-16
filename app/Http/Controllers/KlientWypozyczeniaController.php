@@ -139,19 +139,25 @@ class KlientWypozyczeniaController extends Controller
 
         $towar = Towar::findOrFail($wypozyczenie->towar_id);
         $cena = $towar->cena;
-        $days = Carbon::parse($wypozyczenie->data_wypozyczenia)->diffInDays(Carbon::parse($wypozyczenie->data_zwrotu));
+        $data_wypozyczenia = Carbon::parse($wypozyczenie->data_wypozyczenia);
+        $data_zwrotu = now();
+
+        $days = ceil($data_wypozyczenia->diffInHours($data_zwrotu) / 24);
 
         $cena_do_zaplaty = $cena * $days;
 
         $wypozyczenie->update([
             'status' => 'zwrocone',
-            'data_zwrotu' => now()->toDateString(),
+            'data_zwrotu' => $data_zwrotu->toDateString(),
             'cena_do_zaplaty' => $cena_do_zaplaty,
             'payment_status' => 'nie zaplacone',
         ]);
 
-        return redirect()->route('klient.wypozyczenia.in_progress')->with('success', 'Wypożyczenie zostało zakończone.');
+        return redirect()->route('klient.wypozyczenia.in_progress')->with('success', 'Wypożyczenie zostało zakońчено.');
     }
+
+
+
 
     public function showInProgress()
     {
@@ -188,19 +194,18 @@ class KlientWypozyczeniaController extends Controller
         return view('klient.wypozyczenia.details', compact('wypozyczenie'));
     }
 
-    public function sumTotalCost()
+    public function pay($id)
     {
-        $user = Auth::user();
+        $wypozyczenie = Wypozyczenia::findOrFail($id);
 
-        $wypozyczenia = Wypozyczenia::where('user_id', $user->id)
-            ->where('status', 'zwrocone')
-            ->get();
-
-        $totalCost = 0;
-        foreach ($wypozyczenia as $wypozyczenie) {
-            $totalCost += $wypozyczenie->cena_do_zaplaty;
+        if ($wypozyczenie->payment_status === 'zaplacone') {
+            return redirect()->route('klient.wypozyczenia.completed')->with('error', 'To wypożyczenie zostało już opłacone.');
         }
 
-        return view('klient.wypozyczenia.total_cost', compact('user', 'totalCost'));
+        $wypozyczenie->update([
+            'payment_status' => 'zaplacone',
+        ]);
+
+        return redirect()->route('klient.wypozyczenia.completed')->with('success', 'Wypożyczenie zostało opłacone.');
     }
 }

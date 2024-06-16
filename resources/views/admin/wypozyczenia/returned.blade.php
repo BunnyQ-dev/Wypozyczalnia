@@ -18,6 +18,10 @@
                 font-size: 1.2em;
             }
 
+            .backbtn{
+                height: 20vh;
+            }
+
         </style>
     </head>
 
@@ -36,9 +40,11 @@
                 Użytkownik: <a href="{{ route('klient.uzytkownicy.show', $wypozyczenie->user->id) }}">{{ $wypozyczenie->user->username }}</a> <br>
                 Data Wypożyczenia: {{ $wypozyczenie->data_wypozyczenia }}<br>
                 Data Zwrotu: {{ $wypozyczenie->data_zwrotu }}<br>
-                Status: {{ $wypozyczenie->status }}
+                Status: {{ $wypozyczenie->status }}<br>
+                Suma do zapłaty: {{ $wypozyczenie->cena_do_zaplaty }}<br>
+                Status opłaty: {{ $wypozyczenie->payment_status }}
             </li>
         @endforeach
     </ul>
-    <a href="{{ route('admin.wypozyczenia.index') }}" class="btn btn-info">Powrót do menu</a>
+    <div class="backbtn"><a href="{{ route('admin.wypozyczenia.index') }}" class="btn btn-info">Powrót do menu</a></div>
 @endsection

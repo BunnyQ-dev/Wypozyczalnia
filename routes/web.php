@@ -137,6 +137,7 @@ Route::prefix('klient')->middleware('auth')->group(function () {
     Route::get('/wypozyczenia/historia', [KlientWypozyczeniaController::class, 'showCompleted'])->name('klient.wypozyczenia.completed');
 
     Route::get('/wypozyczenia/{id}', [KlientWypozyczeniaController::class, 'showDetails'])->name('klient.wypozyczenia.details');
+    Route::post('/wypozyczenia/pay/{id}', [KlientWypozyczeniaController::class, 'pay'])->name('klient.wypozyczenia.pay');
 
 
 });

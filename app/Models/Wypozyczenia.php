@@ -16,7 +16,7 @@ class Wypozyczenia extends Model
         'towar_id',
         'status',
         'payment_status',
-        '',
+        'cena_do_zaplaty',
         'data_wypozyczenia',
         'data_zwrotu'
     ];

@@ -107,11 +107,11 @@
             const dataZwrotu = document.getElementById('data_zwrotu');
 
             const initializeDatepicker = (inputElement, blockedDates) => {
-                $(inputElement).datepicker('destroy'); // Destroy previous datepicker instance
+                $(inputElement).datepicker('destroy');
                 $(inputElement).datepicker({
                     format: 'yyyy-mm-dd',
                     autoclose: true,
-                    startDate: new Date(), // Prevent dates before today
+                    startDate: new Date(),
                     beforeShowDay: function(date) {
                         const dateString = date.toISOString().split('T')[0];
                         return {
@@ -147,7 +147,7 @@
                 fetchBlockedDates(towarId);
             });
 
-            // Initialize datepickers with empty blocked dates initially
+
             initializeDatepicker(dataWypozyczenia, []);
             initializeDatepicker(dataZwrotu, []);
         });

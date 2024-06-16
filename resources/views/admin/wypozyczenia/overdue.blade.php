@@ -20,6 +20,9 @@
                 font-size: 1.2em;
                 color: #666;
             }
+            .backbtn{
+                height: 20vh;
+            }
         </style>
 
         <h1>Lista Przekroczonych Wypożyczeń</h1>
@@ -47,6 +50,6 @@
                 @endforeach
             </ul>
         @endif
+    <div class="backbtn"><a href="{{ route('admin.wypozyczenia.index') }}" class="btn btn-info">Powrót do menu</a></div>
 
-        <a href="{{ route('admin.wypozyczenia.index') }}" class="btn btn-info">Powrót do menu</a>
 @endsection
