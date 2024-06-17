@@ -105,8 +105,11 @@ class WypozyczeniaController extends Controller
 
     public function indexo()
     {
-        $towary = Towar::all();
-        return view('orders.index', compact('towary'));
+        $wypozyczenia = Wypozyczenia::with('towar.kategoria')
+            ->where('status', 'zarezerwowane')
+            ->get();
+
+        return view('orders.index', compact('wypozyczenia'));
     }
 
     public function getBlockedDateso($towar_id)

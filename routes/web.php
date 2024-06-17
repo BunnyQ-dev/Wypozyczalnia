@@ -116,14 +116,14 @@ Route::prefix('kategorie')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('/{id}', [KategoriaController::class, 'destroy'])->name('admin.kategorie.destroy');
 });
 
-
+Route::get('/klient/towary', [KlientTowaryController::class, 'index'])->name('klient.towary.index');
 Route::prefix('klient')->middleware('auth')->group(function () {
     Route::get('/towar/{id}', [KlientTowaryController::class, 'show'])->name('klient.towar.show');
     Route::post('/rent', [KlientWypozyczeniaController::class, 'store'])->name('klient.rent.store');
     Route::get('/uzytkownicy/{user}', [UserController::class, 'showForClient'])->name('klient.uzytkownicy.show');
     Route::get('/uzytkownicy/{user}/edit', [UserController::class, 'editForClient'])->name('klient.uzytkownicy.edit');
     Route::put('/uzytkownicy/{user}', [UserController::class, 'updateForClient'])->name('klient.uzytkownicy.update');
-    Route::get('/towary', [KlientTowaryController::class, 'index'])->name('klient.towary.index');
+
     Route::get('/towar/{id}', [KlientTowaryController::class, 'show'])->name('klient.towar.show');
 
     Route::get('/wypozyczenia', [KlientWypozyczeniaController::class, 'showAll'])->name('klient.wypozyczenia.show');
