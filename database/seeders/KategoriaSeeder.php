@@ -19,7 +19,6 @@ class KategoriaSeeder extends Seeder
             ['nazwa' => 'Spycharki'],
             ['nazwa' => 'Walce drogowe'],
             ['nazwa' => 'Podnośniki'],
-            // Dodaj inne kategorie wypożyczalni sprzętu budowlanego
         ];
 
         DB::table('kategoria')->insert($kategorie);

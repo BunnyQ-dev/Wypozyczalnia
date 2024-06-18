@@ -13,11 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Wywołaj seedery
         $this->call([
             KategoriaSeeder::class,
             TowarSeeder::class,
-            // Dodaj inne seedery, jeśli istnieją
         ]);
     }
 }

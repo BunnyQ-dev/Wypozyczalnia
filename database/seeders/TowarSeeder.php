@@ -19,7 +19,6 @@ class TowarSeeder extends Seeder
             ['kategoria_id' => 2, 'nazwa' => 'Spycharka CAT D6', 'opis' => 'Spycharka gąsienicowa', 'cena' => 300.00],
             ['kategoria_id' => 3, 'nazwa' => 'Walec drogowy Bomag BW120', 'opis' => 'Walec tandemowy', 'cena' => 150.00],
             ['kategoria_id' => 4, 'nazwa' => 'Podnośnik nożycowy Genie GS1932', 'opis' => 'Podnośnik elektryczny', 'cena' => 200.00],
-            // Dodaj inne towary wypożyczalni sprzętu budowlanego
         ];
 
         DB::table('towar')->insert($towary);
