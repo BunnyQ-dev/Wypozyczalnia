@@ -63,7 +63,7 @@ Route::get('/regulamin', function () {
     return view('regulamin');
 })->name('regulamin');
 
-// Trasy для TowarController
+// Trasy TowarController
 Route::prefix('towary')->middleware('admin')->group(function () {
     Route::get('/', [TowarController::class, 'index'])->name('admin.towar.index');
     Route::get('/create', [TowarController::class, 'create'])->name('admin.towar.create');
@@ -75,7 +75,7 @@ Route::prefix('towary')->middleware('admin')->group(function () {
 });
 
 
-// Trasy для WypozyczeniaController
+// Trasy WypozyczeniaController
 Route::prefix('wypozyczenia')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [WypozyczeniaController::class, 'index'])->name('admin.wypozyczenia.index');
     Route::get('/create', [WypozyczeniaController::class, 'create'])->name('admin.wypozyczenia.create');
@@ -95,7 +95,7 @@ Route::prefix('wypozyczenia')->middleware(['auth', 'admin'])->group(function () 
 });
 
 
-// Trasy для UserController
+// Trasy UserController
 Route::prefix('uzytkownicy')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('admin.uzytkownicy.index');
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('admin.uzytkownicy.edit');
@@ -105,7 +105,7 @@ Route::prefix('uzytkownicy')->middleware(['auth', 'admin'])->group(function () {
 });
 
 
-// Trasy для KategoriaController
+// Trasy KategoriaController
 Route::prefix('kategorie')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [KategoriaController::class, 'index'])->name('admin.kategorie.index');
     Route::get('/create', [KategoriaController::class, 'create'])->name('admin.kategorie.create');
